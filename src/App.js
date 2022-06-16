@@ -3,6 +3,7 @@ import ProtectedRoute from "./components/validators/ProtectedRoute";
 // import PublicRoute from "./components/validators/PublicRoute";
 import Navbar from "./components/layout/nav/Navbar";
 import { useSelector } from "react-redux";
+import Home from "./components/pages/home/Home";
 
 function App() {
   const isAuth = useSelector((state) => state.auth);
@@ -11,6 +12,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navbar isAuth={isAuth.isAuthenticated} />}>
+          <Route path="/" element={<Home isAuth={isAuth.isAuthenticated} />} />
+
           {/* <Route path="register" element={<Register />} />
             <Route
               path="login"
