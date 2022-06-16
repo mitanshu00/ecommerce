@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/validators/ProtectedRoute";
 import Navbar from "./components/layout/nav/Navbar";
 import { useSelector } from "react-redux";
 import Home from "./components/pages/home/Home";
+import Products from "./components/pages/product-list/Products";
 
 function App() {
   const isAuth = useSelector((state) => state.auth);
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navbar isAuth={isAuth.isAuthenticated} />}>
           <Route path="/" element={<Home isAuth={isAuth.isAuthenticated} />} />
+          <Route path="/:category" element={<Products />} />
 
           {/* <Route path="register" element={<Register />} />
             <Route
