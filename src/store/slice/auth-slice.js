@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
-  user: {},
-  isAuthenticated: false,
+  // user: {},
+  // isAuthenticated: false,
+  user: {
+    id: 9,
+    name: "mitansu patel",
+    email: "mitanshu@gmail.com",
+    mobile_number: "1234567890",
+  },
+  isAuthenticated: true,
   loading: false,
 };
 
