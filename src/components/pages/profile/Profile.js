@@ -5,6 +5,7 @@ import ProfileAction from "./ProfileAction";
 import Addresses from "./profile-tabs/Addresses";
 import Order from "./profile-tabs/Order";
 import Info from "./profile-tabs/Info";
+import RatingReviews from "./profile-tabs/RatingReviews";
 
 function Products() {
   const [selectedTab, setSelectedTab] = useState("info");
@@ -22,6 +23,7 @@ function Products() {
           {selectedTab === "pending" && <Order status="pending" />}
           {selectedTab === "cancelled" && <Order status="cancelled" />}
           {selectedTab === "returned" && <Order status="returned" />}
+          {selectedTab === "reviews" && <RatingReviews />}
         </Grid>
       </Grid>
     </Box>

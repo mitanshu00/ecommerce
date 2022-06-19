@@ -109,7 +109,7 @@ export default function ProfileAction({ selecteTab }) {
         <ListItemText primary="Whishlist" />
       </ListItemButton>
 
-      <ListItemButton>
+      <ListItemButton onClick={() => handleTabChange("reviews")}>
         <ListItemIcon>
           <ReviewsIcon />
         </ListItemIcon>

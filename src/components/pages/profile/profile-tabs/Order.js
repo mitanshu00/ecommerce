@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -7,9 +7,29 @@ import {
   Avatar,
 } from "@mui/material";
 
+let apiUrl = process.env.REACT_APP_API_URL;
+
 function Order({ status }) {
+  const [orders, setOrders] = useState([{}]);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/orders/?user_id=10`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOrders(data);
+      });
+  }, [status]);
+
   return (
-    <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+    <List
+      sx={{
+        width: "100%",
+        bgcolor: "background.paper",
+        boxShadow: 2,
+        // overflow: "scroll",
+      }}
+      // className="product-details"
+    >
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar

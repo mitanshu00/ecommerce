@@ -7,10 +7,7 @@ import { useSelector } from "react-redux";
 export default function Info() {
   const user = useSelector((state) => state.auth.user);
   return (
-    <Paper
-      elevation="4"
-      sx={{ width: "100%", minHeight: "400px", pt: 2, pl: 4, my: 2 }}
-    >
+    <Paper sx={{ width: "100%", minHeight: "400px", pt: 2, pl: 4, my: 2 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
           <Typography variant="h6" sx={{ my: 2 }}>
