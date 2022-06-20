@@ -9,6 +9,10 @@ import { useDispatch } from "react-redux";
 import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
 import Products from "./components/pages/product-list/Products";
+import Cart from "./components/pages/cart/Cart";
+import Wishlist from "./components/pages/wishlist/Wishlist";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
 
 function App() {
   let apiUrl = process.env.REACT_APP_API_URL;
@@ -29,14 +33,17 @@ function App() {
           <Route path="/" element={<Home isAuth={isAuth.isAuthenticated} />} />
           <Route path="/:category" element={<Products />} />
           <Route path="/Product/:id" element={<Product />} />
+          <Route path="/Cart" element={<Cart />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
 
           {/* <Route path="register" element={<Register />} />
             <Route
               path="login"
               element={<Login setLoggedUser={setLoggedUser} />}
             /> */}
+          <Route path="whishlist" element={<Wishlist />} />
           <Route element={<ProtectedRoute isAuth={isAuth.isAuthenticated} />}>
-            {/* <Route path="whishlist" element={<Whishlist />} />*/}
             {/* <Route path="Order" element={<Order />} />*/}
             {/* <Route path="Profile" element={<Profile />} />*/}
           </Route>
