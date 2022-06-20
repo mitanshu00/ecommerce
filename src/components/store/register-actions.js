@@ -1,7 +1,7 @@
 export const sendRegisterData = (data) => {
   return () => {
     const sendRequest = async () => {
-      fetch("https://384e-103-240-35-190.in.ngrok.io/api/v1/users", {
+      fetch("https://8ee1-103-240-35-190.in.ngrok.io/api/v1/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -6,7 +6,7 @@ import { cartActions } from "../store/cart-slice";
 const ProductItem = (props) => {
   const dispatch = useDispatch();
 
-  const { title, price, description, id } = props;
+  const { title, price, description, id, image } = props;
 
   const addToCartHandler = () => {
     dispatch(
@@ -14,6 +14,8 @@ const ProductItem = (props) => {
         id,
         title,
         price,
+        description,
+        image,
       })
     );
   };
@@ -23,6 +25,8 @@ const ProductItem = (props) => {
         id,
         title,
         price,
+        description,
+        image,
       })
     );
   };
@@ -30,6 +34,7 @@ const ProductItem = (props) => {
   return (
     <li className={classes.item}>
       <header>
+        <img src={image} alt="" width="100"></img>
         <h3>{title}</h3>
         <div className={classes.price}>₹{price.toFixed(2)}</div>
       </header>

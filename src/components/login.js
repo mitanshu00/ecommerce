@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { formActions } from "./store/formSlice";
 import { Link } from "react-router-dom";
 import { sendFormData } from "./store/form-actions";
+import classes from "./login.module.css";
 
 function Login() {
   const dispatch = useDispatch();
@@ -52,48 +53,46 @@ function Login() {
     );
   };
 
-  const EmailInputClasses = EmailIsInvalid
-    ? "form-control invalid"
-    : "form-control";
-  const PasswordClasses = PasswordIsInValid
-    ? "form-control invalid"
-    : "form-control";
-
   return (
-    <form onSubmit={formSubmitHandler} className="app">
-      <div className={EmailInputClasses}>
-        <label htmlFor="email">Your Email</label>
-        <input
-          type="email"
-          id="email"
-          onChange={EmailInputChangeHandler}
-          value={enteredEmail}
-          onBlur={EmailBlurHandler}
-        />
-        {EmailIsInvalid && <p className="error-text">Enter Valid E-mail!</p>}
-      </div>
-      <div className={PasswordClasses}>
-        <label htmlFor="pwd">Password</label>
-        <input
-          type="password"
-          id="pwd"
-          onChange={passwordChangeHandler}
-          value={enteredPassword}
-          onBlur={PasswordBlurHandler}
-        />
-        {PasswordIsInValid && (
-          <p className="error-text">Enter valid Password!</p>
-        )}
-      </div>
+    <div className={classes.container}>
+      <div className={classes.wrapper}>
+        <form onSubmit={formSubmitHandler} className={classes.login}>
+          <p className={classes.title}>Sign In</p>
 
-      <div className="form-actions">
-        <button disabled={!formIsValid}>Submit</button>
-      </div>
+          <input
+            placeholder="Email ID"
+            type="email"
+            id="email"
+            onChange={EmailInputChangeHandler}
+            value={enteredEmail}
+            onBlur={EmailBlurHandler}
+          />
+          {EmailIsInvalid && (
+            <p className={classes.errortext}>Enter Valid E-mail!</p>
+          )}
+          <input
+            placeholder="Password"
+            type="password"
+            id="pwd"
+            onChange={passwordChangeHandler}
+            value={enteredPassword}
+            onBlur={PasswordBlurHandler}
+          />
+          {PasswordIsInValid && (
+            <p className={classes.errortext}>Enter valid Password!</p>
+          )}
 
-      <div>
-        <Link to="/register">New User ? register</Link>
+          <div className={classes.link}>
+            <Link to="/register" style={{ color: "#000" }}>
+              New User ? register
+            </Link>
+          </div>
+          <div className={classes.formactions}>
+            <button disabled={!formIsValid}>Sign-In</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 
