@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-const PublicRoute = ({ loggedUser, redirectPath = "/", children }) => {
-  if (loggedUser) {
+const PublicRoute = ({ isAuth, redirectPath = "/", children }) => {
+  if (isAuth) {
     return <Navigate to={redirectPath} replace />;
   }
 

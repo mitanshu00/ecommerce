@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/validators/ProtectedRoute";
-// import PublicRoute from "./components/validators/PublicRoute";
+import PublicRoute from "./components/validators/PublicRoute";
 import Navbar from "./components/layout/nav/Navbar";
 import { useSelector } from "react-redux";
 import Product from "./components/pages/product/Product";
@@ -13,6 +13,7 @@ import Cart from "./components/pages/cart/Cart";
 import Wishlist from "./components/pages/wishlist/Wishlist";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import Profile from "./components/pages/profile/Profile";
 
 function App() {
   let apiUrl = process.env.REACT_APP_API_URL;
@@ -34,16 +35,14 @@ function App() {
           <Route path="/:category" element={<Products />} />
           <Route path="/Product/:id" element={<Product />} />
           <Route path="/Cart" element={<Cart />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
 
-          {/* <Route path="register" element={<Register />} />
-            <Route
-              path="login"
-              element={<Login setLoggedUser={setLoggedUser} />}
-            /> */}
-          <Route path="whishlist" element={<Wishlist />} />
+          <Route element={<PublicRoute isAuth={isAuth.isAuthenticated} />}>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
           <Route element={<ProtectedRoute isAuth={isAuth.isAuthenticated} />}>
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="profile" element={<Profile />} />
             {/* <Route path="Order" element={<Order />} />*/}
             {/* <Route path="Profile" element={<Profile />} />*/}
           </Route>

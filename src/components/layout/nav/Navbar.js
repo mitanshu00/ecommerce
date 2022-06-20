@@ -78,6 +78,12 @@ export default function Navbar({ isAuth }) {
     handleMobileMenuClose();
   };
 
+  const onMyAccountClick = () => {
+    navigate("/profile");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -99,8 +105,8 @@ export default function Navbar({ isAuth }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={onMyAccountClick}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
 
@@ -130,7 +136,7 @@ export default function Navbar({ isAuth }) {
     <>
       <Box>
         <AppBar position="static">
-          <Toolbar sx={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <Toolbar sx={{ maxWidth: "1500px", margin: "0 auto" }}>
             <Typography
               variant="h6"
               noWrap
