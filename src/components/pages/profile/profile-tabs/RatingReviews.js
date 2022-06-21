@@ -39,7 +39,7 @@ function RatingReviews() {
                     variant="square"
                     src={rating.product?.poster_urls[0].replace(
                       "http://localhost:3000/",
-                      "https://aacd-43-250-165-38.in.ngrok.io/"
+                      process.env.REACT_APP_API
                     )}
                   />
                 </ListItemAvatar>

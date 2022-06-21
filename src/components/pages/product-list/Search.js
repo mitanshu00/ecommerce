@@ -5,19 +5,18 @@ import ProductListLayout from "./ProductListLayout";
 
 let apiUrl = process.env.REACT_APP_API_URL;
 
-function Products() {
+function Search() {
   const [filterData, setFilterData] = useState([]);
-
   const [error, setError] = useState(false);
 
-  let { subcategory } = useParams();
+  let { query } = useParams();
 
   useEffect(() => {
-    fetch(`${apiUrl}/products?sub_category=${subcategory}`)
+    fetch(`${apiUrl}/search?search=${query}`)
       .then((res) => res.json())
-      .then((data) => setFilterData(data.products))
+      .then((data) => setFilterData(data))
       .catch((err) => setError(err));
-  }, [subcategory]);
+  }, [query]);
 
   if (error) {
     return <NotFound />;
@@ -31,4 +30,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Search;

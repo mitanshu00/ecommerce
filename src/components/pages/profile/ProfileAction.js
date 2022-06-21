@@ -17,6 +17,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import KeyboardReturnOutlinedIcon from "@mui/icons-material/KeyboardReturnOutlined";
+import { authLogout } from "../../../store/action/auth-action";
+import { useDispatch } from "react-redux";
 
 export default function ProfileAction({ selecteTab }) {
   const [open, setOpen] = React.useState(false);
@@ -27,6 +29,12 @@ export default function ProfileAction({ selecteTab }) {
 
   const handleTabChange = (newValue) => {
     selecteTab(newValue);
+  };
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(authLogout());
   };
 
   return (
@@ -116,7 +124,7 @@ export default function ProfileAction({ selecteTab }) {
         <ListItemText primary="Reviews & Ratings" />
       </ListItemButton>
 
-      <ListItemButton>
+      <ListItemButton onClick={handleLogout}>
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>

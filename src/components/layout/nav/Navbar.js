@@ -1,62 +1,21 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import NavMenu from "./NavMenu";
+import SearchBar from "./search-bar/SearchBar";
+import { useDispatch } from "react-redux";
+import { authLogout } from "../../../store/action/auth-action";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  marginRight: theme.spacing(2),
-  marginLeft: theme.spacing(8),
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: 1,
-  color: theme.palette.common.black,
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    color: "black",
-    [theme.breakpoints.up("md")]: {
-      width: "65ch",
-    },
-  },
-  backgroundColor: "whitesmoke",
-}));
-
-export default function Navbar({ isAuth }) {
+export default function Navbar({ isAuth, isSeller }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -73,9 +32,12 @@ export default function Navbar({ isAuth }) {
     setMobileMoreAnchorEl(null);
   };
 
+  const dispatch = useDispatch();
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    dispatch(authLogout());
   };
 
   const onMyAccountClick = () => {
@@ -128,7 +90,11 @@ export default function Navbar({ isAuth }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <NavMenu isAuth={isAuth} handleProfileMenuOpen={handleProfileMenuOpen} />
+      <NavMenu
+        isAuth={isAuth}
+        isSeller={isSeller}
+        handleProfileMenuOpen={handleProfileMenuOpen}
+      />
     </Menu>
   );
 
@@ -146,15 +112,9 @@ export default function Navbar({ isAuth }) {
             >
               Ecommerce
             </Typography>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+
+            <SearchBar />
+
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <NavMenu

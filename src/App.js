@@ -14,27 +14,64 @@ import Wishlist from "./components/pages/wishlist/Wishlist";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/profile/Profile";
+import { subCatActions } from "./store/slice/subcategories-slice";
+import { brandActions } from "./store/slice/brands-slice";
+import NotFound from "./components/pages/error-pages/NotFound";
+import Seller from "./components/seller/Seller";
+import Category from "./components/pages/category/Category";
+import { authCheck } from "./store/action/auth-action";
+import Search from "./components/pages/product-list/Search";
+import { fetchCartData } from "./store/action/cart-action";
+import SellerRoute from "./components/validators/SellerRoute";
 
 function App() {
   let apiUrl = process.env.REACT_APP_API_URL;
   let dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth);
+  let userId = isAuth?.user?.user?.id;
 
   useEffect(() => {
     fetch(`${apiUrl}/main_categories`)
       .then((res) => res.json())
-      .then((data) => dispatch(catActions.add(data)));
+      .then((data) => dispatch(catActions.add(data)))
+      .catch((err) => console.log(err));
+
+    fetch(`${apiUrl}/sub_categories`)
+      .then((res) => res.json())
+      .then((data) => dispatch(subCatActions.add(data)))
+      .catch((err) => console.log(err));
+
+    fetch(`${apiUrl}/brands`)
+      .then((res) => res.json())
+      .then((data) => dispatch(brandActions.add(data.data)))
+      .catch((err) => console.log(err));
   }, [apiUrl, dispatch]);
 
-  const isAuth = useSelector((state) => state.auth);
+  // useeffect check if user is logged in
+  useEffect(() => {
+    dispatch(authCheck());
+    dispatch(fetchCartData(userId));
+  }, [dispatch, userId]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navbar isAuth={isAuth.isAuthenticated} />}>
+        <Route
+          path="/"
+          element={
+            <Navbar
+              isAuth={isAuth.isAuthenticated}
+              isSeller={isAuth.isSeller}
+            />
+          }
+        >
           <Route path="/" element={<Home isAuth={isAuth.isAuthenticated} />} />
-          <Route path="/:category" element={<Products />} />
+          <Route path="/:subcategory" element={<Products />} />
+          <Route path="/c/:category" element={<Category />} />
+
           <Route path="/Product/:id" element={<Product />} />
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/Search/:query" element={<Search />} />
 
           <Route element={<PublicRoute isAuth={isAuth.isAuthenticated} />}>
             <Route path="/register" element={<Register />} />
@@ -44,12 +81,18 @@ function App() {
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="profile" element={<Profile />} />
             {/* <Route path="Order" element={<Order />} />*/}
-            {/* <Route path="Profile" element={<Profile />} />*/}
+
+            {/* <Route element={<SellerRoute isSeller={isAuth.sellerId} />}>
+            </Route> */}
           </Route>
+          <Route path="seller" element={<Seller />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+// ? private route for seller

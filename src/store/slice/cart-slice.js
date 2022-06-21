@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    wishItems: [],
     items: [],
     totalQuantity: 0,
+    totalPrice: 0,
+    cartId: null,
   },
   reducers: {
     toggle(state) {
@@ -25,7 +26,9 @@ const cartSlice = createSlice({
           price: newItem.price,
           quantity: 1,
           totalPrice: newItem.price,
-          name: newItem.title,
+          name: newItem.name,
+          description: newItem.description,
+          img_url: newItem.img_url,
         });
       } else {
         existingItem.quantity++;
@@ -43,24 +46,12 @@ const cartSlice = createSlice({
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
     },
-    addItemToWishlist(state, action) {
-      const favItem = action.payload;
-      const existingItem = state.wishItems.find(
-        (item) => item.id === favItem.id
-      );
-      if (!existingItem) {
-        state.wishItems.push({
-          id: favItem.id,
-          price: favItem.price,
-          name: favItem.title,
-        });
-      } else {
-        return;
-      }
-    },
-    removeItemFromWishlist(state, action) {
+    removeItemWholeItem(state, action) {
       const id = action.payload;
-      state.wishItems = state.wishItems.filter((item) => item.id !== id);
+      const existingItem = state.items.find((item) => item.id === id);
+      state.totalQuantity = state.totalQuantity - existingItem.quantity;
+      state.items = state.items.filter((item) => item.id !== id);
+      state.subTotal = state.subTotal - existingItem.totalPrice;
     },
   },
 });

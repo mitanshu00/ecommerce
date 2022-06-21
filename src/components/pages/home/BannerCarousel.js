@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
 
-function BannerCarousel({ title }) {
+function BannerCarousel({ discountedProducts }) {
   return (
     <Carousel
       autoPlay={true}
@@ -20,27 +20,17 @@ function BannerCarousel({ title }) {
         },
       }}
     >
-      <img
-        src="assets/1.jpg"
-        alt=""
-        style={{ width: "100%", height: "300px" }}
-      />
-      <img
-        src="assets/1.jpg"
-        alt=""
-        style={{ width: "100%", height: "300px" }}
-      />
-      <img
-        src="assets/1.jpg"
-        alt=""
-        style={{ width: "100%", height: "300px" }}
-      />
-
-      <img
-        src="assets/1.jpg"
-        alt=""
-        style={{ width: "100%", height: "300px" }}
-      />
+      {discountedProducts.map((product) => (
+        <img
+          src={product.slider_url.replace(
+            "http://localhost:3000/",
+            process.env.REACT_APP_API
+          )}
+          alt=""
+          style={{ width: "100%", height: "300px" }}
+          key={product.id}
+        />
+      ))}
     </Carousel>
   );
 }

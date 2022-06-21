@@ -1,10 +1,10 @@
+import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import BannerCarousel from "./BannerCarousel";
 import CategoryGrid from "./CategoryGrid";
 import ProductCarousel from "./ProductCarousel";
 import { products, productst } from "../../../data/ProductList";
-import { CategoryList } from "../../../data/categoryList";
-import { PopularList } from "../../../data/categoryList";
+import { useSelector } from "react-redux";
 
 const responsiveStyle = {
   desktop: {
@@ -27,40 +27,47 @@ const styles = {
   maxWidth: "200px",
 };
 
-const stylesTwo = {
-  maxHeight: "200px",
-  maxWidth: "350px",
-};
+let apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
+  const [discountedProducts, setDiscountedProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/discounts`)
+      .then((res) => res.json())
+      .then((data) => setDiscountedProducts(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  let categories = [];
+  categories = useSelector((state) => state.category.categories);
+
   return (
     <>
       <Box>
-        <BannerCarousel />
+        {discountedProducts.length > 0 && (
+          <BannerCarousel discountedProducts={discountedProducts} />
+        )}
         <ProductCarousel
+          title="Discounted products"
           data={products}
           timer={true}
-          title="Discounted products"
         />
-        <CategoryGrid
-          title="Categories"
-          list={CategoryList}
-          styles={styles}
-          showTitle={true}
-          gridCol={{ xs: 2, sm: 3, md: 3, lg: 6 }}
-        />
+        {categories.length > 0 && (
+          <CategoryGrid
+            title="Categories"
+            list={categories}
+            styles={styles}
+            showTitle={true}
+            gridCol={{ xs: 2, sm: 3, md: 3, lg: 6 }}
+          />
+        )}
+
         <ProductCarousel
           data={productst}
           timer={false}
           title="Popular Brands"
           responsive={responsiveStyle}
-        />
-        <CategoryGrid
-          title="Popular products"
-          list={PopularList}
-          styles={stylesTwo}
-          showTitle={false}
-          gridCol={{ xs: 1, sm: 2, md: 4 }}
         />
       </Box>
     </>

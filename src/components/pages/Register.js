@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerActions } from "../../store/slice/register-slice";
 import { sendRegisterData } from "../../store/action/register-actions";
 import { Link } from "react-router-dom";
+import classes from "./login.module.css";
 
 function Register() {
   const dispatch = useDispatch();
@@ -74,19 +75,6 @@ function Register() {
     );
   };
 
-  const NameInputClasses = NameIsInvalid
-    ? "form-control invalid"
-    : "form-control";
-  const PhoneClasses = PasswordIsInValid
-    ? "form-control invalid"
-    : "form-control";
-  const EmailInputClasses = EmailIsInvalid
-    ? "form-control invalid"
-    : "form-control";
-  const PasswordClasses = PasswordIsInValid
-    ? "form-control invalid"
-    : "form-control";
-
   let formIsValid = false;
 
   if (
@@ -99,22 +87,24 @@ function Register() {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="app">
-        <div className={NameInputClasses}>
-          <label htmlFor="name">Name</label>
+    <div className={classes.container}>
+      <div className={classes.wrapper}>
+        <form onSubmit={submitHandler} className={classes.login}>
+          <p className={classes.title}>Sign Up</p>
+
           <input
+            placeholder="Firstname Lastname"
             type="text"
             id="name"
             onChange={NameInputChangeHandler}
             value={enteredName}
             onBlur={NameBlurHandler}
           />
-          {NameIsInvalid && <p className="error-text">Enter your name!</p>}
-        </div>
-        <div className={PhoneClasses}>
-          <label htmlFor="phone">Phone No.</label>
+          {NameIsInvalid && (
+            <p className={classes.errortext}>Name cannot be empty!</p>
+          )}
           <input
+            placeholder="Phone No."
             type="text"
             id="phone"
             onChange={PhoneChangeHandler}
@@ -122,24 +112,28 @@ function Register() {
             onBlur={PhoneBlurHandler}
           />
           {PhoneIsInValid && (
-            <p className="error-text">Enter valid Phone number!</p>
+            <p className={classes.errortext}>Enter valid Phone number!</p>
           )}
-        </div>
+          {enteredPhone.trim().length < 1 && enteredPhoneTouched && (
+            <p className={classes.errortext}>Enter Phone Number!</p>
+          )}
 
-        <div className={EmailInputClasses}>
-          <label htmlFor="regemail">Your Email</label>
           <input
+            placeholder="Email ID"
             type="email"
             id="regemail"
             onChange={EmailInputChangeHandler}
             value={enteredRegEmail}
             onBlur={EmailBlurHandler}
           />
-          {EmailIsInvalid && <p className="error-text">Enter Valid E-mail!</p>}
-        </div>
-        <div className={PasswordClasses}>
-          <label htmlFor="rpwd">Password</label>
+          {EmailIsInvalid && (
+            <p className={classes.errortext}>Enter Valid E-mail!</p>
+          )}
+          {enteredRegEmail.trim().length === 0 && enteredMailTouched && (
+            <p className={classes.errortext}>This field cannot be empty!</p>
+          )}
           <input
+            placeholder="Password"
             type="password"
             id="rpwd"
             onChange={passwordChangeHandler}
@@ -147,19 +141,23 @@ function Register() {
             onBlur={PasswordBlurHandler}
           />
           {PasswordIsInValid && (
-            <p className="error-text">Enter valid Password!</p>
+            <p className={classes.errortext}>Enter valid Password!</p>
           )}
-        </div>
+          {enteredRegPassword.trim().length === 0 && enteredPasswordTouched && (
+            <p className={classes.errortext}>Please Enter Password!</p>
+          )}
+          <div className={classes.link}>
+            <Link to="/login" style={{ color: "#000" }}>
+              Existing User ? Sign in
+            </Link>
+          </div>
 
-        <div className="form-actions">
-          <button disabled={!formIsValid}>Submit</button>
-        </div>
-
-        <div>
-          <Link to="/">Already User ? Login</Link>
-        </div>
+          <div className={classes.formactions}>
+            <button disabled={!formIsValid}>Submit</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 

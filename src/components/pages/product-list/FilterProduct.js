@@ -1,15 +1,8 @@
-/* 
-filter based on
-
- - brand
- - price (if possible with min - max input)
- - rating (with 4* and above)
- - discount
-
-*/
-
 import { useState, useEffect } from "react";
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+
+const starStye = { m: "-5px", p: "0px 5px" };
 
 // count all products by discount
 const countDiscount = (products) => {
@@ -55,7 +48,7 @@ const countRating = (products) => {
   return rating;
 };
 
-function FilterProduct({ products }) {
+function FilterProduct({ products, setFilterData }) {
   const [discount, setDiscount] = useState({
     "30above": 0,
     "40above": 0,
@@ -69,19 +62,82 @@ function FilterProduct({ products }) {
     "4above": 0,
   });
 
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedRating, setSelectedRating] = useState([]);
+  const [selectedDiscount, setSelectedDiscount] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState({
+    min: 0,
+    max: 0,
+  });
+
   useEffect(() => {
     setDiscount(countDiscount(products));
     setRating(countRating(products));
   }, [products]);
 
-  console.log(discount, rating);
-
   let brandList = new Set();
 
   // get all brands from products
   products.forEach((product) => {
-    brandList.add(product.brand);
+    brandList.add(product.brand.name);
   });
+
+  // filter by selected brand of array
+  const handleBrandChange = (brand) => {
+    if (selectedBrands.includes(brand)) {
+      setSelectedBrands(selectedBrands.filter((item) => item !== brand));
+    } else {
+      setSelectedBrands([...selectedBrands, brand]);
+    }
+  };
+
+  // filter by selected discount
+  const handleDiscountChange = (discount) => {
+    setSelectedDiscount(discount);
+  };
+
+  const handleFilterSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      selectedBrands,
+      selectedRating,
+      selectedPrice,
+      selectedDiscount
+    );
+
+    // filter by selected brand, rating, price and discount
+    let filteredProducts = products.filter((product) => {
+      if (selectedBrands.length > 0) {
+        if (!selectedBrands.includes(product.brand.name)) {
+          return false;
+        }
+      }
+      if (selectedRating.length > 0) {
+        if (!selectedRating.includes(product.rating)) {
+          return false;
+        }
+      }
+      if (selectedPrice.min > 0) {
+        if (product.price < selectedPrice.min) {
+          return false;
+        }
+      }
+      if (selectedPrice.max > 0) {
+        if (product.price > selectedPrice.max) {
+          return false;
+        }
+      }
+      // check if product discount in greater than selectedDiscount
+      if (selectedDiscount) {
+        if (!product.discount >= selectedDiscount) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+    setFilterData(filteredProducts);
+  };
 
   return (
     <Box sx={{ p: 4 }}>
@@ -89,70 +145,159 @@ function FilterProduct({ products }) {
         Filter
       </Typography>
 
-      <Box sx={{ mt: 2 }}>
-        <Typography variant="h6">Brand</Typography>
-        <Divider />
+      <form onSubmit={handleFilterSubmit}>
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="h6">Brand</Typography>
+          <Divider />
 
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {Array.from(brandList).map((brand) => (
-            <li key={brand}>
-              <input type="checkbox" id={brand} />
-              <label htmlFor={brand}>{brand}</label>
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            {Array.from(brandList).map((brand) => (
+              <li key={brand}>
+                <input
+                  type="checkbox"
+                  id={brand}
+                  onClick={() => handleBrandChange(brand)}
+                />
+                <label htmlFor={brand}>{brand}</label>
+              </li>
+            ))}
+          </ul>
+        </Box>
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="h6">Price</Typography>
+          <Divider />
+          <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+            <input
+              type="number"
+              placeholder="min"
+              style={{
+                maxWidth: "50px",
+                padding: "5px",
+                borderRadius: "5px",
+                borderColor: "lightGray",
+              }}
+              onChange={(e) =>
+                setSelectedPrice({ ...selectedPrice, min: e.target.value })
+              }
+            />
+            <Typography variant="body2">-</Typography>
+            <input
+              type="number"
+              placeholder="max"
+              style={{
+                maxWidth: "50px",
+                padding: "5px",
+                borderRadius: "5px",
+                borderColor: "lightGray",
+              }}
+              onChange={(e) =>
+                setSelectedPrice({ ...selectedPrice, max: e.target.value })
+              }
+            />
+          </Stack>
+        </Box>
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="h6">Rating</Typography>
+          <Divider />
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            <li>
+              <input
+                type="radio"
+                id="2above"
+                name="filterrating"
+                onClick={() => setSelectedRating([2, 3, 4, 5])}
+              />
+              <label htmlFor="2above">
+                <StarIcon color="warning" sx={starStye} />
+                <StarIcon color="warning" sx={starStye} />
+                {`(${rating["2above"]})`}
+              </label>
             </li>
-          ))}
-        </ul>
-      </Box>
-      <Box sx={{ mt: 2 }}>
-        <Typography variant="h6">Price</Typography>
-        <Divider />
-        <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-          <input type="number" placeholder="min" style={{ maxWidth: "50px" }} />
-          <Typography variant="body2">-</Typography>
-          <input type="number" placeholder="max" style={{ maxWidth: "50px" }} />
-        </Stack>
-      </Box>
-      <Box sx={{ mt: 2 }}>
-        <Typography variant="h6">Rating</Typography>
-        <Divider />
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          <li>
-            <input type="checkbox" id="2above" />
-            <label htmlFor="2above">2 and above - {rating["2above"]}</label>
-          </li>
-          <li>
-            <input type="checkbox" id="3above" />
-            <label htmlFor="3above">3 and above - {rating["3above"]}</label>
-          </li>
-          <li>
-            <input type="checkbox" id="4above" />
-            <label htmlFor="4above">4 and above - {rating["4above"]}</label>
-          </li>
-        </ul>
-      </Box>
-      <Box sx={{ mt: 2 }}>
-        <Typography variant="h6">Discount</Typography>
-        <Divider />
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          <li>
-            <input type="checkbox" id="30above" />
-            <label htmlFor="30above">30 - 40 - {discount["30above"]}</label>
-          </li>
-          <li>
-            <input type="checkbox" id="40above" />
-            <label htmlFor="40above">40 - 50 - {discount["40above"]}</label>
-          </li>
-          <li>
-            <input type="checkbox" id="50above" />
-            <label htmlFor="50above">50 - 60 - {discount["50above"]}</label>
-          </li>
-          <li>
-            <input type="checkbox" id="60above" />
-            <label htmlFor="60above">
-              60 and above - {discount["60above"]}
-            </label>
-          </li>
-        </ul>
-      </Box>
+            <li>
+              <input
+                type="radio"
+                id="3above"
+                name="filterrating"
+                onClick={() => setSelectedRating([3, 4, 5])}
+              />
+              <label htmlFor="3above">
+                <StarIcon color="warning" sx={starStye} />
+                <StarIcon color="warning" sx={starStye} />
+                <StarIcon color="warning" sx={starStye} />
+                {`(${rating["3above"]})`}
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="4above"
+                name="filterrating"
+                onClick={() => setSelectedRating([4, 5])}
+              />
+              <label htmlFor="4above">
+                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
+                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
+                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
+                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
+                {`(${rating["4above"]})`}
+              </label>
+            </li>
+          </ul>
+        </Box>
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="h6">Discount</Typography>
+          <Divider />
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            <li>
+              <input
+                type="radio"
+                name="filterdiscount"
+                id="30above"
+                onClick={() => handleDiscountChange(30)}
+              />
+              <label htmlFor="30above">
+                30% and above {`(${discount["30above"]})`}
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="filterdiscount"
+                id="40above"
+                onClick={() => handleDiscountChange(40)}
+              />
+              <label htmlFor="40above">
+                40% and above {`(${discount["40above"]})`}
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="filterdiscount"
+                id="50above"
+                onClick={() => handleDiscountChange(50)}
+              />
+              <label htmlFor="50above">
+                50% and above {`(${discount["50above"]})`}
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="filterdiscount"
+                id="60above"
+                onClick={() => handleDiscountChange(60)}
+              />
+              <label htmlFor="60above">
+                60% and above {`(${discount["60above"]})`}
+              </label>
+            </li>
+          </ul>
+        </Box>
+        <Button type="submit" variant="contained" color="primary">
+          Apply
+        </Button>
+      </form>
     </Box>
   );
 }

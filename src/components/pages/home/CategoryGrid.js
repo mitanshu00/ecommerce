@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
-import { Stack, Typography, Divider } from "@mui/material";
-import GridCom from "./sub-component/GridCom";
+import { Stack, Typography, Divider, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryGrid({
   title,
@@ -8,38 +8,70 @@ export default function CategoryGrid({
   styles,
   showTitle,
   gridCol,
+  viewAllLink,
 }) {
+  const navigate = useNavigate();
+
+  const handleClick = (name, id) => {
+    navigate(`/c/${name}`);
+  };
+
   return (
     <>
-      <Typography
-        sx={{
-          fontSize: 22,
-          fontWeight: 600,
-          lineHeight: "32px",
-          marginRight: 2,
-          mt: 8,
-        }}
-      >
-        {title}
-      </Typography>
-      <Divider />
+      <Box sx={{ display: "flex", padding: "5px 10px" }}>
+        <Typography
+          sx={{
+            fontSize: 22,
+            fontWeight: 600,
+            lineHeight: "32px",
+            marginRight: 2,
+          }}
+        >
+          {title}
+        </Typography>
+        {viewAllLink && (
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              marginLeft: "auto",
+              backgroundColor: "#2874f0",
+              borderRadius: 2,
+              fontSize: 13,
+            }}
+          >
+            View All
+          </Button>
+        )}
+      </Box>
 
-      <GridCom columns={gridCol}>
+      <Divider sx={{ my: 2 }} />
+
+      <Grid container spacing={1} justifyContent="center">
         {list.map((category, index) => (
-          <Grid item xs={1} key={index}>
+          <Grid
+            item
+            xs={2}
+            key={index}
+            sx={{ cursor: "pointer" }}
+            onClick={() => handleClick(category.name, category.id)}
+          >
             <Stack>
               <img
-                src={category.url}
+                src={category.img_url.replace(
+                  "http://localhost:3000/",
+                  process.env.REACT_APP_API
+                )}
                 alt="category img"
                 style={styles}
               />
               {showTitle && (
-                <p style={{ textAlign: "center" }}>{category.id}</p>
+                <p style={{ textAlign: "center" }}>{category.name}</p>
               )}
             </Stack>
           </Grid>
         ))}
-      </GridCom>
+      </Grid>
     </>
   );
 }

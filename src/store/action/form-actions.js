@@ -1,25 +1,24 @@
-export const sendFormData = (data) => {
-  return () => {
-    const sendRequest = async () => {
-      fetch("https://8ee1-103-240-35-190.in.ngrok.io/api/v1/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: data.enteredEmail,
-          password: data.enteredPassword,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
+import { authActions } from "../slice/auth-slice";
 
-    sendRequest();
+export const sendFormData = (data) => {
+  return async (dispatch) => {
+    fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.enteredEmail,
+        password: data.enteredPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("auth", JSON.stringify(data));
+        dispatch(authActions.login(data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 };

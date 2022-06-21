@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export default function Info() {
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user.user);
   return (
     <Paper sx={{ width: "100%", minHeight: "400px", pt: 2, pl: 4, my: 2 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
