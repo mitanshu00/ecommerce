@@ -5,7 +5,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import Cart from "./cart/cart";
 import Products from "./Shop/Products";
 import Wishlist from "./Wishlist/Wishlist";
-import PlaceOrder from "./PlaceOrder/PlaceOrder";
+// import PlaceOrder from "./PlaceOrder/PlaceOrder";
+import SelectAddress from "./PlaceOrder/SelectAddress";
 
 function Dummy() {
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -30,7 +31,7 @@ function Dummy() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/" element={<Products />} />
-        <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route path="/placeorder" element={<SelectAddress />} />
       </Routes>
     </div>
   );

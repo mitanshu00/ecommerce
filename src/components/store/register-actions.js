@@ -1,7 +1,7 @@
 export const sendRegisterData = (data) => {
   return () => {
     const sendRequest = async () => {
-      fetch("https://8ee1-103-240-35-190.in.ngrok.io/api/v1/users", {
+      fetch("https://f9c7-103-240-35-190.in.ngrok.io/api/v1/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -16,6 +16,12 @@ export const sendRegisterData = (data) => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          const { user, token } = data;
+          console.log(user);
+          console.log(token);
+          // // localStorage.setItem("token", token);
+          // // localStorage.setItem("userData", user);
+          // dispatch(authActions.login({ user }));
         })
         .catch((error) => {
           console.error(error);

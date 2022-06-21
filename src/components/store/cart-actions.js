@@ -1,10 +1,8 @@
-// import { useDispatch } from "react-redux";
-import { authActions } from "./auth-slice";
-
-export const sendFormData = (data) => {
+export const sendAddToCartData = (data) => {
+  // const dispatch = useDispatch();
   return (dispatch) => {
     const sendRequest = async () => {
-      fetch("https://f9c7-103-240-35-190.in.ngrok.io/api/v1/login", {
+      fetch("https://f14c-103-240-35-190.in.ngrok.io/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,10 +16,9 @@ export const sendFormData = (data) => {
         .then((data) => {
           console.log(data);
           const { user, token } = data;
-          console.log(user);
-          localStorage.setItem("token", token);
-          localStorage.setItem("userData", user);
-          dispatch(authActions.login({ user }));
+          // localStorage.setItem("token", token);
+          // localStorage.setItem("userData", userData);
+          // dispatch(authActions.login(userData));
         })
         .catch((error) => {
           console.error(error);

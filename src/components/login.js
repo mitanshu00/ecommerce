@@ -7,6 +7,7 @@ import classes from "./login.module.css";
 
 function Login() {
   const dispatch = useDispatch();
+  // const loginUser = useSelector((state) => state.auth.user);
   const enteredEmail = useSelector((state) => state.login.email);
   const enteredPassword = useSelector((state) => state.login.password);
 
@@ -17,10 +18,11 @@ function Login() {
     (state) => state.login.isTouched.password
   );
 
+  // && enteredEmail === loginUser.user.email;
   const enteredMailIsValid = enteredEmail.includes("@");
   const EmailIsInvalid = !enteredMailIsValid && enteredMailTouched;
 
-  const enteredPasswordIsValid = enteredPassword.trim().length > 7;
+  const enteredPasswordIsValid = enteredPassword.trim().length > 5;
   const PasswordIsInValid = !enteredPasswordIsValid && enteredPasswordTouched;
 
   let formIsValid = false;
@@ -70,6 +72,7 @@ function Login() {
           {EmailIsInvalid && (
             <p className={classes.errortext}>Enter Valid E-mail!</p>
           )}
+
           <input
             placeholder="Password"
             type="password"

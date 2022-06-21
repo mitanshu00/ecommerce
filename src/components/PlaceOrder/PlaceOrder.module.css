@@ -1,0 +1,22 @@
+.container {
+  border: 1px solid greenyellow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .form {
+  justify-content: center;
+  border: 1px solid black;
+  width: 80%;
+  height: 80vh;
+}
+.container .form .con2 {
+  border: 1px solid red;
+}
+.container .form .con2 .card {
+  height: 250px;
+  border: 1px solid blue;
+}
+.container .form .con2 .card .name {
+  display: flex;
+}
