@@ -14,6 +14,7 @@ const countDiscount = (products) => {
   };
   products.forEach((product) => {
     if (product.discount >= 30 && product.discount < 40) {
+      console.log(product, "sssss");
       discount["30above"] += 1;
     } else if (product.discount >= 40 && product.discount < 50) {
       discount["40above"] += 1;
@@ -35,13 +36,13 @@ const countRating = (products) => {
     "4above": 0,
   };
   products.forEach((product) => {
-    if (product.rating >= 2 && product.rating < 3) {
+    if (product.average_rating >= 2 && product.average_rating < 3) {
       rating["2above"] += 1;
     }
-    if (product.rating >= 3 && product.rating < 4) {
+    if (product.average_rating >= 3 && product.average_rating < 4) {
       rating["3above"] += 1;
     }
-    if (product.rating >= 4) {
+    if (product.average_rating >= 4) {
       rating["4above"] += 1;
     }
   });
@@ -57,6 +58,7 @@ function FilterProduct({ products, setFilterData }) {
   });
 
   const [rating, setRating] = useState({
+    norating: 0,
     "2above": 0,
     "3above": 0,
     "4above": 0,
@@ -66,8 +68,8 @@ function FilterProduct({ products, setFilterData }) {
   const [selectedRating, setSelectedRating] = useState([]);
   const [selectedDiscount, setSelectedDiscount] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState({
-    min: 0,
-    max: 0,
+    min: null,
+    max: null,
   });
 
   useEffect(() => {
@@ -176,6 +178,7 @@ function FilterProduct({ products, setFilterData }) {
                 borderRadius: "5px",
                 borderColor: "lightGray",
               }}
+              max={selectedPrice.max && selectedPrice.max}
               onChange={(e) =>
                 setSelectedPrice({ ...selectedPrice, min: e.target.value })
               }
@@ -190,6 +193,7 @@ function FilterProduct({ products, setFilterData }) {
                 borderRadius: "5px",
                 borderColor: "lightGray",
               }}
+              min={selectedPrice.min && selectedPrice.min}
               onChange={(e) =>
                 setSelectedPrice({ ...selectedPrice, max: e.target.value })
               }

@@ -1,5 +1,8 @@
 import React from "react";
 import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
@@ -7,15 +10,28 @@ import Carousel from "react-material-ui-carousel";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { WhishlistActions } from "../../../store/slice/whishlist-slice";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function ActionAreaCard({ product }) {
-  const handleWhishlistClick = (id) => {
-    console.log("whishlist clicked", id);
-  };
-
+export default function ActionAreaCard({ product, whishlisted }) {
   const navigate = useNavigate();
   const handleProductCardClick = (id) => {
     navigate(`/product/${id}`);
+  };
+
+  const dispatch = useDispatch();
+
+  const addToWishlistHandler = () => {
+    dispatch(
+      WhishlistActions.addItemToWishlist({
+        id: product.id,
+        price: product.price,
+        name: product.name,
+        img_url: product.poster_urls[0],
+        description: product.description,
+      })
+    );
   };
 
   return (
@@ -32,9 +48,9 @@ export default function ActionAreaCard({ product }) {
           padding: "5px",
           cursor: "pointer",
         }}
-        onClick={() => handleWhishlistClick(product.id)}
+        onClick={addToWishlistHandler}
       >
-        <FavoriteBorderIcon />
+        {whishlisted ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </IconButton>
       <CardActionArea onClick={() => handleProductCardClick(product.id)}>
         <Carousel
@@ -69,13 +85,22 @@ export default function ActionAreaCard({ product }) {
         </Carousel>
         <CardContent sx={{ p: 1 }}>
           <Typography variant="h6" component="div">
-            {product.name}
+            <Stack direction="row" justifyContent="space-between">
+              <Box>{product.name}</Box>
+              {product.average_rating && (
+                <Typography sx={{ pt: 1 }}>
+                  {product.average_rating} ★
+                </Typography>
+              )}
+            </Stack>
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {product.description}
+            {product.description.slice(0, 50)}
           </Typography>
           <del>Rs. {product.price}</del>
-          <Typography>{`Rs. ${product.price} (${product.discount}%)`}</Typography>
+          <Typography
+            sx={{ color: "darkgreen" }}
+          >{`Rs. ${product.price} (${product.discount}%)`}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

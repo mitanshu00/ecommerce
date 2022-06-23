@@ -7,7 +7,6 @@ let apiUrl = process.env.REACT_APP_API_URL;
 
 function Products() {
   const [filterData, setFilterData] = useState([]);
-
   const [error, setError] = useState(false);
 
   let { subcategory } = useParams();
