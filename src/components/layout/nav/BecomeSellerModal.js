@@ -53,6 +53,8 @@ export default function BasicModal({ open, setOpen }) {
       .then((response) => response.json())
       .then((data) => {
         dispatch(authActions.registeredForSeller());
+        dispatch(authActions.setSellerId(data.id));
+        localStorage.setItem("seller", JSON.stringify(data.id));
         console.log(data);
       })
       .catch((error) => {

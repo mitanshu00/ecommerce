@@ -10,11 +10,13 @@ import BecomeSeller from "./BecomeSellerModal";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function NavMenu({ isAuth, isSeller, handleProfileMenuOpen }) {
+function NavMenu({ handleProfileMenuOpen }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const userDetails = useSelector((state) => state.auth);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
+  let isAuth = userDetails.isAuthenticated;
+  let isSeller = userDetails.sellerId;
 
   // * user user name
 
@@ -63,20 +65,23 @@ function NavMenu({ isAuth, isSeller, handleProfileMenuOpen }) {
           <p>Cart</p>
         </MenuItem>
 
-        {isAuth &&
-          (isSeller ? (
-            <MenuItem onClick={goToSellerDash}>
-              <p>Seller Dashboard</p>
-            </MenuItem>
-          ) : userDetails.registeredForSeller ? (
-            <MenuItem>
-              <p>Request Pending</p>
-            </MenuItem>
-          ) : (
-            <MenuItem onClick={handleOpen}>
-              <p>Become Seller</p>
-            </MenuItem>
-          ))}
+        {isAuth && isSeller && (
+          <MenuItem onClick={goToSellerDash}>
+            <p>Seller Dashboard</p>
+          </MenuItem>
+        )}
+
+        {isAuth && !isSeller && userDetails.registeredForSeller && (
+          <MenuItem>
+            <p>Request Pending</p>
+          </MenuItem>
+        )}
+
+        {isAuth && !isSeller && !userDetails.registeredForSeller && (
+          <MenuItem onClick={handleOpen}>
+            <p>Become Seller</p>
+          </MenuItem>
+        )}
 
         {isAuth ? (
           <MenuItem onClick={handleProfileMenuOpen}>
@@ -89,7 +94,12 @@ function NavMenu({ isAuth, isSeller, handleProfileMenuOpen }) {
             >
               <AccountCircle />
             </IconButton>
-            <p>{userDetails?.user?.user?.name}</p>
+            <p>{userDetails?.user?.user?.name} </p>
+            {!userDetails.isVerified && (
+              <p style={{ fontSize: "x-small", color: "yellow" }}>
+                (Not Verified)
+              </p>
+            )}
           </MenuItem>
         ) : (
           <MenuItem onClick={onLoginClick}>

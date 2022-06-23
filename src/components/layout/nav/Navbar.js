@@ -12,15 +12,22 @@ import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import SearchBar from "./search-bar/SearchBar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../../store/action/auth-action";
+import Otp from "../Otp";
 
 export default function Navbar({ isAuth, isSeller }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [otpModel, setOtpModel] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleOtpModelOpen = () => setOtpModel(true);
+  const handleOtpModelClose = () => setOtpModel(false);
+
+  const isVerified = useSelector((state) => state.auth.isVerified);
 
   let navigate = useNavigate();
 
@@ -37,6 +44,11 @@ export default function Navbar({ isAuth, isSeller }) {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
     dispatch(authLogout());
   };
 
@@ -44,6 +56,10 @@ export default function Navbar({ isAuth, isSeller }) {
     navigate("/profile");
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const onVerifyClick = () => {
+    handleOtpModelOpen();
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -68,7 +84,8 @@ export default function Navbar({ isAuth, isSeller }) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={onMyAccountClick}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      {!isVerified && <MenuItem onClick={onVerifyClick}>Verify email</MenuItem>}
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -90,17 +107,14 @@ export default function Navbar({ isAuth, isSeller }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <NavMenu
-        isAuth={isAuth}
-        isSeller={isSeller}
-        handleProfileMenuOpen={handleProfileMenuOpen}
-      />
+      <NavMenu handleProfileMenuOpen={handleProfileMenuOpen} />
     </Menu>
   );
 
   return (
     <>
       <Box>
+        {otpModel && <Otp handleClose={handleOtpModelClose} />}
         <AppBar position="static">
           <Toolbar sx={{ maxWidth: "1500px", margin: "0 auto" }}>
             <Typography
