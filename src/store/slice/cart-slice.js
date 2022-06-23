@@ -5,7 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     totalQuantity: 0,
-    totalPrice: 0,
+    subTotal: 0,
     cartId: null,
   },
   reducers: {
@@ -15,6 +15,7 @@ const cartSlice = createSlice({
     replaceCart(state, action) {
       state.totalQuantity = action.payload.totalQuantity;
       state.items = action.payload.items;
+      state.subTotal = action.payload.subTotal;
     },
     addItemToCart(state, action) {
       const newItem = action.payload;
@@ -30,9 +31,11 @@ const cartSlice = createSlice({
           description: newItem.description,
           img_url: newItem.img_url,
         });
+        state.subTotal = state.subTotal + newItem.price;
       } else {
         existingItem.quantity++;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+        state.subTotal = state.subTotal + newItem.price;
       }
     },
     removeItemFromCart(state, action) {
@@ -41,9 +44,11 @@ const cartSlice = createSlice({
       state.totalQuantity--;
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== id);
+        state.subTotal = state.subTotal - existingItem.price;
       } else {
         existingItem.quantity--;
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
+        state.subTotal = state.subTotal - existingItem.price;
       }
     },
     removeItemWholeItem(state, action) {

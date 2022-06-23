@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 
 function BannerCarousel({ discountedProducts }) {
+  console.log("🚀 ~ file: BannerCarousel.js ~ line 5 ~ BannerCarousel ~ discountedProducts", discountedProducts)
   return (
     <Carousel
       autoPlay={true}

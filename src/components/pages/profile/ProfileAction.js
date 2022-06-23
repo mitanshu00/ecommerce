@@ -71,6 +71,12 @@ export default function ProfileAction({ selecteTab }) {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+          {/* <ListItemButton sx={{ pl: 4 }} onClick={() => handleTabChange("all")}>
+            <ListItemIcon>
+              <CheckCircleOutlineIcon />
+            </ListItemIcon>
+            <ListItemText primary="All" />
+          </ListItemButton> */}
           <ListItemButton
             sx={{ pl: 4 }}
             onClick={() => handleTabChange("completed")}

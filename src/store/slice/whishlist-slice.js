@@ -4,6 +4,7 @@ const whishlistSlice = createSlice({
   name: "whishlist",
   initialState: {
     wishItems: [],
+    itemIds: [],
   },
   reducers: {
     addItemToWishlist(state, action) {
@@ -15,9 +16,11 @@ const whishlistSlice = createSlice({
         state.wishItems.push({
           id: favItem.id,
           price: favItem.price,
-          name: favItem.title,
+          name: favItem.name,
+          description: favItem.description,
           img_url: favItem.img_url,
         });
+        state.itemIds.push(favItem.id);
       } else {
         return;
       }
@@ -25,6 +28,7 @@ const whishlistSlice = createSlice({
     removeItemFromWishlist(state, action) {
       const id = action.payload;
       state.wishItems = state.wishItems.filter((item) => item.id !== id);
+      state.itemIds = state.itemIds.filter((iId) => iId !== id);
     },
   },
 });

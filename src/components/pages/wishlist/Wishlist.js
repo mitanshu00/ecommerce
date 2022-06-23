@@ -26,7 +26,7 @@ function Wishlist() {
                   total: item.totalPrice,
                   price: item.price,
                   description: item.description,
-                  image: item.image,
+                  image: item.img_url,
                 }}
               />
             ))}

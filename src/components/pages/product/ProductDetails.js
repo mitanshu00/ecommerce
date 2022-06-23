@@ -4,7 +4,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Reviews from "./Reviews";
 import { cartActions } from "../../../store/slice/cart-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { WhishlistActions } from "../../../store/slice/whishlist-slice";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate } from "react-router-dom";
 
 let apiUrl = process.env.REACT_APP_API_URL;
 
@@ -13,10 +16,12 @@ function ProductDetails({ product }) {
   const [avgRating, setAvgRating] = useState(0);
 
   useEffect(() => {
-    fetch(`${apiUrl}/reviews/?product_id=34`)
+    fetch(`${apiUrl}/reviews/?product_id=${product.id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, []);
+  }, [product.id]);
+
+  const whishlistIds = useSelector((state) => state.whishlist.itemIds);
 
   const dispatch = useDispatch();
 
@@ -33,7 +38,22 @@ function ProductDetails({ product }) {
     );
   };
 
-  // const addToWishlistHandler = () => {};
+  const addToWishlistHandler = () => {
+    dispatch(
+      WhishlistActions.addItemToWishlist({
+        id: product.id,
+        price: product.price,
+        name: product.name,
+        img_url: product.poster_urls[0],
+        description: product.description,
+      })
+    );
+  };
+
+  const navigate = useNavigate();
+  const goToWhishlistPage = () => {
+    navigate("/wishlist");
+  };
 
   return (
     <Box
@@ -49,15 +69,26 @@ function ProductDetails({ product }) {
       </Button>
       <Stack direction="row" sx={{ mt: 4 }}>
         <Typography variant="h5">
-          <span>₹{product.price}</span>
+          <span>
+            ₹
+            {!product.discount?.offer_dicount
+              ? product.price
+              : product.price -
+                (product.price * product.discount?.offer_dicount) / 100}
+          </span>
           &nbsp;&nbsp;&nbsp;
         </Typography>
         <Typography>
           <span>
-            <strike>₹5999</strike>
+            <strike>₹{product.price}</strike>
           </span>
           &nbsp;&nbsp;&nbsp;
-          <span style={{ color: "#388E3C" }}>49% off</span>
+          <span style={{ color: "#388E3C" }}>
+            {product?.discount?.offer_dicount
+              ? product?.discount?.offer_dicount
+              : "0"}
+            % off
+          </span>
         </Typography>
       </Stack>
       <Typography variant="subtitle2" sx={{ color: "darkgreen" }}>
@@ -73,15 +104,27 @@ function ProductDetails({ product }) {
           <AddShoppingCartIcon sx={{ pr: 1 }} />
           ADD TO CARD
         </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          sx={{ px: 4, py: 2 }}
-          // onClick={addToWishlistHandler}
-        >
-          <FavoriteBorderIcon sx={{ pr: 1 }} />
-          WHISHLIST
-        </Button>
+        {whishlistIds.includes(product.id) ? (
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{ px: 4, py: 2 }}
+            onClick={goToWhishlistPage}
+          >
+            <FavoriteIcon sx={{ pr: 1 }} />
+            WHISHLISTED
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="secondary"
+            sx={{ px: 4, py: 2 }}
+            onClick={addToWishlistHandler}
+          >
+            <FavoriteBorderIcon sx={{ pr: 1 }} />
+            WHISHLIST
+          </Button>
+        )}
       </Stack>
       <Divider sx={{ my: 4 }} />
       <Typography variant="h5">Product Details</Typography>

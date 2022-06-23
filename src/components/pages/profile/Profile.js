@@ -19,7 +19,8 @@ function Products() {
         <Grid item xs={7} sm={9} columns={{ xs: 1 }}>
           {selectedTab === "info" && <Info />}
           {selectedTab === "addr" && <Addresses />}
-          {selectedTab === "completed" && <Order status="completed" />}
+          {/* {selectedTab === "all" && <Order status="all" />} */}
+          {selectedTab === "completed" && <Order status="created" />}
           {selectedTab === "pending" && <Order status="pending" />}
           {selectedTab === "cancelled" && <Order status="cancelled" />}
           {selectedTab === "returned" && <Order status="returned" />}

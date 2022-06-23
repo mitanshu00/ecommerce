@@ -16,3 +16,12 @@ export const authLogout = () => {
     console.log("logout successfull");
   };
 };
+
+export const sellerCheck = () => {
+  return (dispatch) => {
+    const id = localStorage.getItem("seller");
+    if (id) {
+      dispatch(authActions.setSellerId(JSON.parse(id)));
+    }
+  };
+};

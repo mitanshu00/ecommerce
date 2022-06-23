@@ -1,26 +1,12 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Button } from "@mui/material";
 import React from "react";
-import CategoryGrid from "../home/CategoryGrid";
 import NotFound from "../error-pages/NotFound";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SubCatProducts from "./SubCatProducts";
 
 let apiUrl = process.env.REACT_APP_API_URL;
-
-const stylesTwo = {
-  maxHeight: "200px",
-  maxWidth: "350px",
-};
-
-let cateroryList = [
-  {
-    id: 1,
-    name: "iphone 12",
-    img_url:
-      "https://www.profseema.com/wp-content/uploads/2020/11/7-compressed.png",
-  },
-];
 
 function Category() {
   const [subCat, setSubCat] = useState([]);
@@ -57,7 +43,12 @@ function Category() {
       <Grid container spacing={1} justifyContent="center">
         {subCat.length > 0 &&
           subCat.map((cat) => (
-            <Grid item xs={1} sx={{ mx: 2, cursor: "pointer" }} key={cat.id}>
+            <Grid
+              item
+              xs={1}
+              sx={{ mx: 8, my: 4, cursor: "pointer" }}
+              key={cat.id}
+            >
               <Box onClick={() => handleClick(cat.id, cat.name)}>
                 {/* <Avatar
                   src={cat.img_url.replace(
@@ -68,21 +59,17 @@ function Category() {
                   variant="square"
                   sx={{ width: "115px", height: "115px", mx: "auto" }}
                 /> */}
-                <Typography align="center">{cat.name}</Typography>
+                <Button variant="contained" sx={{ px: 4, py: 2 }}>
+                  {cat.name}
+                </Button>
               </Box>
             </Grid>
           ))}
       </Grid>
 
       {/* loop all category in categoryGrid */}
-      <CategoryGrid
-        title="category"
-        list={cateroryList}
-        styles={stylesTwo}
-        showTitle={true}
-        gridCol={{ xs: 1, sm: 2, md: 4 }}
-        viewAllLink={true}
-      />
+      {subCat.length > 0 &&
+        subCat.map((cat) => <SubCatProducts subCategory={cat} />)}
     </>
   );
 }

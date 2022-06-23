@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
-
   const MainTotal = useSelector((state) => state.cart.subTotal);
+  
   return (
     <div className={classes.containerr}>
       <h1>My Cart ({cartQuantity})</h1>

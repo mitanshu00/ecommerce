@@ -31,11 +31,17 @@ let apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState([]);
+  const [highestDiscProd, setHighestDiscProd] = useState([]);
 
   useEffect(() => {
     fetch(`${apiUrl}/discounts`)
       .then((res) => res.json())
       .then((data) => setDiscountedProducts(data))
+      .catch((err) => console.log(err));
+
+    fetch(`${apiUrl}/discount_items/?offer_type=direct`)
+      .then((res) => res.json())
+      .then((data) => setHighestDiscProd(data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -45,14 +51,16 @@ const Home = () => {
   return (
     <>
       <Box>
-        {discountedProducts.length > 0 && (
+        {/* {discountedProducts.length > 0 && (
           <BannerCarousel discountedProducts={discountedProducts} />
+        )} */}
+        {highestDiscProd.length > 0 && (
+          <ProductCarousel
+            title="Discounted products"
+            data={highestDiscProd}
+            timer={true}
+          />
         )}
-        <ProductCarousel
-          title="Discounted products"
-          data={products}
-          timer={true}
-        />
         {categories.length > 0 && (
           <CategoryGrid
             title="Categories"
@@ -63,12 +71,12 @@ const Home = () => {
           />
         )}
 
-        <ProductCarousel
+        {/* <ProductCarousel
           data={productst}
           timer={false}
           title="Popular Brands"
           responsive={responsiveStyle}
-        />
+        /> */}
       </Box>
     </>
   );

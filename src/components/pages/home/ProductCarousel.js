@@ -64,18 +64,25 @@ const ProductCarousel = ({
         keyBoardControl={true}
         showDots={false}
       >
-        {data.map((temp) => (
+        {data.map((product) => (
           <Link
-            to={`product/${temp.id}`}
+            to={`product/${product.product_id}`}
             style={{ textDecoration: "none" }}
-            key={temp.id}
+            key={product.id}
           >
             <Box textAlign="center" style={{ padding: "25px 15px" }}>
-              <img
-                src={temp.url}
-                sx={{ width: "100%", maxHeight: 150 }}
-                alt=""
-              />
+              {product?.product?.poster_urls[0] && (
+                <img
+                  src={product.product.poster_urls[0].replace(
+                    "http://localhost:3000/",
+                    process.env.REACT_APP_API
+                  )}
+                  width="100px"
+                  height="100px"
+                  sx={{ width: "100%", maxHeight: 150 }}
+                  alt=""
+                />
+              )}
               <Typography
                 style={{
                   fontWeight: 600,
@@ -84,13 +91,14 @@ const ProductCarousel = ({
                   marginTop: 5,
                 }}
               >
-                {temp.title.shortTitle}
+                {product.product.name}
               </Typography>
               <Typography style={{ color: "green" }}>
-                {temp.discount}
+                Rs.{product.product.price} (
+                {product.product.discount.offer_dicount}%)
               </Typography>
               <Typography style={{ color: "#212121", opacity: ".6" }}>
-                {temp.tagline}
+                {product.product.description.slice(0, 15)}
               </Typography>
             </Box>
           </Link>

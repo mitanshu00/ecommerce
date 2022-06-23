@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
   user: {},
+  isVerified: false,
   isAuthenticated: false,
   isSeller: false,
   registeredForSeller: false,
@@ -30,7 +31,11 @@ const authSlice = createSlice({
     setSellerId(state, action) {
       state.isSeller = true;
       state.sellerId = action.payload;
+      state.registeredForSeller = false;
     },
+    otpVerify(state){
+      state.isVerified = true;
+    }
   },
 });
 

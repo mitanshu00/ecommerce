@@ -15,7 +15,12 @@ export const sendRegisterData = (data) => {
           password: data.enteredRegPassword,
         }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Something went wrong");
+        })
         .then((data) => {
           localStorage.setItem("auth", JSON.stringify(data));
           dispatch(authActions.login(data));
