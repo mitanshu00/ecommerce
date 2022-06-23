@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import AddProdut from "./AddProduct";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -17,6 +18,12 @@ const columns = [
     headerName: "price",
     type: "number",
     width: 80,
+  },
+  {
+    field: "discount",
+    headerName: "discount",
+    type: "number",
+    width: 100,
   },
   {
     field: "created_at",
@@ -41,16 +48,22 @@ const columns = [
       </>
     ),
   },
+  {
+    field: "Edit",
+    headerName: "Edit",
+    width: 150,
+    renderCell: (params) => <Button>edit</Button>,
+  },
 ];
 
 export default function Stocks() {
   const [rows, setRow] = useState([]);
   const [open, setOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const handleOpen = () => setOpen(true);
 
-  // !temp id
-  let sellerId = 1;
+  let sellerId = useSelector((state) => state.auth.sellerId);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/sellers/${sellerId}`)
       .then((res) => res.json())
@@ -72,6 +85,9 @@ export default function Stocks() {
         rowsPerPageOptions={[10, 20, 30, 50]}
         checkboxSelection
         autoHeight={true}
+        onSelectionModelChange={(newSelectionArray) => {
+          setSelectedItems(newSelectionArray);
+        }}
       />
     </div>
   );

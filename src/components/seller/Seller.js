@@ -16,17 +16,29 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SupportIcon from "@mui/icons-material/Support";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Dashboard from "./Dashboard";
 import Stocks from "./Stocks";
 import Sales from "./Sales";
+import { useDispatch } from "react-redux";
+import { authLogout } from "../../store/action/auth-action";
+import ManageOrder from "./ManageOrder";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
 export default function Seller() {
   const [tab, setTab] = useState("dashboard");
 
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(authLogout());
+  };
+
+  let username = useSelector((state) => state.auth.user.user.name);
+
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", mt: 4 }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -54,7 +66,7 @@ export default function Seller() {
           <List>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemText primary={"User name"} />
+                <ListItemText primary={username} />
               </ListItemButton>
             </ListItem>
             <Divider />
@@ -83,11 +95,19 @@ export default function Seller() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
+              <ListItemButton onClick={() => setTab("manageorder")}>
+                <ListItemIcon>
+                  <LocalShippingIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Manage Order"} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Logout"} />
+                <ListItemText primary={"Logout"} onClick={handleLogout} />
               </ListItemButton>
             </ListItem>
             <Divider />
@@ -104,10 +124,11 @@ export default function Seller() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, px: 3, minHeight: "100vh" }}>
         <Toolbar />
-   
+
         {tab === "dashboard" && <Dashboard />}
         {tab === "stocks" && <Stocks />}
         {tab === "sales" && <Sales />}
+        {tab === "manageorder" && <ManageOrder />}
       </Box>
     </Box>
   );

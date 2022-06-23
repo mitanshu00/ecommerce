@@ -38,6 +38,7 @@ export default function AddProdut({ open, setOpen }) {
   let categories = useSelector((state) => state.category.categories);
   let subcategories = useSelector((state) => state.subcategory.subcategories);
   let brands = useSelector((state) => state.brand.brands);
+  let sellerId = useSelector((state) => state.auth.sellerId);
 
   useEffect(() => {
     setSubCat(subcategories);
@@ -77,8 +78,8 @@ export default function AddProdut({ open, setOpen }) {
         price: form.price,
         description: form.description,
         sub_category_id: form.subcategory,
-        brand_id: 4,
-        seller_id: 1,
+        brand_id: form.brand,
+        seller_id: sellerId,
         posters: [...form.images],
       }),
     })

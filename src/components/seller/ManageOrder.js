@@ -34,18 +34,20 @@ const columns = [
       return <p>{params.row.product.price}</p>;
     },
   },
+
   {
-    field: "created_at",
-    headerName: "created at",
-    width: 250,
-  },
-  {
-    field: "discount",
-    headerName: "discount",
-    type: "number",
+    field: "status",
+    headerName: "status",
     width: 120,
     renderCell: (params) => {
-      return <p>{params.row.product.discount}</p>;
+      return (
+        <select name="status" id="status">
+          <option value="pending">created</option>
+          <option value="delivered">delivered</option>
+          <option value="cancelled">cancelled</option>
+          <option value="returned">returned</option>
+        </select>
+      );
     },
   },
 ];
@@ -53,8 +55,8 @@ const columns = [
 export default function Stocks() {
   const [rows, setRow] = useState([]);
 
-  let sellerId = useSelector((state) => state.auth.sellerId);
-  // let sellerId = 1;
+  //   let sellerId = useSelector((state) => state.auth.sellerId);
+  let sellerId = 1;
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`)
       .then((res) => res.json())
@@ -70,7 +72,6 @@ export default function Stocks() {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10, 20, 30, 50]}
-        checkboxSelection
         autoHeight={true}
       />
     </div>
