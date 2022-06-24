@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Divider } from "@mui/material/";
+import { Box, Typography, Divider } from "@mui/material/";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
@@ -32,18 +32,6 @@ const ProductCarousel = ({ data, title, responsive }) => {
         >
           {title}
         </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            marginLeft: "auto",
-            backgroundColor: "#2874f0",
-            borderRadius: 2,
-            fontSize: 13,
-          }}
-        >
-          View All
-        </Button>
       </Box>
       <Divider />
       <Carousel

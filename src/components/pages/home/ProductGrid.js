@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import { Stack, Typography, Divider, Box, Button } from "@mui/material";
+import { Stack, Typography, Divider, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function CategoryGrid({
@@ -29,20 +29,6 @@ export default function CategoryGrid({
         >
           {title}
         </Typography>
-        {viewAllLink && (
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              marginLeft: "auto",
-              backgroundColor: "#2874f0",
-              borderRadius: 2,
-              fontSize: 13,
-            }}
-          >
-            View All
-          </Button>
-        )}
       </Box>
 
       <Divider sx={{ my: 2 }} />
