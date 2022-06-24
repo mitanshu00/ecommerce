@@ -28,13 +28,7 @@ const WishlistItems = (props) => {
     <div className={classes.cardbox}>
       <li className={classes.list}>
         <div className={classes.image}>
-          <img
-            src={image.replace(
-              "http://localhost:3000/",
-              process.env.REACT_APP_API
-            )}
-            alt="a product"
-          />
+          <img src={image} alt="a product" />
         </div>
         <div className={classes.dtlscon}>
           <div className={classes.txt}>

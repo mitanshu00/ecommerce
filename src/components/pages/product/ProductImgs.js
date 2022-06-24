@@ -9,10 +9,6 @@ export default function ProductImg({ images }) {
     setImgIndex(index);
   };
 
-  let newimages = images.map((image) => {
-    return image.replace("http://localhost:3000/", process.env.REACT_APP_API);
-  });
-
   return (
     <Box
       sx={{
@@ -26,8 +22,8 @@ export default function ProductImg({ images }) {
       <Grid container spacing={1}>
         <Grid item xs={12} sm={2} columns={{ xs: 1 }}>
           <Stack spacing={2} direction="column">
-            {newimages &&
-              newimages.map((image, index) => (
+            {images &&
+              images.map((image, index) => (
                 <img
                   src={image}
                   height="70px"
@@ -59,8 +55,8 @@ export default function ProductImg({ images }) {
               },
             }}
           >
-            {newimages &&
-              newimages.map((image, index) => (
+            {images &&
+              images.map((image, index) => (
                 <img
                   src={image}
                   alt=""

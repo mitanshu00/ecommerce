@@ -56,14 +56,7 @@ export default function CategoryGrid({
             onClick={() => handleClick(category.name, category.id)}
           >
             <Stack>
-              <img
-                src={category.img_url.replace(
-                  "http://localhost:3000/",
-                  process.env.REACT_APP_API
-                )}
-                alt="category img"
-                style={styles}
-              />
+              <img src={category.img_url} alt="category img" style={styles} />
               {showTitle && (
                 <p style={{ textAlign: "center" }}>{category.name}</p>
               )}

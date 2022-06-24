@@ -60,21 +60,22 @@ export default function Stocks() {
   const [rows, setRow] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
-  console.log(
-    "🚀 ~ file: Stocks.js ~ line 63 ~ Stocks ~ selectedItems",
-    selectedItems
-  );
+  console.log(selectedItems);
 
   const handleOpen = () => setOpen(true);
 
   let sellerId = useSelector((state) => state.auth.sellerId);
+  let token = useSelector((state) => state.auth.user.token);
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/sellers/${sellerId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/sellers/${sellerId}`, {
+      headers: { authorization: `Bearer ${token}` },
+    })
       .then((res) => res.json())
       .then((data) => {
         setRow(data.products);
       });
-  }, [sellerId]);
+  }, [sellerId, token]);
 
   return (
     <div style={{ width: "100%" }}>

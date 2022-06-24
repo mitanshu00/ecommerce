@@ -60,6 +60,9 @@
   height: 40vh;
   background-color: #fff;
   width: 29%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .container .footer {
   justify-content: center;

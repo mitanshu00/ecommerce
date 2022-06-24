@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
+import { sendCartData } from "../../../store/action/cart-action";
 
 let apiUrl = process.env.REACT_APP_API_URL;
 
@@ -22,6 +23,7 @@ function ProductDetails({ product }) {
   }, [product.id]);
 
   const whishlistIds = useSelector((state) => state.whishlist.itemIds);
+  const token = useSelector((state) => state.auth.user.token);
 
   const dispatch = useDispatch();
 
@@ -36,6 +38,7 @@ function ProductDetails({ product }) {
         description: product.description,
       })
     );
+    dispatch(sendCartData(token, product.id));
   };
 
   const addToWishlistHandler = () => {
@@ -56,10 +59,7 @@ function ProductDetails({ product }) {
   };
 
   return (
-    <Box
-      sx={{ px: 2 }}
-      // className="product-details"
-    >
+    <Box sx={{ px: 2 }}>
       <Typography variant="h3">{product.name}</Typography>
       <Typography variant="h6" sx={{ my: 2 }}>
         {product.description}
@@ -95,7 +95,7 @@ function ProductDetails({ product }) {
         Inclusive all taxes
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mt: 4 }}>
-        {!product.quantity > 0 ? (
+        {product.quantity > 0 ? (
           <Button
             variant="contained"
             color="success"

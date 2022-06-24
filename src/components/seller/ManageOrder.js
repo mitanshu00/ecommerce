@@ -55,15 +55,21 @@ export const columns = [
 export default function Stocks() {
   const [rows, setRow] = useState([]);
 
-  //   let sellerId = useSelector((state) => state.auth.sellerId);
-  let sellerId = 1;
+  let sellerId = useSelector((state) => state.auth.sellerId);
+  let token = useSelector((state) => state.auth.user.token);
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`)
+    fetch(
+      `${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`,
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setRow(data);
       });
-  }, [sellerId]);
+  }, [sellerId, token]);
 
   return (
     <div style={{ width: "100%" }}>

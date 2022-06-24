@@ -10,11 +10,15 @@ const stylesTwo = {
 
 function SubCatProducts({ subCategory }) {
   const [subCat, setSubCats] = useState([]);
+  console.log(
+    "🚀 ~ file: SubCatProducts.js ~ line 13 ~ SubCatProducts ~ subCat",
+    subCat
+  );
 
   useEffect(() => {
     fetch(`${apiUrl}/products?sub_category_id=${subCategory.id}`)
       .then((res) => res.json())
-      .then((data) => setSubCats(data.products))
+      .then((data) => setSubCats(data))
       .catch((err) => console.log(err));
   }, [subCategory]);
 

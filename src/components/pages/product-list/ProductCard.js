@@ -70,16 +70,7 @@ export default function ActionAreaCard({ product, whishlisted }) {
           }}
         >
           {product.poster_urls.map((image, index) => (
-            <img
-              src={image.replace(
-                "http://localhost:3000/",
-                process.env.REACT_APP_API
-              )}
-              alt=""
-              width="100%"
-              height="275xp"
-              key={index}
-            />
+            <img src={image} alt="" width="100%" height="275xp" key={index} />
           ))}
         </Carousel>
         <CardContent sx={{ p: 1 }}>

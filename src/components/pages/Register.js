@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerActions } from "../../store/slice/register-slice";
 import { sendRegisterData } from "../../store/action/register-actions";
@@ -93,7 +93,7 @@ function Register() {
           <p className={classes.title}>Sign Up</p>
 
           <input
-            placeholder="Firstname Lastname"
+            placeholder="Name"
             type="text"
             id="name"
             onChange={NameInputChangeHandler}

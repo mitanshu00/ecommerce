@@ -1,12 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./PlaceOrder.module.css";
 import { useCallback, useState, useEffect } from "react";
+import { sendOrderData } from "../../../store/action/PlaceOrder-action";
 
 const PlaceOrder = () => {
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const MainTotal = useSelector((state) => state.cart.subTotal);
+  const token = useSelector((state) => state.auth.user.token);
 
   const [page, setPage] = useState(0);
   const [finalAdd, setFinalAdd] = useState([]);
@@ -19,15 +22,16 @@ const PlaceOrder = () => {
   });
 
   const fetchDataHandler = useCallback(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user_addresses`)
+    fetch(`${process.env.REACT_APP_API_URL}/user_addresses`, {
+      headers: { authorization: `Bearer ${token}` },
+    })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setState(data);
       });
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     fetchDataHandler();
@@ -43,19 +47,38 @@ const PlaceOrder = () => {
     setPage((cur) => cur + 1);
   };
 
-  const formStep = (e) => {
-    if (page === 2) {
+  const summeryHandler = (e) => {
+    if (page === 1) {
       e.preventDefault();
       alert("Form Submitted");
-      console.log(cardData);
-      console.log(finalAdd);
+      console.log({
+        address_id: finalAdd[0].id,
+        totalAmount: MainTotal,
+      });
+      dispatch(
+        sendOrderData({
+          address_id: finalAdd[0].id,
+          totalAmount: MainTotal,
+        })
+      );
     } else {
       setPage((cur) => cur + 1);
     }
   };
-  const PrevStep = () => {
-    setPage((cur) => cur - 1);
-  };
+
+  // const formStep = (e) => {
+  //   if (page === 2) {
+  //     e.preventDefault();
+  //     alert("Form Submitted");
+  //     console.log(cardData);
+  //     console.log(finalAdd);
+  //   } else {
+  //     setPage((cur) => cur + 1);
+  //   }
+  // };
+  // const PrevStep = () => {
+  //   setPage((cur) => cur - 1);
+  // };
 
   return (
     <div className={styles.container}>
@@ -64,23 +87,27 @@ const PlaceOrder = () => {
           <div className={styles.con2}>
             <h1>Select a delivery address</h1>
             <div className={styles.rowcard}>
-              {state.map((item) => (
-                <div className={styles.card} key={item.id}>
-                  <div className={styles.name}>
-                    <h4>{item.mobile_no}</h4>
-                  </div>
-                  <p>{item.address_line1}</p>
-                  <p>{item.address_line2}</p>
-                  <p>
-                    {item.city}-{item.postal_code}
-                  </p>
-                  <p>{item.country}</p>
+              {state.length === 0 && <p>no address available.</p>}
+              {state.length > 0 &&
+                state.map((item) => (
+                  <div className={styles.card} key={item.id}>
+                    <div className={styles.name}>
+                      <h4>{item.mobile_no}</h4>
+                    </div>
+                    <p>{item.address_line1}</p>
+                    <p>{item.address_line2}</p>
+                    <p>
+                      {item.city}-{item.postal_code}
+                    </p>
+                    <p>
+                      {item.state}, {item.country}
+                    </p>
 
-                  <button onClick={() => DeliveryAddress(item.id)}>
-                    Deliver to this address
-                  </button>
-                </div>
-              ))}
+                    <button onClick={() => DeliveryAddress(item.id)}>
+                      Deliver to this address
+                    </button>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -94,13 +121,7 @@ const PlaceOrder = () => {
                 {cartItems.map((item) => (
                   <div className={styles.list} key={item.id}>
                     <div className={styles.image}>
-                      <img
-                        src={item.img_url[0].replace(
-                          "http://localhost:3000/",
-                          process.env.REACT_APP_API
-                        )}
-                        alt="img"
-                      />
+                      <img src={item.img_url[0]} alt="img" />
                     </div>
                     <div className={styles.dtlscon}>
                       <h2>{item.name}</h2>
@@ -134,6 +155,7 @@ const PlaceOrder = () => {
                     <h4>₹ {MainTotal}</h4>
                   </div>
                 </div>
+                <botton onClick={summeryHandler}>Proceed To Pay</botton>
               </div>
             </div>
           </div>
@@ -247,7 +269,7 @@ const PlaceOrder = () => {
           </div>
         </div>
       )}
-      <div className={styles.footer}>
+      {/* <div className={styles.footer}>
         <button
           type="button"
           onClick={PrevStep}
@@ -258,7 +280,7 @@ const PlaceOrder = () => {
         <button type="button" onClick={formStep}>
           {page === 0 || page === 1 ? "Next" : "Submit"}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

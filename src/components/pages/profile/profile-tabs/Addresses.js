@@ -8,13 +8,16 @@ import {
   Button,
 } from "@mui/material";
 import AddressList from "./AddressList";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 let apiUrl = process.env.REACT_APP_API_URL;
-// const userId = useSelector((state) => state.auth.user.id);
-let userId = 10;
 
 function Addresses() {
+  let userDetails = useSelector((state) => state.auth.user);
+
+  let userId = userDetails.user.id;
+  let token = userDetails.token;
+
   const [addresses, setAddresses] = useState([{}]);
   const [open, setOpen] = useState(false);
   const [optionId, setOptionId] = useState(0);
@@ -29,12 +32,14 @@ function Addresses() {
   });
 
   useEffect(() => {
-    fetch(`${apiUrl}/user_addresses/?user_id=${userId}`)
+    fetch(`${apiUrl}/user_addresses/`, {
+      headers: { authorization: `Bearer ${token}` },
+    })
       .then((res) => res.json())
       .then((data) => {
         setAddresses(data);
       });
-  }, []);
+  }, [token]);
 
   const handleChangeForm = (e) => {
     setNewAddress({
@@ -62,6 +67,7 @@ function Addresses() {
       method: optionId ? "PUT" : "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(newAddress),
     })
@@ -98,7 +104,10 @@ function Addresses() {
 
   return (
     <Grid container justify="center" spacing={1}>
-      <AddressList addresses={addresses} editAddress={editAddress} />
+      {addresses.length === 0 && <p>No address available.</p>}
+      {addresses.length > 0 && (
+        <AddressList addresses={addresses} editAddress={editAddress} />
+      )}
       <Grid item md={6}>
         {!open && (
           <Button

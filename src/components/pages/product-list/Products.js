@@ -14,7 +14,7 @@ function Products() {
   useEffect(() => {
     fetch(`${apiUrl}/products?sub_category=${subcategory}`)
       .then((res) => res.json())
-      .then((data) => setFilterData(data.products))
+      .then((data) => setFilterData(data))
       .catch((err) => setError(err));
   }, [subcategory]);
 

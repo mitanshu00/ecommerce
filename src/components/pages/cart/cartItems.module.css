@@ -24,7 +24,7 @@
 .image img {
   background-size: cover;
   width: 80%;
-  height: auto;
+  height: 175px;
   margin: auto;
   border-radius: 10px;
 }
