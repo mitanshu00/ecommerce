@@ -1,0 +1,168 @@
+.container {
+  background-color: rgb(229, 228, 228);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .form {
+  justify-content: center;
+  /* border: 1px solid black; */
+  width: 90%;
+  min-height: 80vh;
+}
+.container .form .con2 {
+  /* border: 1px solid red; */
+
+  margin-top: 50px;
+}
+.container .form .con2 h1 {
+  margin-bottom: 50px;
+  border-bottom: 3px solid rgb(210, 210, 210);
+}
+.container .form .con2 .card {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+  min-height: 240px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 30%;
+  padding: 10px;
+  background-color: #fff;
+}
+.container .form .con2 .rowcard {
+  display: flex;
+  flex-wrap: wrap;
+}
+.container .form .con2 .rowcard .card .name {
+  display: flex;
+}
+.container .form .con2 .rowcard .card .name h4 {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.container .form .con2 .rowcard .card button {
+  border: none;
+  outline: none;
+  background-color: rgb(216, 216, 0);
+  border-radius: 5px;
+  width: 95%;
+  padding: 5px 5px;
+}
+.container .form .con2 .bigcard {
+  display: flex;
+  justify-content: space-between;
+}
+.container .form .con2 .bigcard .card1 {
+  width: 70%;
+  min-height: 100%;
+}
+.container .form .con2 .bigcard .card2 {
+  height: 40vh;
+  background-color: #fff;
+  width: 29%;
+}
+.container .footer {
+  justify-content: center;
+  /* border: 1px solid black; */
+  width: 90%;
+  margin: 20px auto;
+
+  display: flex;
+  justify-content: space-between;
+  /* min-height: 80vh; */
+}
+
+.container .footer button {
+  background: #4650ff;
+  color: whitesmoke;
+  border: none;
+  padding: 5px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.container .footer button:disabled {
+  cursor: not-allowed;
+}
+.prev {
+  display: none;
+  position: fixed;
+}
+/* other */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+.card1 {
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.card1 .list {
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); */
+  list-style-type: none;
+  min-height: 160px;
+  margin-bottom: 10px;
+  display: flex;
+  background-color: #fff;
+}
+
+.image {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+.image img {
+  background-size: cover;
+  width: 90%;
+  height: auto;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.container .form .con2 .bigcard .card1 .list .dtlscon h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+.container .form .con2 .bigcard .card1 .list .dtlscon p {
+  margin-bottom: 10px;
+  /* font-size: 24px; */
+}
+.dtlscon {
+  width: 60%;
+  margin: 0 10px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.price {
+  padding-top: 10px;
+  width: 20%;
+}
+.price h2 {
+  width: 100%;
+  text-align: right;
+  font-size: 24px;
+  padding-right: 10px;
+  margin: 0;
+}
+
+/* pay-box */
+.proceed1 {
+  width: 90%;
+  margin: 0 auto;
+}
+.proceed1 p {
+  font-size: 20px;
+  margin: 10px 0;
+}
+.proceed1 h5 {
+  margin: 10px 0;
+  color: grey;
+}
+.proceed1 .amount {
+  display: flex;
+  justify-content: space-between;
+}
+.proceed1 .amount h4 {
+  color: black;
+}

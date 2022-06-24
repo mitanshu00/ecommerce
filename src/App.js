@@ -9,10 +9,12 @@ import { useDispatch } from "react-redux";
 import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
 import Products from "./components/pages/product-list/Products";
-import Cart from "./components/pages/cart/Cart";
+import Cart from "./components/pages/cart/Cartt";
+import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder";
 import Wishlist from "./components/pages/wishlist/Wishlist";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
+import Login from "./components/pages/Login/Login";
+import Register from "./components/pages/Register/register";
+
 import Profile from "./components/pages/profile/Profile";
 import { subCatActions } from "./store/slice/subcategories-slice";
 import { brandActions } from "./store/slice/brands-slice";
@@ -71,6 +73,7 @@ function App() {
 
           <Route path="/Product/:id" element={<Product />} />
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/Cart/placeorder" element={<PlaceOrder />} />
           <Route path="/Search/:query" element={<Search />} />
 
           <Route element={<PublicRoute isAuth={isAuth.isAuthenticated} />}>

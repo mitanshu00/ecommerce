@@ -45,9 +45,9 @@ const Home = () => {
   return (
     <>
       <Box>
-        {discountedProducts.length > 0 && (
+        {/* {discountedProducts.length > 0 && (
           <BannerCarousel discountedProducts={discountedProducts} />
-        )}
+        )} */}
         <ProductCarousel
           title="Discounted products"
           data={products}

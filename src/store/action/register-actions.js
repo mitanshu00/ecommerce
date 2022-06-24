@@ -1,9 +1,7 @@
-import { authActions } from "../slice/auth-slice";
-
 export const sendRegisterData = (data) => {
-  return async (dispatch) => {
+  return () => {
     const sendRequest = async () => {
-      fetch(`${process.env.REACT_APP_API_URL}/users`, {
+      fetch("https://fe90-103-240-35-190.in.ngrok.io/api/v1/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -17,8 +15,13 @@ export const sendRegisterData = (data) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          localStorage.setItem("auth", JSON.stringify(data));
-          dispatch(authActions.login(data));
+          console.log(data);
+          const { user, token } = data;
+          console.log(user);
+          console.log(token);
+          // // localStorage.setItem("token", token);
+          // // localStorage.setItem("userData", user);
+          // dispatch(authActions.login({ user }));
         })
         .catch((error) => {
           console.error(error);

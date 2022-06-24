@@ -3,19 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
+    wishItems: [],
     items: [],
     totalQuantity: 0,
-    totalPrice: 0,
-    cartId: null,
+    subTotal: 0,
   },
   reducers: {
     toggle(state) {
       state.cartIsVisible = !state.cartIsVisible;
     },
-    replaceCart(state, action) {
-      state.totalQuantity = action.payload.totalQuantity;
-      state.items = action.payload.items;
-    },
+
     addItemToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
@@ -28,11 +25,13 @@ const cartSlice = createSlice({
           totalPrice: newItem.price,
           name: newItem.name,
           description: newItem.description,
-          img_url: newItem.img_url,
+          image: newItem.img_url,
         });
+        state.subTotal = state.subTotal + newItem.price;
       } else {
         existingItem.quantity++;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+        state.subTotal = state.subTotal + existingItem.price;
       }
     },
     removeItemFromCart(state, action) {
@@ -45,6 +44,7 @@ const cartSlice = createSlice({
         existingItem.quantity--;
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
+      state.subTotal = state.subTotal - existingItem.price;
     },
     removeItemWholeItem(state, action) {
       const id = action.payload;
@@ -52,6 +52,27 @@ const cartSlice = createSlice({
       state.totalQuantity = state.totalQuantity - existingItem.quantity;
       state.items = state.items.filter((item) => item.id !== id);
       state.subTotal = state.subTotal - existingItem.totalPrice;
+    },
+    addItemToWishlist(state, action) {
+      const favItem = action.payload;
+      const existingItem = state.wishItems.find(
+        (item) => item.id === favItem.id
+      );
+      if (!existingItem) {
+        state.wishItems.push({
+          id: favItem.id,
+          price: favItem.price,
+          name: favItem.title,
+          description: favItem.description,
+          image: favItem.image,
+        });
+      } else {
+        return;
+      }
+    },
+    removeItemFromWishlist(state, action) {
+      const id = action.payload;
+      state.wishItems = state.wishItems.filter((item) => item.id !== id);
     },
   },
 });

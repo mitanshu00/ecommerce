@@ -4,7 +4,7 @@ export const fetchCartData = (userId) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/carts/?user_id=${userId}`
+        `${process.env.REACT_APP_API_URL}carts/?user_id=${userId}`
       );
 
       if (!response.ok) {

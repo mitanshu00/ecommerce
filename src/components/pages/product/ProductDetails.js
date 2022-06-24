@@ -5,6 +5,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Reviews from "./Reviews";
 import { cartActions } from "../../../store/slice/cart-slice";
 import { useDispatch } from "react-redux";
+import { sendAddToCartData } from "../../../store/action/cart-actions";
 
 let apiUrl = process.env.REACT_APP_API_URL;
 
@@ -27,13 +28,29 @@ function ProductDetails({ product }) {
         price: product.price,
         totalPrice: product.price,
         name: product.name,
+        image: product.poster_urls[0],
+        description: product.description,
+      })
+    );
+    dispatch(
+      sendAddToCartData({
+        id: product.id,
+      })
+    );
+  };
+
+  const addToWishlistHandler = () => {
+    dispatch(
+      cartActions.addItemToWishlist({
+        id: product.id,
+        price: product.price,
+        totalPrice: product.price,
+        name: product.name,
         img_url: product.poster_urls[0],
         description: product.description,
       })
     );
   };
-
-  // const addToWishlistHandler = () => {};
 
   return (
     <Box
@@ -77,7 +94,7 @@ function ProductDetails({ product }) {
           variant="outlined"
           color="secondary"
           sx={{ px: 4, py: 2 }}
-          // onClick={addToWishlistHandler}
+          onClick={addToWishlistHandler}
         >
           <FavoriteBorderIcon sx={{ pr: 1 }} />
           WHISHLIST

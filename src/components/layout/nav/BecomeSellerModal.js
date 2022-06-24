@@ -27,7 +27,8 @@ export default function BasicModal({ open, setOpen }) {
     seller_location: "",
   });
 
-  let userInfo = useSelector((state) => state.auth.user.user);
+  let userInfo = useSelector((state) => state.auth.user);
+  // console.log(userInfo);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
