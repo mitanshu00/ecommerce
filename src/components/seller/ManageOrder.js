@@ -55,8 +55,7 @@ export const columns = [
 export default function Stocks() {
   const [rows, setRow] = useState([]);
 
-  //   let sellerId = useSelector((state) => state.auth.sellerId);
-  let sellerId = 1;
+  let sellerId = useSelector((state) => state.auth.sellerId);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`)
       .then((res) => res.json())

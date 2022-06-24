@@ -93,7 +93,7 @@ function Register() {
           <p className={classes.title}>Sign Up</p>
 
           <input
-            placeholder="Firstname Lastname"
+            placeholder="Name"
             type="text"
             id="name"
             onChange={NameInputChangeHandler}
