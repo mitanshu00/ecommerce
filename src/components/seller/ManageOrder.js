@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 
-const columns = [
+export const columns = [
   { field: "id", headerName: "ID", width: 70 },
   {
     field: "order_id",

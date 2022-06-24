@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import BannerCarousel from "./BannerCarousel";
 import CategoryGrid from "./CategoryGrid";
 import ProductCarousel from "./ProductCarousel";
-import { products, productst } from "../../../data/ProductList";
 import { useSelector } from "react-redux";
 
 const responsiveStyle = {
@@ -67,7 +66,6 @@ const Home = () => {
             list={categories}
             styles={styles}
             showTitle={true}
-            gridCol={{ xs: 2, sm: 3, md: 3, lg: 6 }}
           />
         )}
 

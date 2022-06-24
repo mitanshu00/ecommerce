@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import UploadImage from "./UploadImage";
+import PropTypes from "prop-types";
 
 const style = {
   position: "absolute",
@@ -200,3 +201,8 @@ export default function AddProdut({ open, setOpen }) {
     </div>
   );
 }
+
+AddProdut.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.bool,
+};

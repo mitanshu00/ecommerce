@@ -18,8 +18,6 @@ function NavMenu({ handleProfileMenuOpen }) {
   let isAuth = userDetails.isAuthenticated;
   let isSeller = userDetails.sellerId;
 
-  // * user user name
-
   const handleOpen = () => setOpen(true);
 
   const onWhishlistClick = () => {

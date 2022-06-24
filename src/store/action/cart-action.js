@@ -54,8 +54,6 @@ export const sendCartData = (cart) => {
 
     try {
       await sendRequest();
-
-      dispatch(console.log("success"));
     } catch (error) {
       console.log("error", error);
     }

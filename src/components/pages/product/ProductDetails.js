@@ -95,15 +95,22 @@ function ProductDetails({ product }) {
         Inclusive all taxes
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mt: 4 }}>
-        <Button
-          variant="contained"
-          color="success"
-          sx={{ px: 4, py: 2 }}
-          onClick={addToCartHandler}
-        >
-          <AddShoppingCartIcon sx={{ pr: 1 }} />
-          ADD TO CARD
-        </Button>
+        {!product.quantity > 0 ? (
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ px: 4, py: 2 }}
+            onClick={addToCartHandler}
+          >
+            <AddShoppingCartIcon sx={{ pr: 1 }} />
+            ADD TO CARD
+          </Button>
+        ) : (
+          <Button variant="contained" color="warning" sx={{ px: 4, py: 2 }}>
+            <AddShoppingCartIcon sx={{ pr: 1 }} />
+            OUT OF STOCK
+          </Button>
+        )}
         {whishlistIds.includes(product.id) ? (
           <Button
             variant="outlined"
@@ -128,21 +135,6 @@ function ProductDetails({ product }) {
       </Stack>
       <Divider sx={{ my: 4 }} />
       <Typography variant="h5">Product Details</Typography>
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-        euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisl,
-        euismod nisl nisl euismod nisl.
-      </Typography>
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-        euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisl,
-        euismod nisl nisl euismod nisl.
-      </Typography>
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-        euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisl,
-        euismod nisl nisl euismod nisl.
-      </Typography>
       <Typography variant="body1">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
         euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisl,

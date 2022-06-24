@@ -6,11 +6,8 @@ import {
   TextField,
   CardActions,
   Button,
-  Stack,
-  Typography,
-  IconButton,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
+import AddressList from "./AddressList";
 // import { useSelector } from "react-redux";
 
 let apiUrl = process.env.REACT_APP_API_URL;
@@ -101,37 +98,7 @@ function Addresses() {
 
   return (
     <Grid container justify="center" spacing={1}>
-      <Grid item md={6}>
-        {addresses.map((address) => (
-          <Card sx={{ mb: 2 }} key={address.id + address.mobile_no}>
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs={10} sm={11} columns={{ xs: 1 }}>
-                  <Stack>
-                    <Typography>fullname</Typography>
-                    <Typography>
-                      {address.address_line1}, {address.address_line2}
-                    </Typography>
-                    <Typography>{address.city}.</Typography>
-                    <Typography>
-                      {address.country}, {address.postal_code}
-                    </Typography>
-                    <Typography>{address.mobile_no}</Typography>
-                  </Stack>
-                </Grid>
-                <Grid item xs={2} sm={1} columns={{ xs: 1 }}>
-                  <IconButton
-                    size="large"
-                    onClick={() => editAddress(address.id)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        ))}
-      </Grid>
+      <AddressList addresses={addresses} editAddress={editAddress} />
       <Grid item md={6}>
         {!open && (
           <Button

@@ -1,5 +1,6 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import PropTypes from "prop-types";
 
 const thumbsContainer = {
   display: "flex",
@@ -32,8 +33,7 @@ const img = {
   height: "100%",
 };
 
-export default function Previews({ files, setFiles }) {
-  //   const [files, setFiles] = useState([]);
+export default function UploadImage({ files, setFiles }) {
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: {
       "image/*": [],
@@ -88,3 +88,8 @@ export default function Previews({ files, setFiles }) {
     </section>
   );
 }
+
+UploadImage.prototype = {
+  files: PropTypes.object,
+  setFiles: PropTypes.object,
+};

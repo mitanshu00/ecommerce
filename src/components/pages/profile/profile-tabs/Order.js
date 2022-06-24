@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
-import { List, ListItem, ListItemText, Grid } from "@mui/material";
+import { List, ListItem, ListItemText, Grid, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 let apiUrl = process.env.REACT_APP_API_URL;
@@ -28,6 +27,10 @@ function Order({ status }) {
     }
   }, [orders, status]);
 
+  const addReview = (product_id) => {
+    console.log(product_id);
+  };
+
   return (
     <>
       {filteredOrders.length === 0 && <p>no {status} orders exists.</p>}
@@ -39,6 +42,7 @@ function Order({ status }) {
               bgcolor: "background.paper",
               boxShadow: 2,
             }}
+            key={order.id}
           >
             <ListItem alignItems="flex-start">
               <ListItemText
@@ -51,16 +55,24 @@ function Order({ status }) {
             <Grid container spacing={2} columns={16} sx={{ pl: 4 }}>
               <Grid item xs={8}>
                 {order.orders?.length > 0 &&
-                  order.orders.map((item) => (
-                    <ListItemText primary={item} secondary="" />
+                  order.orders.map((item, index) => (
+                    <ListItemText primary={item} secondary="" key={index} />
                   ))}
               </Grid>
               <Grid item xs={8}>
                 {order.order_items?.length > 0 &&
-                  order.order_items.map((item) => (
-                    <Link to={`/product/${item.product_id}`}>
-                      <ListItemText primary="view" />
-                    </Link>
+                  order.order_items.map((item, index) => (
+                    <>
+                      <Button
+                        variant="contained"
+                        onClick={() => addReview(item.product_id)}
+                      >
+                        Add Review
+                      </Button>
+                      <Link to={`/product/${item.product_id}`} key={index}>
+                        <ListItemText primary="view" />
+                      </Link>
+                    </>
                   ))}
               </Grid>
             </Grid>

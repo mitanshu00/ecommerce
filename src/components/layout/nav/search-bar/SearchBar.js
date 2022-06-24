@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import { Link } from "react-router-dom";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useSelector } from "react-redux";
 import ListItemText from "@mui/material/ListItemText";
 import { Avatar } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,7 +50,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function SearchBar() {
   const [searchInput, setSearchInput] = useState("");
-
   const [inFocus, setInFocus] = useState(false);
   const [history, setHistory] = useState([]);
 
@@ -109,9 +107,7 @@ function SearchBar() {
     }
   };
 
-  // const navigate = useNavigate();
   const onLinkClick = (name) => {
-    // navigate(`/c/${name}`);
     setInFocus(false);
     setSearchInput("");
   };

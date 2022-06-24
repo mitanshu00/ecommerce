@@ -14,7 +14,6 @@ const countDiscount = (products) => {
   };
   products.forEach((product) => {
     if (product.discount >= 30 && product.discount < 40) {
-      console.log(product, "sssss");
       discount["30above"] += 1;
     } else if (product.discount >= 40 && product.discount < 50) {
       discount["40above"] += 1;
@@ -28,7 +27,6 @@ const countDiscount = (products) => {
 };
 
 // count all products by rating
-
 const countRating = (products) => {
   const rating = {
     "2above": 0,
@@ -239,10 +237,10 @@ function FilterProduct({ products, setFilterData }) {
                 onClick={() => setSelectedRating([4, 5])}
               />
               <label htmlFor="4above">
-                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
-                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
-                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
-                <StarIcon color="warning" sx={{ m: "-5px", p: "0px 5px" }} />
+                <StarIcon color="warning" sx={starStye} />
+                <StarIcon color="warning" sx={starStye} />
+                <StarIcon color="warning" sx={starStye} />
+                <StarIcon color="warning" sx={starStye} />
                 {`(${rating["4above"]})`}
               </label>
             </li>

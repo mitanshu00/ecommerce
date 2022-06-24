@@ -39,7 +39,7 @@ const columns = [
       <>
         {params.row.poster_urls.map((img, index) => (
           <Fragment key={index}>
-            <a href={img} target="_blank">
+            <a href={img} target="_blank" rel="noreferrer">
               {index}
             </a>
             <span>-</span>
@@ -60,6 +60,10 @@ export default function Stocks() {
   const [rows, setRow] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
+  console.log(
+    "🚀 ~ file: Stocks.js ~ line 63 ~ Stocks ~ selectedItems",
+    selectedItems
+  );
 
   const handleOpen = () => setOpen(true);
 

@@ -24,7 +24,7 @@ function Products() {
 
   return (
     <>
-      {filterData.length === 0 && <p>Loading</p>}
+      {/* {filterData.length === 0 && <p>Loading</p>} */}
       {filterData.length > 0 && <ProductListLayout filterData={filterData} />}
     </>
   );

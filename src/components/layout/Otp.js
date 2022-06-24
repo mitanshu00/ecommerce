@@ -4,21 +4,17 @@ import { Modal, Box, Paper, Stack, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/slice/auth-slice";
 import { useSelector } from "react-redux";
+import { modelStyle as styles } from "../Styles/common";
 
 const modelStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  ...styles,
   width: 600,
-  heigth: 500,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  borderRadius: "25px",
+  height: 500,
 };
 
 const Otp = ({ handleClose }) => {
   const [otp, setOtp] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (value) => setOtp(value);
 
@@ -31,11 +27,13 @@ const Otp = ({ handleClose }) => {
     )
       .then((res) => {
         if (res.ok) return res.json();
-        else throw new Error("something went wrong");
+        else {
+          throw new Error("something went wrong");
+        }
       })
       .then((data) => {
-        console.log(data);
-        if (data.message === "is_varified") {
+        if (data.error) setError(data.error);
+        if (data.masssage === "is_varified") {
           dispatch(authActions.otpVerify());
           handleClose();
         }
@@ -54,6 +52,7 @@ const Otp = ({ handleClose }) => {
         <Paper elevation={4}>
           <Stack justifyContent="center" sx={{ p: 8 }}>
             <p>Email sent to your email address.</p>
+            <p style={{ color: "red" }}>{error}</p>
             <OtpInput
               value={otp}
               onChange={handleChange}

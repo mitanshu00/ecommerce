@@ -33,9 +33,10 @@ const authSlice = createSlice({
       state.sellerId = action.payload;
       state.registeredForSeller = false;
     },
-    otpVerify(state){
+    otpVerify(state) {
       state.isVerified = true;
-    }
+      localStorage.setItem("isverified", JSON.stringify(true));
+    },
   },
 });
 

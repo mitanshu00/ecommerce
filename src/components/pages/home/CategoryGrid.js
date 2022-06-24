@@ -7,7 +7,6 @@ export default function CategoryGrid({
   list,
   styles,
   showTitle,
-  gridCol,
   viewAllLink,
 }) {
   const navigate = useNavigate();

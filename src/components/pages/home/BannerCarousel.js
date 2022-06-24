@@ -1,8 +1,12 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
+import PropTypes from "prop-types";
 
 function BannerCarousel({ discountedProducts }) {
-  console.log("🚀 ~ file: BannerCarousel.js ~ line 5 ~ BannerCarousel ~ discountedProducts", discountedProducts)
+  console.log(
+    "🚀 ~ file: BannerCarousel.js ~ line 5 ~ BannerCarousel ~ discountedProducts",
+    discountedProducts
+  );
   return (
     <Carousel
       autoPlay={true}
@@ -35,5 +39,9 @@ function BannerCarousel({ discountedProducts }) {
     </Carousel>
   );
 }
+
+BannerCarousel.prototype = {
+  discountedProducts: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default BannerCarousel;

@@ -108,8 +108,4 @@ const ProductCarousel = ({
   );
 };
 
-// const Slide = () => {
-//   return <MultiSlide />;
-// };
-
 export default ProductCarousel;

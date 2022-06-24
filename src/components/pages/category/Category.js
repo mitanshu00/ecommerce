@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Box, Grid, Button } from "@mui/material";
-import React from "react";
 import NotFound from "../error-pages/NotFound";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -15,7 +14,6 @@ function Category() {
   const navigate = useNavigate();
 
   let { category } = useParams();
-
   let categories = useSelector((state) => state.category.categories);
 
   // get category id
@@ -50,15 +48,6 @@ function Category() {
               key={cat.id}
             >
               <Box onClick={() => handleClick(cat.id, cat.name)}>
-                {/* <Avatar
-                  src={cat.img_url.replace(
-                    "http://localhost:3000/",
-                    process.env.REACT_APP_API
-                  )}
-                  alt="category"
-                  variant="square"
-                  sx={{ width: "115px", height: "115px", mx: "auto" }}
-                /> */}
                 <Button variant="contained" sx={{ px: 4, py: 2 }}>
                   {cat.name}
                 </Button>

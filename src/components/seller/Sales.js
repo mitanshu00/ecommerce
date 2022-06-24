@@ -1,39 +1,10 @@
 import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
+import { columns as columnList } from "./ManageOrder";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  {
-    field: "order_id",
-    headerName: "Order id",
-    width: 100,
-    sortable: false,
-  },
-  {
-    field: "name",
-    headerName: "Product name",
-    width: 250,
-    renderCell: (params) => {
-      return <p>{params.row.product.name}</p>;
-    },
-  },
-  {
-    field: "quantity",
-    headerName: "quantity",
-    width: 100,
-    sortable: false,
-  },
-
-  {
-    field: "price",
-    headerName: "price",
-    type: "number",
-    width: 120,
-    renderCell: (params) => {
-      return <p>{params.row.product.price}</p>;
-    },
-  },
+  ...columnList,
   {
     field: "created_at",
     headerName: "created at",

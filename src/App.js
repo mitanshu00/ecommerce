@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/validators/ProtectedRoute";
 import PublicRoute from "./components/validators/PublicRoute";
@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Product from "./components/pages/product/Product";
 import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
-import Products from "./components/pages/product-list/Products";
+// import Products from "./components/pages/product-list/Products";
 import Cart from "./components/pages/cart/Cart";
 import Wishlist from "./components/pages/wishlist/Wishlist";
 import Login from "./components/pages/Login";
@@ -22,8 +22,11 @@ import { authCheck, sellerCheck } from "./store/action/auth-action";
 import Search from "./components/pages/product-list/Search";
 import { fetchCartData } from "./store/action/cart-action";
 import SellerRoute from "./components/validators/SellerRoute";
-import Order from "./components/pages/order/Order";
-import PlaceOrder from "./components/pages/checkout/PlaceOrder";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const Products = React.lazy(() =>
+  import("./components/pages/product-list/Products")
+);
 
 function App() {
   let apiUrl = process.env.REACT_APP_API_URL;
@@ -68,7 +71,14 @@ function App() {
           }
         >
           <Route path="/" element={<Home isAuth={isAuth.isAuthenticated} />} />
-          <Route path="/:subcategory" element={<Products />} />
+          <Route
+            path="/:subcategory"
+            element={
+              <Suspense fallback={<CircularProgress />}>
+                <Products />
+              </Suspense>
+            }
+          />
           <Route path="/c/:category" element={<Category />} />
 
           <Route path="/Product/:id" element={<Product />} />
@@ -79,8 +89,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          <Route path="Order" element={<Order />} />
-          <Route path="PlaceOrder" element={<PlaceOrder />} />
           <Route element={<ProtectedRoute isAuth={isAuth.isAuthenticated} />}>
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="profile" element={<Profile />} />
@@ -96,5 +104,3 @@ function App() {
 }
 
 export default App;
-
-// ? private route for seller

@@ -7,17 +7,11 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../../store/slice/auth-slice";
+import { modelStyle } from "../../Styles/common";
 
+// model style
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "background.paper",
-  borderRadius: "5px",
-  boxShadow: 4,
-  p: 4,
+  ...modelStyle,
 };
 
 export default function BasicModal({ open, setOpen }) {
@@ -55,7 +49,6 @@ export default function BasicModal({ open, setOpen }) {
         dispatch(authActions.registeredForSeller());
         dispatch(authActions.setSellerId(data.id));
         localStorage.setItem("seller", JSON.stringify(data.id));
-        console.log(data);
       })
       .catch((error) => {
         console.error(error);

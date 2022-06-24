@@ -10,7 +10,6 @@ let apiUrl = process.env.REACT_APP_API_URL;
 
 function Product() {
   const [product, setProduct] = useState({});
-  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { id } = useParams();
 

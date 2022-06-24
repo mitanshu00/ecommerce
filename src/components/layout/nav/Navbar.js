@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,14 +8,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Footer from "../Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import SearchBar from "./search-bar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../../store/action/auth-action";
 import Otp from "../Otp";
 
-export default function Navbar({ isAuth, isSeller }) {
+export default function Navbar({ isAuth }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [otpModel, setOtpModel] = React.useState(false);
@@ -24,22 +23,25 @@ export default function Navbar({ isAuth, isSeller }) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  // open/close otp model
   const handleOtpModelOpen = () => setOtpModel(true);
   const handleOtpModelClose = () => setOtpModel(false);
 
   const isVerified = useSelector((state) => state.auth.isVerified);
-
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
-  const dispatch = useDispatch();
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -60,10 +62,6 @@ export default function Navbar({ isAuth, isSeller }) {
 
   const onVerifyClick = () => {
     handleOtpModelOpen();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = "primary-search-account-menu";
@@ -153,7 +151,7 @@ export default function Navbar({ isAuth, isSeller }) {
         {renderMobileMenu}
         {renderMenu}
       </Box>
-      <Box sx={{ maxWidth: "1500px", margin: "30px auto" }}>
+      <Box sx={{ maxWidth: "1500px", margin: "30px auto", minHeight: "90vh" }}>
         <Outlet />
       </Box>
       <Footer />
