@@ -9,8 +9,14 @@ const formSlice = createSlice({
       email: false,
       password: false,
     },
+    isLoggedIn: false,
+    errorMsg: "",
   },
   reducers: {
+    login(state, action) {
+      state.errorMsg = action.payload;
+      console.log(state.errorMsg);
+    },
     emailChangeHandler(state, action) {
       state.email = action.payload;
     },
@@ -30,7 +36,7 @@ const formSlice = createSlice({
         email: state.email,
         password: state.password,
       };
-
+      state.isLoggedIn = true;
       console.log(data);
 
       state.email = "";

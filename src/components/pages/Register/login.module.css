@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+.container {
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;
+  /* background: url("https://wallpaperaccess.com/full/2593170.png") 50%; */
+  /* background: url("https://img.freepik.com/free-vector/hand-painted-watercolor-abstract-watercolor-background_23-2149005675.jpg?t=st=1655909719~exp=1655910319~hmac=fb541a0f6fd629a6eb9736994be5bd903da26198ac66668f4d265c75f6de014c&w=900")
+    50%; */
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+  background-size: cover;
+  /* font-family: "Noto Sans JP", sans-serif; */
+  font-family: "Nunito", sans-serif;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+.login {
+  border-radius: 2px 2px 5px 5px;
+  padding: 10px 20px 20px 20px;
+  width: 90%;
+  min-height: 65vh;
+  max-width: 420px;
+  /* background: rgba(255, 255, 255, 0.762); */
+  background: transparent;
+  position: relative;
+  /* margin-right: 10%; */
+  padding-bottom: 80px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+.login input {
+  display: block;
+  padding: 5px 0;
+  margin-top: 25px;
+  background: transparent;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #2196f3;
+  border-radius: 2px;
+  /* transition: border-width 0.2s ease; */
+  font-size: 20px;
+  font-family: "Noto Sans JP", sans-serif;
+
+  /* color: #ccc; */
+}
+.login input::placeholder {
+  font-size: 20px;
+  color: #ccc;
+}
+.login input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #2196f3;
+}
+
+.login button:disabled,
+.login button:disabled:hover,
+.login button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.errortext {
+  color: rgb(138, 0, 0);
+  font-size: 12px;
+  font-weight: bold;
+}
+.link {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.title {
+  font-size: 1.5em;
+  color: #444;
+  font-weight: bold;
+  margin: 10px 0 30px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.login button {
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px;
+  background: #2196f3;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  display: block;
+  border: none;
+  margin-top: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-height: 60px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 2px 2px;
+}

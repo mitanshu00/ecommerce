@@ -1,4 +1,4 @@
-import { cartActions } from "../slice/cart-slice";
+// import { cartActions } from "../slice/cart-slice";
 
 export const fetchCartData = (userId) => {
   return async (dispatch) => {

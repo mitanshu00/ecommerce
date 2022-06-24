@@ -1,14 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formActions } from "../../store/slice/formSlice";
+import { formActions } from "../../../store/slice/formSlice";
 import { Link } from "react-router-dom";
-import { sendFormData } from "../../store/action/form-actions";
+import { sendFormData } from "../../../store/action/form-actions";
+import { authActions } from "../../../store/slice/auth-slice";
 import classes from "./login.module.css";
 
 function Login() {
   const dispatch = useDispatch();
+  const ErrorMsg = useSelector((state) => state.login.errorMsg);
   const enteredEmail = useSelector((state) => state.login.email);
   const enteredPassword = useSelector((state) => state.login.password);
+  const IsAuth = useSelector((state) => state.auth.isAuthenticated);
 
   const enteredMailTouched = useSelector(
     (state) => state.login.isTouched.email
@@ -20,7 +23,7 @@ function Login() {
   const enteredMailIsValid = enteredEmail.includes("@");
   const EmailIsInvalid = !enteredMailIsValid && enteredMailTouched;
 
-  const enteredPasswordIsValid = enteredPassword.trim().length > 7;
+  const enteredPasswordIsValid = enteredPassword.trim().length > 5;
   const PasswordIsInValid = !enteredPasswordIsValid && enteredPasswordTouched;
 
   let formIsValid = false;
@@ -45,6 +48,10 @@ function Login() {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     dispatch(formActions.submitHandler());
+
+    if (IsAuth) {
+      dispatch(authActions.login());
+    }
     dispatch(
       sendFormData({
         enteredEmail,
@@ -70,6 +77,7 @@ function Login() {
           {EmailIsInvalid && (
             <p className={classes.errortext}>Enter Valid E-mail!</p>
           )}
+          {ErrorMsg && <p className={classes.errortext}>{ErrorMsg}</p>}
 
           <input
             placeholder="Password"
@@ -85,7 +93,7 @@ function Login() {
 
           <div className={classes.link}>
             <Link to="/register" style={{ color: "#000" }}>
-              New User? register
+              New User ? register
             </Link>
           </div>
           <div className={classes.formactions}>

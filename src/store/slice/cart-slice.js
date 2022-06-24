@@ -29,7 +29,7 @@ const cartSlice = createSlice({
           totalPrice: newItem.price,
           name: newItem.name,
           description: newItem.description,
-          img_url: newItem.img_url,
+          image: newItem.img_url,
         });
         state.subTotal = state.subTotal + newItem.price;
       } else {

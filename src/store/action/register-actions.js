@@ -24,6 +24,10 @@ export const sendRegisterData = (data) => {
         .then((data) => {
           localStorage.setItem("auth", JSON.stringify(data));
           dispatch(authActions.login(data));
+          console.log(data);
+          const { user, token } = data;
+          console.log(user);
+          console.log(token);
         })
         .catch((error) => {
           console.error(error);

@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
+import { sendAddToCartData } from "../../../store/action/cart-actions";
 
 let apiUrl = process.env.REACT_APP_API_URL;
 
 function ProductDetails({ product }) {
   const [reviews, setReviews] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
+  const token = useSelector((state) => state.auth.user.token);
 
   useEffect(() => {
     fetch(`${apiUrl}/reviews/?product_id=${product.id}`)
@@ -35,6 +37,14 @@ function ProductDetails({ product }) {
         img_url: product.poster_urls[0],
         description: product.description,
       })
+    );
+    dispatch(
+      sendAddToCartData(
+        {
+          id: product.id,
+        },
+        token
+      )
     );
   };
 

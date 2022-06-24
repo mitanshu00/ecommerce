@@ -1,8 +1,10 @@
 import { authActions } from "../slice/auth-slice";
+import { formActions } from "../slice/formSlice";
 
 export const sendFormData = (data) => {
   return async (dispatch) => {
-    fetch(`${process.env.REACT_APP_API_URL}/login`, {
+    // fetch(`${process.env.REACT_APP_API_URL}/login`, {
+    fetch("https://fe90-103-240-35-190.in.ngrok.io/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,8 +21,15 @@ export const sendFormData = (data) => {
         throw new Error("Something went wrong");
       })
       .then((data) => {
+        console.log(data);
+        const { user, token, error } = data;
+        console.log(user);
+        localStorage.setItem("token", token);
         localStorage.setItem("auth", JSON.stringify(data));
-        dispatch(authActions.login(data));
+        dispatch(formActions.login(error));
+        if (!error) {
+          dispatch(authActions.login(data));
+        }
       })
       .catch((error) => {
         console.error(error);

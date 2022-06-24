@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 import classes from "../cart/cartItems.module.css";
 import { Button } from "@mui/material";
+import { cartActions } from "../../../store/slice/cart-slice";
 
 const WishlistItems = (props) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const WishlistItems = (props) => {
 
   const addToCartHandler = () => {
     dispatch(
-      WhishlistActions.addItemToCart({
+      cartActions.addItemToCart({
         id,
         title,
         price,

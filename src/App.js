@@ -8,10 +8,12 @@ import Product from "./components/pages/product/Product";
 import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
 import Products from "./components/pages/product-list/Products";
-import Cart from "./components/pages/cart/Cart";
+import Cart from "./components/pages/cart/Cartt";
+import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder";
 import Wishlist from "./components/pages/wishlist/Wishlist";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
+import Login from "./components/pages/Login/Login";
+import Register from "./components/pages/Register/register";
+
 import Profile from "./components/pages/profile/Profile";
 import { subCatActions } from "./store/slice/subcategories-slice";
 import { brandActions } from "./store/slice/brands-slice";
@@ -23,7 +25,7 @@ import Search from "./components/pages/product-list/Search";
 import { fetchCartData } from "./store/action/cart-action";
 import SellerRoute from "./components/validators/SellerRoute";
 import Order from "./components/pages/order/Order";
-import PlaceOrder from "./components/pages/checkout/PlaceOrder";
+// import PlaceOrder from "./components/pages/checkout/PlaceOrder";
 
 function App() {
   let apiUrl = process.env.REACT_APP_API_URL;
@@ -73,6 +75,8 @@ function App() {
 
           <Route path="/Product/:id" element={<Product />} />
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/Cart/placeorder" element={<PlaceOrder />} />
+
           <Route path="/Search/:query" element={<Search />} />
 
           <Route element={<PublicRoute isAuth={isAuth.isAuthenticated} />}>
