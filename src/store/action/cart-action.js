@@ -31,7 +31,6 @@ export const fetchCartData = (token) => {
 
     try {
       const cartData = await fetchData();
-      console.log("cartData", cartData);
       let totalQuantity = 0;
       let subTotal = 0;
 
@@ -51,8 +50,8 @@ export const fetchCartData = (token) => {
       dispatch(
         cartActions.replaceCart({
           items: newCartData || [],
-          totalQuantity,
-          subTotal,
+          totalQuantity: totalQuantity || 0,
+          subTotal: subTotal || 0,
         })
       );
     } catch (error) {

@@ -38,15 +38,7 @@ function CartItem(props) {
     <div className={classes.cardbox}>
       <li className={classes.list}>
         <div className={classes.image}>
-          {image[0] && (
-            <img
-              src={image[0].replace(
-                "http://localhost:3000/",
-                process.env.REACT_APP_API
-              )}
-              alt=""
-            />
-          )}
+          {image[0] && <img src={image[0]} alt="" />}
         </div>
         <div className={classes.dtlscon}>
           <div className={classes.txt}>

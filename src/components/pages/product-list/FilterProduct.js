@@ -98,12 +98,6 @@ function FilterProduct({ products, setFilterData }) {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      selectedBrands,
-      selectedRating,
-      selectedPrice,
-      selectedDiscount
-    );
 
     // filter by selected brand, rating, price and discount
     let filteredProducts = products.filter((product) => {

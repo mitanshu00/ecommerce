@@ -3,10 +3,7 @@ import Carousel from "react-material-ui-carousel";
 import PropTypes from "prop-types";
 
 function BannerCarousel({ discountedProducts }) {
-  console.log(
-    "🚀 ~ file: BannerCarousel.js ~ line 5 ~ BannerCarousel ~ discountedProducts",
-    discountedProducts
-  );
+
   return (
     <Carousel
       autoPlay={true}
@@ -27,10 +24,7 @@ function BannerCarousel({ discountedProducts }) {
     >
       {discountedProducts.map((product) => (
         <img
-          src={product.slider_url.replace(
-            "http://localhost:3000/",
-            process.env.REACT_APP_API
-          )}
+          src={product.poster_url}
           alt=""
           style={{ width: "100%", height: "300px" }}
           key={product.id}

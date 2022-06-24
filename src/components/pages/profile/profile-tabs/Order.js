@@ -9,16 +9,21 @@ function Order({ status }) {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
 
-  let userId = useSelector((state) => state.auth.user.user.id);
+  let userDetails = useSelector((state) => state.auth.user);
+
+  let token = userDetails.token;
+
   // let userId = 10;
   // ?user_id=${userId}
   useEffect(() => {
-    fetch(`${apiUrl}/orders/?user_id=${userId}`)
+    fetch(`${apiUrl}/orders/`, {
+      headers: { authorization: `Bearer ${token}` },
+    })
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
       });
-  }, [userId]);
+  }, [token]);
 
   useEffect(() => {
     if (orders.length > 0) {

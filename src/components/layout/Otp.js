@@ -18,13 +18,13 @@ const Otp = ({ handleClose }) => {
 
   const handleChange = (value) => setOtp(value);
 
-  const userId = useSelector((state) => state.auth.user.user.id);
+  const token = useSelector((state) => state.auth.user.token);
 
   const dispatch = useDispatch();
   const verifyOtpHandler = () => {
-    fetch(
-      `${process.env.REACT_APP_API_URL}/verify?user_id=${userId}&otp=${otp}`
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/verify?otp=${otp}`, {
+      headers: { authorization: `Bearer ${token}` },
+    })
       .then((res) => {
         if (res.ok) return res.json();
         else {

@@ -21,7 +21,9 @@ export default function BasicModal({ open, setOpen }) {
     seller_location: "",
   });
 
-  let userInfo = useSelector((state) => state.auth.user.user);
+  let userDetails = useSelector((state) => state.auth.user);
+  let userInfo = userDetails.user;
+  let token = userDetails.token;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -35,7 +37,7 @@ export default function BasicModal({ open, setOpen }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         pan_id: form.pan_id,

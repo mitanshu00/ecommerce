@@ -68,7 +68,6 @@ export default function AddProdut({ open, setOpen }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     fetch(`${process.env.REACT_APP_API_URL}/products`, {
       method: "POST",
       headers: {

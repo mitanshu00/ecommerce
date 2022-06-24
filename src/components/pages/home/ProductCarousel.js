@@ -66,10 +66,7 @@ const ProductCarousel = ({ data, title, responsive }) => {
             <Box textAlign="center" style={{ padding: "25px 15px" }}>
               {product?.product?.poster_urls[0] && (
                 <img
-                  src={product.product.poster_urls[0].replace(
-                    "http://localhost:3000/",
-                    process.env.REACT_APP_API
-                  )}
+                  src={product.product.poster_urls[0]}
                   width="100px"
                   height="100px"
                   sx={{ width: "100%", maxHeight: 150 }}

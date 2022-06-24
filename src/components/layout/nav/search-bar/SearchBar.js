@@ -143,10 +143,7 @@ function SearchBar() {
                       <ReplayIcon />
                     ) : (
                       <Avatar
-                        src={item.img_url.replace(
-                          "http://localhost:3000/",
-                          process.env.REACT_APP_API
-                        )}
+                        src={item.img_url}
                         alt="err"
                         size="medium"
                         variant="square"

@@ -136,10 +136,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
           {reviews.map((review) =>
             review.image_urls.map((image, index) => (
               <Avatar
-                src={image.replace(
-                  "http://localhost:3000/",
-                  process.env.REACT_APP_API
-                )}
+                src={image}
                 alt=""
                 variant="square"
                 sx={{ width: "75px", height: "75px" }}
@@ -176,10 +173,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
               <Stack direction="row" spacing={2}>
                 {review["image_urls"].map((img, index) => (
                   <Avatar
-                    src={img.replace(
-                      "http://localhost:3000/",
-                      process.env.REACT_APP_API
-                    )}
+                    src={img}
                     alt="review-img"
                     variant="square"
                     sx={{ width: "50px", height: "50px" }}

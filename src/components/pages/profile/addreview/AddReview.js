@@ -4,11 +4,14 @@ import Rating from "@mui/material/Rating";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 export default function AddReview({ product_id, user_id }) {
   const [value, setValue] = useState(0);
   const [review, setReview] = useState("");
   const [reviewHeader, setReviewHeader] = useState("");
+
+  let token = useSelector((state) => state.auth.user.token);
 
   const reviewChangeHandle = (e) => {
     setReview(e.target.value);
@@ -25,6 +28,7 @@ export default function AddReview({ product_id, user_id }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         product_id,

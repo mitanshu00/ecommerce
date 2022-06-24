@@ -59,10 +59,7 @@ export default function CategoryGrid({
             <Stack>
               {category?.poster_urls[0] && (
                 <img
-                  src={category.poster_urls[0].replace(
-                    "http://localhost:3000/",
-                    process.env.REACT_APP_API
-                  )}
+                  src={category.poster_urls[0]}
                   alt="category img"
                   style={styles}
                 />
