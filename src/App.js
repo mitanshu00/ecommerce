@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Product from "./components/pages/product/Product";
 import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
-// import Products from "./components/pages/product-list/Products";
 import Cart from "./components/pages/cart/Cart";
 import Wishlist from "./components/pages/wishlist/Wishlist";
 import Login from "./components/pages/Login";
@@ -19,11 +18,16 @@ import NotFound from "./components/pages/error-pages/NotFound";
 import Seller from "./components/seller/Seller";
 import Category from "./components/pages/category/Category";
 import { authCheck, sellerCheck } from "./store/action/auth-action";
-import Search from "./components/pages/product-list/Search";
 import { fetchCartData } from "./store/action/cart-action";
 import SellerRoute from "./components/validators/SellerRoute";
 import CircularProgress from "@mui/material/CircularProgress";
+import PlaceOrder from "./components/pages/placeorder/PlaceOrder";
 
+// import Products from "./components/pages/product-list/Products";
+// import Search from "./components/pages/product-list/Search";
+const Search = React.lazy(() =>
+  import("./components/pages/product-list/Search")
+);
 const Products = React.lazy(() =>
   import("./components/pages/product-list/Products")
 );
@@ -32,7 +36,7 @@ function App() {
   let apiUrl = process.env.REACT_APP_API_URL;
   let dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth);
-  let userId = isAuth?.user?.user?.id;
+  let token = isAuth?.user?.token;
 
   useEffect(() => {
     fetch(`${apiUrl}/main_categories`)
@@ -55,8 +59,8 @@ function App() {
   useEffect(() => {
     dispatch(authCheck());
     dispatch(sellerCheck());
-    dispatch(fetchCartData(userId));
-  }, [dispatch, userId]);
+    dispatch(fetchCartData(token));
+  }, [dispatch, token]);
 
   return (
     <BrowserRouter>
@@ -74,7 +78,7 @@ function App() {
           <Route
             path="/:subcategory"
             element={
-              <Suspense fallback={<CircularProgress />}>
+              <Suspense fallback={<CircularProgress size={14} />}>
                 <Products />
               </Suspense>
             }
@@ -83,15 +87,23 @@ function App() {
 
           <Route path="/Product/:id" element={<Product />} />
           <Route path="/Cart" element={<Cart />} />
-          <Route path="/Search/:query" element={<Search />} />
+          <Route
+            path="/Search/:query"
+            element={
+              <Suspense fallback={<CircularProgress size={14} />}>
+                <Search />
+              </Suspense>
+            }
+          />
 
           <Route element={<PublicRoute isAuth={isAuth.isAuthenticated} />}>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route element={<ProtectedRoute isAuth={isAuth.isAuthenticated} />}>
-            <Route path="wishlist" element={<Wishlist />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/PlaceOrder" element={<PlaceOrder />} />
           </Route>
         </Route>
         <Route element={<SellerRoute isSeller={isAuth.sellerId} />}>

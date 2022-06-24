@@ -7,6 +7,9 @@ const whishlistSlice = createSlice({
     itemIds: [],
   },
   reducers: {
+    replaceWhishItems(state, action) {
+      state.wishItems = action.payload;
+    },
     addItemToWishlist(state, action) {
       const favItem = action.payload;
       const existingItem = state.wishItems.find(

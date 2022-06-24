@@ -4,12 +4,16 @@ import { cartActions } from "../../../store/slice/cart-slice";
 
 import classes from "./cartItems.module.css";
 import { Button } from "@mui/material";
+import { sendCartData } from "../../../store/action/cart-action";
+import { useSelector } from "react-redux";
 
 function CartItem(props) {
-  console.log("🚀 ~ file: CartItems.js ~ line 9 ~ CartItem ~ props", props);
   const dispatch = useDispatch();
 
   const { name, quantity, price, id, description, image } = props.item;
+
+  const isAuth = useSelector((state) => state.auth);
+  let token = isAuth?.user?.token;
 
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
@@ -27,19 +31,22 @@ function CartItem(props) {
         price,
       })
     );
+    dispatch(sendCartData(token, id));
   };
 
   return (
     <div className={classes.cardbox}>
       <li className={classes.list}>
         <div className={classes.image}>
-          <img
-            src={image.replace(
-              "http://localhost:3000/",
-              process.env.REACT_APP_API
-            )}
-            alt=""
-          />
+          {image[0] && (
+            <img
+              src={image[0].replace(
+                "http://localhost:3000/",
+                process.env.REACT_APP_API
+              )}
+              alt=""
+            />
+          )}
         </div>
         <div className={classes.dtlscon}>
           <div className={classes.txt}>

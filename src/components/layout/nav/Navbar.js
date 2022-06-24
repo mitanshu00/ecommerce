@@ -113,7 +113,7 @@ export default function Navbar({ isAuth }) {
     <>
       <Box>
         {otpModel && <Otp handleClose={handleOtpModelClose} />}
-        <AppBar position="static">
+        <AppBar position="static" style={{ background: "#2E3B55" }}>
           <Toolbar sx={{ maxWidth: "1500px", margin: "0 auto" }}>
             <Typography
               variant="h6"

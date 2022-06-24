@@ -1,4 +1,6 @@
 import { authActions } from "../slice/auth-slice";
+import { clearCart } from "./cart-action";
+import { clearWishItems } from "./wishlist-action";
 
 export const authCheck = () => {
   return (dispatch) => {
@@ -24,6 +26,8 @@ export const authLogout = () => {
     localStorage.removeItem("seller");
     localStorage.removeItem("isverified");
     dispatch(authActions.logout());
+    dispatch(clearCart());
+    dispatch(clearWishItems());
     console.log("logout successfull");
   };
 };

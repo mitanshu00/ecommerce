@@ -17,7 +17,6 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SupportIcon from "@mui/icons-material/Support";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import Dashboard from "./Dashboard";
 import Stocks from "./Stocks";
 import Sales from "./Sales";
 import { useDispatch } from "react-redux";
@@ -28,7 +27,7 @@ import { useSelector } from "react-redux";
 const drawerWidth = 240;
 
 export default function Seller() {
-  const [tab, setTab] = useState("dashboard");
+  const [tab, setTab] = useState("stocks");
 
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -70,14 +69,6 @@ export default function Seller() {
               </ListItemButton>
             </ListItem>
             <Divider />
-            <ListItem disablePadding>
-              <ListItemButton onClick={() => setTab("dashboard")}>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Dashboard"} />
-              </ListItemButton>
-            </ListItem>
             <ListItem disablePadding>
               <ListItemButton onClick={() => setTab("stocks")}>
                 <ListItemIcon>
@@ -125,7 +116,6 @@ export default function Seller() {
       <Box component="main" sx={{ flexGrow: 1, px: 3, minHeight: "100vh" }}>
         <Toolbar />
 
-        {tab === "dashboard" && <Dashboard />}
         {tab === "stocks" && <Stocks />}
         {tab === "sales" && <Sales />}
         {tab === "manageorder" && <ManageOrder />}

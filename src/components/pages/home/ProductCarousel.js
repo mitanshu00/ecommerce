@@ -2,7 +2,6 @@ import { Box, Typography, Button, Divider } from "@mui/material/";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
-import CountdownTimer from "./sub-component/CountdownTimer";
 
 const responsiveStyle = {
   desktop: {
@@ -19,12 +18,7 @@ const responsiveStyle = {
   },
 };
 
-const ProductCarousel = ({
-  data,
-  timer,
-  title,
-  responsive = responsiveStyle,
-}) => {
+const ProductCarousel = ({ data, title, responsive }) => {
   return (
     <Box sx={{ marginTop: 12, background: "#FFFFFF" }}>
       <Box sx={{ display: "flex", padding: "5px 10px" }}>
@@ -38,7 +32,6 @@ const ProductCarousel = ({
         >
           {title}
         </Typography>
-        {timer && <CountdownTimer />}
         <Button
           variant="contained"
           color="primary"
@@ -106,6 +99,10 @@ const ProductCarousel = ({
       </Carousel>
     </Box>
   );
+};
+
+ProductCarousel.defaultProps = {
+  responsive: responsiveStyle,
 };
 
 export default ProductCarousel;

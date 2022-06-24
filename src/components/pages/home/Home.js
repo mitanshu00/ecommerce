@@ -54,11 +54,7 @@ const Home = () => {
           <BannerCarousel discountedProducts={discountedProducts} />
         )} */}
         {highestDiscProd.length > 0 && (
-          <ProductCarousel
-            title="Discounted products"
-            data={highestDiscProd}
-            timer={true}
-          />
+          <ProductCarousel title="Discounted products" data={highestDiscProd} />
         )}
         {categories.length > 0 && (
           <CategoryGrid
@@ -71,7 +67,6 @@ const Home = () => {
 
         {/* <ProductCarousel
           data={productst}
-          timer={false}
           title="Popular Brands"
           responsive={responsiveStyle}
         /> */}
