@@ -9,8 +9,10 @@ import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
 import Cart from "./components/pages/cart/Cart";
 import Wishlist from "./components/pages/wishlist/Wishlist";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
+// import Login from "./components/pages/login/Login";
+import Login2 from "./components/pages/login-reg/login2";
+// import Register from "./components/pages/login/Register";
+import Register2 from "./components/pages/login-reg/register2";
 import Profile from "./components/pages/profile/Profile";
 import { subCatActions } from "./store/slice/subcategories-slice";
 import { brandActions } from "./store/slice/brands-slice";
@@ -97,8 +99,10 @@ function App() {
           />
 
           <Route element={<PublicRoute isAuth={isAuth.isAuthenticated} />}>
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            {/* <Route path="/register" element={<Register />} /> */}
+            <Route path="/register" element={<Register2 />} />
+            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/login" element={<Login2 />} />
           </Route>
           <Route element={<ProtectedRoute isAuth={isAuth.isAuthenticated} />}>
             <Route path="/wishlist" element={<Wishlist />} />

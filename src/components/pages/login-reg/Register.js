@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerActions } from "../../store/slice/register-slice";
-import { sendRegisterData } from "../../store/action/register-actions";
+import { registerActions } from "../../../store/slice/register-slice";
+import { sendRegisterData } from "../../../store/action/register-actions";
 import { Link } from "react-router-dom";
 import classes from "./login.module.css";
 

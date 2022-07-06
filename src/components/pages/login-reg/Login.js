@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formActions } from "../../store/slice/formSlice";
+import { formActions } from "../../../store/slice/formSlice";
 import { Link } from "react-router-dom";
-import { sendFormData } from "../../store/action/form-actions";
+import { sendFormData } from "../../../store/action/form-actions";
 import classes from "./login.module.css";
 
 function Login() {
