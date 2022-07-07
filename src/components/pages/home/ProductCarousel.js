@@ -6,20 +6,19 @@ import { Link } from "react-router-dom";
 const responsiveStyle = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 5,
+    items: 5
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 3,
+    items: 3
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
+    items: 1
+  }
 };
 
-const ProductCarousel = ({ data, title, responsive }) => {
-  return (
+const ProductCarousel = ({ data, title, responsive }) => (
     <Box sx={{ marginTop: 12, background: "#FFFFFF" }}>
       <Box sx={{ display: "flex", padding: "5px 10px" }}>
         <Typography
@@ -27,7 +26,7 @@ const ProductCarousel = ({ data, title, responsive }) => {
             fontSize: 22,
             fontWeight: 600,
             lineHeight: "32px",
-            marginRight: 2,
+            marginRight: 2
           }}
         >
           {title}
@@ -66,7 +65,7 @@ const ProductCarousel = ({ data, title, responsive }) => {
                   fontWeight: 600,
                   color: "#212121",
                   fontSize: 14,
-                  marginTop: 5,
+                  marginTop: 5
                 }}
               >
                 {product.product.name}
@@ -83,11 +82,10 @@ const ProductCarousel = ({ data, title, responsive }) => {
         ))}
       </Carousel>
     </Box>
-  );
-};
+);
 
 ProductCarousel.defaultProps = {
-  responsive: responsiveStyle,
+  responsive: responsiveStyle
 };
 
 export default ProductCarousel;

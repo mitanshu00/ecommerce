@@ -9,8 +9,9 @@ import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import { sendCartData } from "../../../store/action/cart-action";
+import PropTypes from "prop-types";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function ProductDetails({ product }) {
   const [reviews, setReviews] = useState([]);
@@ -95,7 +96,8 @@ function ProductDetails({ product }) {
         Inclusive all taxes
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mt: 4 }}>
-        {product.quantity > 0 ? (
+        {product.quantity > 0
+          ? (
           <Button
             variant="contained"
             color="success"
@@ -105,13 +107,15 @@ function ProductDetails({ product }) {
             <AddShoppingCartIcon sx={{ pr: 1 }} />
             ADD TO CARD
           </Button>
-        ) : (
+            )
+          : (
           <Button variant="contained" color="warning" sx={{ px: 4, py: 2 }}>
             <AddShoppingCartIcon sx={{ pr: 1 }} />
             OUT OF STOCK
           </Button>
-        )}
-        {whishlistIds.includes(product.id) ? (
+            )}
+        {whishlistIds.includes(product.id)
+          ? (
           <Button
             variant="outlined"
             color="secondary"
@@ -121,7 +125,8 @@ function ProductDetails({ product }) {
             <FavoriteIcon sx={{ pr: 1 }} />
             WHISHLISTED
           </Button>
-        ) : (
+            )
+          : (
           <Button
             variant="outlined"
             color="secondary"
@@ -131,7 +136,7 @@ function ProductDetails({ product }) {
             <FavoriteBorderIcon sx={{ pr: 1 }} />
             WHISHLIST
           </Button>
-        )}
+            )}
       </Stack>
       <Divider sx={{ my: 4 }} />
       <Typography variant="h5">Product Details</Typography>
@@ -161,5 +166,9 @@ function ProductDetails({ product }) {
     </Box>
   );
 }
+
+ProductDetails.propTypes = {
+  product: PropTypes.object,
+};
 
 export default ProductDetails;

@@ -6,26 +6,24 @@ const timerStyles = {
   color: "#7f7f7f",
   marginLeft: 10,
   display: "flex",
-  alignItems: "center",
+  alignItems: "center"
 };
 
-const renderer = ({ hours, minutes, seconds }) => {
-  return (
+const renderer = ({ hours, minutes, seconds }) => (
     <span
       sx={{
         ...timerStyles,
-        marginLeft: 10,
+        marginLeft: 10
       }}
     >
       {hours} : {minutes} : {seconds} Left
     </span>
-  );
-};
+);
 
 const timerURL =
   "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg";
 
-function CountdownTimer() {
+function CountdownTimer () {
   return (
     <Box sx={timerStyles}>
       <img src={timerURL} style={{ width: 24 }} alt="time clock" />

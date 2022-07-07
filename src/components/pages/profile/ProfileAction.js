@@ -19,7 +19,7 @@ import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 import KeyboardReturnOutlinedIcon from "@mui/icons-material/KeyboardReturnOutlined";
 import { authLogout } from "../../../store/action/auth-action";
 import { useDispatch } from "react-redux";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 export default function ProfileAction({ selecteTab }) {
   const [open, setOpen] = React.useState(false);
@@ -141,6 +141,6 @@ export default function ProfileAction({ selecteTab }) {
   );
 }
 
-// ProfileAction.propTypes = {
-//   selecteTab: PropTypes.string,
-// };
+ProfileAction.propTypes = {
+  selecteTab: PropTypes.string,
+};

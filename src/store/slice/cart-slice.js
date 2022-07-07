@@ -6,18 +6,18 @@ const cartSlice = createSlice({
     items: [],
     totalQuantity: 0,
     subTotal: 0,
-    cartId: null,
+    cartId: null
   },
   reducers: {
-    toggle(state) {
+    toggle (state) {
       state.cartIsVisible = !state.cartIsVisible;
     },
-    replaceCart(state, action) {
+    replaceCart (state, action) {
       state.totalQuantity = action.payload.totalQuantity;
       state.items = action.payload.items;
       state.subTotal = action.payload.subTotal;
     },
-    addItemToCart(state, action) {
+    addItemToCart (state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++;
@@ -29,7 +29,7 @@ const cartSlice = createSlice({
           totalPrice: newItem.price,
           name: newItem.name,
           description: newItem.description,
-          img_url: newItem.img_url,
+          img_url: newItem.img_url
         });
         state.subTotal = state.subTotal + newItem.price;
       } else {
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
         state.subTotal = state.subTotal + newItem.price;
       }
     },
-    removeItemFromCart(state, action) {
+    removeItemFromCart (state, action) {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
       state.totalQuantity--;
@@ -51,14 +51,14 @@ const cartSlice = createSlice({
         state.subTotal = state.subTotal - existingItem.price;
       }
     },
-    removeItemWholeItem(state, action) {
+    removeItemWholeItem (state, action) {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
       state.totalQuantity = state.totalQuantity - existingItem.quantity;
       state.items = state.items.filter((item) => item.id !== id);
       state.subTotal = state.subTotal - existingItem.totalPrice;
-    },
-  },
+    }
+  }
 });
 
 export const cartActions = cartSlice.actions;

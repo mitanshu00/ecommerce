@@ -8,31 +8,29 @@ const columns = [
   {
     field: "created_at",
     headerName: "created at",
-    width: 250,
+    width: 250
   },
   {
     field: "discount",
     headerName: "discount",
     type: "number",
     width: 120,
-    renderCell: (params) => {
-      return <p>{params.row.product.discount}</p>;
-    },
-  },
+    renderCell: (params) => <p>{params.row.product.discount}</p>
+  }
 ];
 
-export default function Stocks() {
+export default function Stocks () {
   const [rows, setRow] = useState([]);
 
-  let sellerId = useSelector((state) => state.auth.sellerId);
-  let token = useSelector((state) => state.auth.user.token);
+  const sellerId = useSelector((state) => state.auth.sellerId);
+  const token = useSelector((state) => state.auth.user.token);
 
   // let sellerId = 1;
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`,
       {
-        headers: { authorization: `Bearer ${token}` },
+        headers: { authorization: `Bearer ${token}` }
       }
     )
       .then((res) => res.json())

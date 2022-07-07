@@ -89,7 +89,7 @@ export default function UploadImage({ files, setFiles }) {
   );
 }
 
-UploadImage.prototype = {
+UploadImage.propTypes = {
   files: PropTypes.object,
   setFiles: PropTypes.object,
 };

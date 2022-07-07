@@ -18,14 +18,13 @@ import SupportIcon from "@mui/icons-material/Support";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Stocks from "./Stocks";
 import Sales from "./Sales";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../store/action/auth-action";
 import ManageOrder from "./ManageOrder";
-import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
-export default function Seller() {
+export default function Seller () {
   const [tab, setTab] = useState("stocks");
 
   const dispatch = useDispatch();
@@ -33,7 +32,7 @@ export default function Seller() {
     dispatch(authLogout());
   };
 
-  let username = useSelector((state) => state.auth.user.user.name);
+  const username = useSelector((state) => state.auth.user.user.name);
 
   return (
     <Box sx={{ display: "flex", mt: 4 }}>
@@ -53,10 +52,10 @@ export default function Seller() {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
+            boxSizing: "border-box"
+          }
         }}
       >
         <Toolbar />

@@ -1,19 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/slice/cart-slice";
 
 import classes from "./cartItems.module.css";
 import { Button } from "@mui/material";
 import { sendCartData } from "../../../store/action/cart-action";
-import { useSelector } from "react-redux";
 
-function CartItem(props) {
+function CartItem({ item }) {
   const dispatch = useDispatch();
 
-  const { name, quantity, price, id, description, image } = props.item;
+  const { name, quantity, price, id, description, image } = item;
 
   const isAuth = useSelector((state) => state.auth);
-  let token = isAuth?.user?.token;
+  const token = isAuth?.user?.token;
 
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
@@ -67,5 +67,9 @@ function CartItem(props) {
     </div>
   );
 }
+
+CartItem.propTypes = {
+  item: PropTypes.object,
+};
 
 export default CartItem;

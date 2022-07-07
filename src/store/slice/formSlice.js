@@ -7,28 +7,28 @@ const formSlice = createSlice({
     password: "",
     isTouched: {
       email: false,
-      password: false,
-    },
+      password: false
+    }
   },
   reducers: {
-    emailChangeHandler(state, action) {
+    emailChangeHandler (state, action) {
       state.email = action.payload;
     },
-    passwordChangeHandler(state, action) {
+    passwordChangeHandler (state, action) {
       state.password = action.payload;
     },
 
-    emailBlurHandler(state) {
+    emailBlurHandler (state) {
       state.isTouched.email = true;
     },
-    passwordBlurHandler(state) {
+    passwordBlurHandler (state) {
       state.isTouched.password = true;
     },
 
-    submitHandler(state) {
+    submitHandler (state) {
       const data = {
         email: state.email,
-        password: state.password,
+        password: state.password
       };
 
       console.log(data);
@@ -37,8 +37,8 @@ const formSlice = createSlice({
       state.isTouched.email = false;
       state.password = "";
       state.isTouched.password = false;
-    },
-  },
+    }
+  }
 });
 
 export const formActions = formSlice.actions;

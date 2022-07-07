@@ -11,19 +11,19 @@ import { modelStyle } from "../../Styles/common";
 
 // model style
 const style = {
-  ...modelStyle,
+  ...modelStyle
 };
 
-export default function BasicModal({ open, setOpen }) {
+export default function BasicModal ({ open, setOpen }) {
   const [form, setForm] = useState({
     pan_id: "",
     gst_id: "",
-    seller_location: "",
+    seller_location: ""
   });
 
-  let userDetails = useSelector((state) => state.auth.user);
-  let userInfo = userDetails.user;
-  let token = userDetails.token;
+  const userDetails = useSelector((state) => state.auth.user);
+  const userInfo = userDetails.user;
+  const token = userDetails.token;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,14 +37,14 @@ export default function BasicModal({ open, setOpen }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         pan_id: form.pan_id,
         gst_id: form.gst_id,
         seller_location: form.seller_location,
-        user_id: userInfo.id,
-      }),
+        user_id: userInfo.id
+      })
     })
       .then((response) => response.json())
       .then((data) => {

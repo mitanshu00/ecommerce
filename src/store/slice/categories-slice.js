@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
-  categories: [],
+  categories: []
 };
 
 const categoryslice = createSlice({
   name: "categories",
   initialState: initialAuthState,
   reducers: {
-    add(state, action) {
+    add (state, action) {
       state.categories = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const catActions = categoryslice.actions;

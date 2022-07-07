@@ -10,7 +10,7 @@ const countDiscount = (products) => {
     "30above": 0,
     "40above": 0,
     "50above": 0,
-    "60above": 0,
+    "60above": 0
   };
   products.forEach((product) => {
     if (product.discount >= 30 && product.discount < 40) {
@@ -31,7 +31,7 @@ const countRating = (products) => {
   const rating = {
     "2above": 0,
     "3above": 0,
-    "4above": 0,
+    "4above": 0
   };
   products.forEach((product) => {
     if (product.average_rating >= 2 && product.average_rating < 3) {
@@ -47,19 +47,19 @@ const countRating = (products) => {
   return rating;
 };
 
-function FilterProduct({ products, setFilterData }) {
+function FilterProduct ({ products, setFilterData }) {
   const [discount, setDiscount] = useState({
     "30above": 0,
     "40above": 0,
     "50above": 0,
-    "60above": 0,
+    "60above": 0
   });
 
   const [rating, setRating] = useState({
     norating: 0,
     "2above": 0,
     "3above": 0,
-    "4above": 0,
+    "4above": 0
   });
 
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -67,7 +67,7 @@ function FilterProduct({ products, setFilterData }) {
   const [selectedDiscount, setSelectedDiscount] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState({
     min: null,
-    max: null,
+    max: null
   });
 
   useEffect(() => {
@@ -75,7 +75,7 @@ function FilterProduct({ products, setFilterData }) {
     setRating(countRating(products));
   }, [products]);
 
-  let brandList = new Set();
+  const brandList = new Set();
 
   // get all brands from products
   products.forEach((product) => {
@@ -100,7 +100,7 @@ function FilterProduct({ products, setFilterData }) {
     e.preventDefault();
 
     // filter by selected brand, rating, price and discount
-    let filteredProducts = products.filter((product) => {
+    const filteredProducts = products.filter((product) => {
       if (selectedBrands.length > 0) {
         if (!selectedBrands.includes(product.brand.name)) {
           return false;
@@ -168,7 +168,7 @@ function FilterProduct({ products, setFilterData }) {
                 maxWidth: "50px",
                 padding: "5px",
                 borderRadius: "5px",
-                borderColor: "lightGray",
+                borderColor: "lightGray"
               }}
               max={selectedPrice.max && selectedPrice.max}
               onChange={(e) =>
@@ -183,7 +183,7 @@ function FilterProduct({ products, setFilterData }) {
                 maxWidth: "50px",
                 padding: "5px",
                 borderRadius: "5px",
-                borderColor: "lightGray",
+                borderColor: "lightGray"
               }}
               min={selectedPrice.min && selectedPrice.min}
               onChange={(e) =>

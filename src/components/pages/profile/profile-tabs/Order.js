@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { List, ListItem, ListItemText, Grid, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function Order({ status }) {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
 
-  let userDetails = useSelector((state) => state.auth.user);
+  const userDetails = useSelector((state) => state.auth.user);
 
-  let token = userDetails.token;
+  const token = userDetails.token;
 
   // let userId = 10;
   // ?user_id=${userId}
@@ -27,7 +28,7 @@ function Order({ status }) {
 
   useEffect(() => {
     if (orders.length > 0) {
-      let newList = orders.filter((item) => item.status === status);
+      const newList = orders.filter((item) => item.status === status);
       setFilteredOrders(newList);
     }
   }, [orders, status]);
@@ -86,5 +87,9 @@ function Order({ status }) {
     </>
   );
 }
+
+Order.propTypes = {
+  status: PropTypes.string.isRequired,
+};
 
 export default Order;

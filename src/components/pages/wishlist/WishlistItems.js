@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 // import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 
 import { WhishlistActions } from "../../../store/slice/whishlist-slice";
@@ -61,6 +62,10 @@ const WishlistItems = (props) => {
       </li>
     </div>
   );
+};
+
+WishlistItems.propTypes = {
+  item: PropTypes.object,
 };
 
 export default WishlistItems;

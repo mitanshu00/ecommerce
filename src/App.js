@@ -34,11 +34,11 @@ const Products = React.lazy(() =>
   import("./components/pages/product-list/Products")
 );
 
-function App() {
-  let apiUrl = process.env.REACT_APP_API_URL;
-  let dispatch = useDispatch();
+function App () {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth);
-  let token = isAuth?.user?.token;
+  const token = isAuth?.user?.token;
 
   useEffect(() => {
     fetch(`${apiUrl}/main_categories`)

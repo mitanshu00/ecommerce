@@ -6,9 +6,9 @@ import ProductDetails from "./ProductDetails";
 import { useParams } from "react-router-dom";
 import NotFound from "../error-pages/NotFound";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
-function Product() {
+function Product () {
   const [product, setProduct] = useState({});
   const [error, setError] = useState(false);
   const { id } = useParams();

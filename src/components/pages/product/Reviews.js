@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   Box,
   Stack,
@@ -63,7 +64,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
     setAvgRating(averageRating(reviews));
   }, [reviews, setAvgRating]);
 
-  let reviewsLength = reviews.length;
+  const reviewsLength = reviews.length;
   return (
     <Box>
       <Stack
@@ -160,8 +161,8 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
                       review.rating >= 4
                         ? "success"
                         : review.rating >= 2
-                        ? "warning"
-                        : "error"
+                          ? "warning"
+                          : "error"
                     }
                   >
                     {review.rating} ★
@@ -171,7 +172,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
                 <ListItemText secondary={review.review_content} />
               </Stack>
               <Stack direction="row" spacing={2}>
-                {review["image_urls"].map((img, index) => (
+                {review.image_urls.map((img, index) => (
                   <Avatar
                     src={img}
                     alt="review-img"
@@ -188,5 +189,11 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
     </Box>
   );
 }
+
+Reviews.propTypes = {
+  reviews: PropTypes.array,
+  avgRating: PropTypes.number,
+  setAvgRating: PropTypes.number,
+};
 
 export default Reviews;

@@ -7,7 +7,7 @@ import Order from "./profile-tabs/Order";
 import Info from "./profile-tabs/Info";
 import RatingReviews from "./profile-tabs/RatingReviews";
 
-function Products() {
+function Products () {
   const [selectedTab, setSelectedTab] = useState("info");
 
   return (

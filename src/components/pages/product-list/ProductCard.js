@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import PropTypes from "prop-types";
 
 export default function ActionAreaCard({ product, whishlisted }) {
   const navigate = useNavigate();
@@ -96,3 +97,8 @@ export default function ActionAreaCard({ product, whishlisted }) {
     </Card>
   );
 }
+
+ActionAreaCard.propTypes = {
+  product: PropTypes.object,
+  whishlisted: PropTypes.bool,
+};

@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../../store/action/auth-action";
 import Otp from "../Otp";
 
-export default function Navbar({ isAuth }) {
+export default function Navbar ({ isAuth }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [otpModel, setOtpModel] = React.useState(false);
@@ -28,7 +28,7 @@ export default function Navbar({ isAuth }) {
   const handleOtpModelClose = () => setOtpModel(false);
 
   const isVerified = useSelector((state) => state.auth.isVerified);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleProfileMenuOpen = (event) => {
@@ -70,13 +70,13 @@ export default function Navbar({ isAuth }) {
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -94,13 +94,13 @@ export default function Navbar({ isAuth }) {
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}

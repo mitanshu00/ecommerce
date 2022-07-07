@@ -19,10 +19,10 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "5px",
   boxShadow: 4,
-  p: 4,
+  p: 4
 };
 
-export default function AddProdut({ open, setOpen }) {
+export default function AddProdut ({ open, setOpen }) {
   const [form, setForm] = useState({
     name: "",
     price: "",
@@ -31,15 +31,15 @@ export default function AddProdut({ open, setOpen }) {
     category: "",
     brand: "",
     subcategory: "",
-    quantity: "",
+    quantity: ""
   });
 
   const [subCat, setSubCat] = useState([]);
 
-  let categories = useSelector((state) => state.category.categories);
-  let subcategories = useSelector((state) => state.subcategory.subcategories);
-  let brands = useSelector((state) => state.brand.brands);
-  let sellerId = useSelector((state) => state.auth.sellerId);
+  const categories = useSelector((state) => state.category.categories);
+  const subcategories = useSelector((state) => state.subcategory.subcategories);
+  const brands = useSelector((state) => state.brand.brands);
+  const sellerId = useSelector((state) => state.auth.sellerId);
 
   useEffect(() => {
     setSubCat(subcategories);
@@ -52,7 +52,7 @@ export default function AddProdut({ open, setOpen }) {
   const handleCategoryChange = (selectedOption) => {
     setForm({ ...form, category: selectedOption.id });
     // filter subcategories by category
-    let newsubcategories = subcategories.filter(
+    const newsubcategories = subcategories.filter(
       (subcategory) => subcategory.main_category_id === selectedOption.id
     );
     setSubCat(newsubcategories);
@@ -71,7 +71,7 @@ export default function AddProdut({ open, setOpen }) {
     fetch(`${process.env.REACT_APP_API_URL}/products`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: form.name,
@@ -80,8 +80,8 @@ export default function AddProdut({ open, setOpen }) {
         sub_category_id: form.subcategory,
         brand_id: form.brand,
         seller_id: sellerId,
-        posters: [...form.images],
-      }),
+        posters: [...form.images]
+      })
     })
       .then((response) => response.json())
 
@@ -203,5 +203,5 @@ export default function AddProdut({ open, setOpen }) {
 
 AddProdut.propTypes = {
   open: PropTypes.bool,
-  setOpen: PropTypes.bool,
+  setOpen: PropTypes.bool
 };

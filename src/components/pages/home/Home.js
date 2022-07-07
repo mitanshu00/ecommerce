@@ -23,10 +23,10 @@ import { useSelector } from "react-redux";
 const styles = {
   borderRadius: "50%",
   maxHeight: "200px",
-  maxWidth: "200px",
+  maxWidth: "200px"
 };
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Home = () => {
   const [discountedProducts, setDiscountedProducts] = useState([]);

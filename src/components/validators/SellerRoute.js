@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const SellerRoute = ({ isSeller, redirectPath = "/", children }) => {
   if (!isSeller) {
@@ -8,4 +9,9 @@ const SellerRoute = ({ isSeller, redirectPath = "/", children }) => {
   return <Outlet />;
 };
 
+SellerRoute.propTypes = {
+  isSeller: PropTypes.bool,
+  redirectPath: PropTypes.string,
+  children: PropTypes.node,
+};
 export default SellerRoute;

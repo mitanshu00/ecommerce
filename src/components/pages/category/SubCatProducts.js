@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import ProductGrid from "../home/ProductGrid";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const stylesTwo = {
   maxHeight: "200px",
-  maxWidth: "350px",
+  maxWidth: "350px"
 };
 
-function SubCatProducts({ subCategory }) {
+function SubCatProducts ({ subCategory }) {
   const [subCat, setSubCats] = useState([]);
   console.log(
     "🚀 ~ file: SubCatProducts.js ~ line 13 ~ SubCatProducts ~ subCat",

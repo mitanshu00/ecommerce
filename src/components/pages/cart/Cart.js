@@ -4,7 +4,7 @@ import CartItem from "./CartItems";
 import classes from "./cart.module.css";
 import { Link } from "react-router-dom";
 
-function Cart() {
+function Cart () {
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const MainTotal = useSelector((state) => state.cart.subTotal);
@@ -14,11 +14,13 @@ function Cart() {
       <h1>My Cart ({cartQuantity})</h1>
 
       <div className={classes.container2}>
-        {cartItems.length === 0 ? (
+        {cartItems.length === 0
+          ? (
           <div className={classes.empty}>
             <h1>Your cart is empty ☹️</h1>
           </div>
-        ) : (
+            )
+          : (
           <ul>
             {cartItems.length > 0 &&
               cartItems.map((item) => (
@@ -31,12 +33,12 @@ function Cart() {
                     total: item.totalPrice,
                     price: item.price,
                     description: item.description,
-                    image: item.img_url,
+                    image: item.img_url
                   }}
                 />
               ))}
           </ul>
-        )}
+            )}
         <div className={classes.proceed}>
           <div className={classes.proceed1}>
             <p>

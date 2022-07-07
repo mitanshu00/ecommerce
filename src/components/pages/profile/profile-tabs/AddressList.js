@@ -46,7 +46,8 @@ function AddressList({ addresses, editAddress }) {
   );
 }
 
-AddressList.prototype = {
+AddressList.propTypes = {
+  addresses: PropTypes.arrayOf(PropTypes.object),
   editAddress: PropTypes.func,
 };
 

@@ -17,8 +17,8 @@ const Search = styled("div")(({ theme }) => ({
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto",
-  },
+    width: "auto"
+  }
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -30,7 +30,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   zIndex: 1,
-  color: theme.palette.common.black,
+  color: theme.palette.common.black
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -42,18 +42,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
     color: "black",
     [theme.breakpoints.up("md")]: {
-      width: "65ch",
-    },
+      width: "65ch"
+    }
   },
-  backgroundColor: "whitesmoke",
+  backgroundColor: "whitesmoke"
 }));
 
-function SearchBar() {
+function SearchBar () {
   const [searchInput, setSearchInput] = useState("");
   const [inFocus, setInFocus] = useState(false);
   const [history, setHistory] = useState([]);
 
-  let categoryList = useSelector((state) => state.category.categories);
+  const categoryList = useSelector((state) => state.category.categories);
 
   useEffect(() => {
     setHistory(categoryList);
@@ -69,21 +69,19 @@ function SearchBar() {
   };
 
   const handleChange = (e) => {
-    let searchValue = e.target.value;
+    const searchValue = e.target.value;
 
     setSearchInput(searchValue);
 
     // filter history by search input
-    let filteredHistory = categoryList.filter((category) => {
-      return (
-        category.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+    const filteredHistory = categoryList.filter((category) => (
+      category.name.toLowerCase().includes(searchValue.toLowerCase()) ||
         category.about.toLowerCase().includes(searchValue.toLowerCase())
-      );
-    });
+    ));
 
     setHistory([
       { id: Date.now(), name: `search "${searchValue}"`, about: "" },
-      ...filteredHistory,
+      ...filteredHistory
     ]);
   };
 
@@ -139,16 +137,18 @@ function SearchBar() {
                   to={`/c/${item.name}`}
                 >
                   <div className="search-suggestion-icon">
-                    {!item.img_url ? (
+                    {!item.img_url
+                      ? (
                       <ReplayIcon />
-                    ) : (
+                        )
+                      : (
                       <Avatar
                         src={item.img_url}
                         alt="err"
                         size="medium"
                         variant="square"
                       />
-                    )}
+                        )}
                   </div>
                   <ListItemText
                     className="search-suggestion-text"

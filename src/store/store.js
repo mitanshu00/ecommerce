@@ -17,8 +17,8 @@ const store = configureStore({
     register: registerSlice.reducer,
     cart: cartSlice.reducer,
     whishlist: whishlistSlice.reducer,
-    brand: brandslice.reducer,
-  },
+    brand: brandslice.reducer
+  }
 });
 
 export default store;

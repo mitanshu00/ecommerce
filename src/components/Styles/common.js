@@ -8,5 +8,5 @@ export const modelStyle = {
   bgcolor: "background.paper",
   borderRadius: "5px",
   boxShadow: 4,
-  p: 4,
+  p: 4
 };

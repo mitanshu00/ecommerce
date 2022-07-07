@@ -2,12 +2,12 @@ import Grid from "@mui/material/Grid";
 import { Stack, Typography, Divider, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function CategoryGrid({
+export default function CategoryGrid ({
   title,
   list,
   styles,
   showTitle,
-  viewAllLink,
+  viewAllLink
 }) {
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export default function CategoryGrid({
             fontSize: 22,
             fontWeight: 600,
             lineHeight: "32px",
-            marginRight: 2,
+            marginRight: 2
           }}
         >
           {title}

@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
-  brands: [],
+  brands: []
 };
 
 const brandslice = createSlice({
   name: "brands",
   initialState: initialAuthState,
   reducers: {
-    add(state, action) {
+    add (state, action) {
       state.brands = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const brandActions = brandslice.actions;

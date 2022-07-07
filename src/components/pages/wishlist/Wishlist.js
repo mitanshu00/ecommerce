@@ -3,18 +3,20 @@ import { useSelector } from "react-redux";
 import WishlistItems from "./WishlistItems";
 import classes from "../cart/cart.module.css";
 
-function Wishlist() {
+function Wishlist () {
   const WishlistItem = useSelector((state) => state.whishlist.wishItems);
   return (
     <div className={classes.containerr}>
       <h1>My Wishlist ❤️</h1>
 
       <div className={classes.container2}>
-        {WishlistItem.length === 0 ? (
+        {WishlistItem.length === 0
+          ? (
           <div className={classes.empty}>
             <h1>Your cart is empty ☹️</h1>
           </div>
-        ) : (
+            )
+          : (
           <ul>
             {WishlistItem.map((item) => (
               <WishlistItems
@@ -26,12 +28,12 @@ function Wishlist() {
                   total: item.totalPrice,
                   price: item.price,
                   description: item.description,
-                  image: item.img_url,
+                  image: item.img_url
                 }}
               />
             ))}
           </ul>
-        )}
+            )}
       </div>
     </div>
   );

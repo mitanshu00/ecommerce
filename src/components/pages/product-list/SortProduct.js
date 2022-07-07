@@ -1,5 +1,6 @@
-import { Button, Grid } from "@mui/material";
 import React from "react";
+import { Button, Grid } from "@mui/material";
+import PropTypes from "prop-types";
 
 function SortProduct({ setFilterData }) {
   const handleSort = (selectedOption) => {
@@ -26,5 +27,9 @@ function SortProduct({ setFilterData }) {
     </Grid>
   );
 }
+
+SortProduct.propTypes = {
+  setFilterData: PropTypes.array,
+};
 
 export default SortProduct;

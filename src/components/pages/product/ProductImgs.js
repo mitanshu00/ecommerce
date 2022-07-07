@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { Box, Grid, Stack } from "@mui/material";
+import PropTypes from "prop-types";
 
 export default function ProductImg({ images }) {
   const [imgIndex, setImgIndex] = useState(0);
@@ -73,3 +74,6 @@ export default function ProductImg({ images }) {
     </Box>
   );
 }
+ProductImg.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string),
+};

@@ -1,12 +1,10 @@
 import { WhishlistActions } from "../slice/whishlist-slice";
 
-export const clearWishItems = () => {
-  return (dispatch) => {
-    dispatch(
-      WhishlistActions.replaceWhishItems({
-        wishItems: [],
-        itemIds: [],
-      })
-    );
-  };
+export const clearWishItems = () => (dispatch) => {
+  dispatch(
+    WhishlistActions.replaceWhishItems({
+      wishItems: [],
+      itemIds: []
+    })
+  );
 };

@@ -8,21 +8,19 @@ export const columns = [
     field: "order_id",
     headerName: "Order id",
     width: 100,
-    sortable: false,
+    sortable: false
   },
   {
     field: "name",
     headerName: "Product name",
     width: 250,
-    renderCell: (params) => {
-      return <p>{params.row.product.name}</p>;
-    },
+    renderCell: (params) => <p>{params.row.product.name}</p>
   },
   {
     field: "quantity",
     headerName: "quantity",
     width: 100,
-    sortable: false,
+    sortable: false
   },
 
   {
@@ -30,39 +28,35 @@ export const columns = [
     headerName: "price",
     type: "number",
     width: 120,
-    renderCell: (params) => {
-      return <p>{params.row.product.price}</p>;
-    },
+    renderCell: (params) => <p>{params.row.product.price}</p>
   },
 
   {
     field: "status",
     headerName: "status",
     width: 120,
-    renderCell: (params) => {
-      return (
+    renderCell: (params) => (
         <select name="status" id="status">
           <option value="pending">created</option>
           <option value="delivered">delivered</option>
           <option value="cancelled">cancelled</option>
           <option value="returned">returned</option>
         </select>
-      );
-    },
-  },
+    )
+  }
 ];
 
-export default function Stocks() {
+export default function Stocks () {
   const [rows, setRow] = useState([]);
 
-  let sellerId = useSelector((state) => state.auth.sellerId);
-  let token = useSelector((state) => state.auth.user.token);
+  const sellerId = useSelector((state) => state.auth.sellerId);
+  const token = useSelector((state) => state.auth.user.token);
 
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`,
       {
-        headers: { authorization: `Bearer ${token}` },
+        headers: { authorization: `Bearer ${token}` }
       }
     )
       .then((res) => res.json())

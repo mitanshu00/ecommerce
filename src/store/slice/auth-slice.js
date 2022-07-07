@@ -7,37 +7,37 @@ const initialAuthState = {
   isSeller: false,
   registeredForSeller: false,
   sellerId: null,
-  loading: false,
+  loading: false
 };
 
 const authSlice = createSlice({
   name: "authentication",
   initialState: initialAuthState,
   reducers: {
-    login(state, action) {
+    login (state, action) {
       state.isAuthenticated = true;
       state.user = action.payload;
     },
-    logout(state) {
+    logout (state) {
       state.isAuthenticated = false;
       state.user = {};
     },
-    loading(state, action) {
+    loading (state, action) {
       state.loading = action.payload;
     },
-    registeredForSeller(state) {
+    registeredForSeller (state) {
       state.registeredForSeller = true;
     },
-    setSellerId(state, action) {
+    setSellerId (state, action) {
       state.isSeller = true;
       state.sellerId = action.payload;
       state.registeredForSeller = false;
     },
-    otpVerify(state) {
+    otpVerify (state) {
       state.isVerified = true;
       localStorage.setItem("isverified", JSON.stringify(true));
-    },
-  },
+    }
+  }
 });
 
 export const authActions = authSlice.actions;

@@ -11,42 +11,42 @@ const registerSlice = createSlice({
       name: false,
       phone: false,
       email: false,
-      password: false,
-    },
+      password: false
+    }
   },
   reducers: {
-    nameChangeHandler(state, action) {
+    nameChangeHandler (state, action) {
       state.name = action.payload;
     },
-    mobileChangeHandler(state, action) {
+    mobileChangeHandler (state, action) {
       state.phone = action.payload;
     },
-    emailChangeHandler(state, action) {
+    emailChangeHandler (state, action) {
       state.email = action.payload;
     },
-    passwordChangeHandler(state, action) {
+    passwordChangeHandler (state, action) {
       state.password = action.payload;
     },
 
-    nameBlurHandler(state) {
+    nameBlurHandler (state) {
       state.isTouched.name = true;
     },
-    mobileBlurHandler(state) {
+    mobileBlurHandler (state) {
       state.isTouched.phone = true;
     },
-    emailBlurHandler(state) {
+    emailBlurHandler (state) {
       state.isTouched.email = true;
     },
-    passwordBlurHandler(state) {
+    passwordBlurHandler (state) {
       state.isTouched.password = true;
     },
 
-    submitHandler(state) {
+    submitHandler (state) {
       const data = {
         name: state.name,
         phone: state.phone,
         email: state.email,
-        password: state.password,
+        password: state.password
       };
 
       console.log(data);
@@ -59,8 +59,8 @@ const registerSlice = createSlice({
       state.isTouched.email = false;
       state.password = "";
       state.isTouched.password = false;
-    },
-  },
+    }
+  }
 });
 
 export const registerActions = registerSlice.actions;

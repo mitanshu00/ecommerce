@@ -5,7 +5,7 @@ import { sendRegisterData } from "../../../store/action/register-actions";
 import { Link } from "react-router-dom";
 import classes from "./login.module.css";
 
-function Register() {
+function Register () {
   const dispatch = useDispatch();
   const enteredName = useSelector((state) => state.register.name);
   const enteredPhone = useSelector((state) => state.register.phone);
@@ -70,7 +70,7 @@ function Register() {
         enteredName,
         enteredPhone,
         enteredRegEmail,
-        enteredRegPassword,
+        enteredRegPassword
       })
     );
   };

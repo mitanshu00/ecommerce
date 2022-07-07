@@ -5,19 +5,19 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SubCatProducts from "./SubCatProducts";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
-function Category() {
+function Category () {
   const [subCat, setSubCat] = useState([]);
   const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
-  let { category } = useParams();
-  let categories = useSelector((state) => state.category.categories);
+  const { category } = useParams();
+  const categories = useSelector((state) => state.category.categories);
 
   // get category id
-  let categoryId =
+  const categoryId =
     categories.length > 0 &&
     categories.find((cat) => cat.name.toLowerCase() === category.toLowerCase());
 

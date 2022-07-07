@@ -5,18 +5,18 @@ import {
   CardContent,
   TextField,
   CardActions,
-  Button,
+  Button
 } from "@mui/material";
 import AddressList from "./AddressList";
 import { useSelector } from "react-redux";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
-function Addresses() {
-  let userDetails = useSelector((state) => state.auth.user);
+function Addresses () {
+  const userDetails = useSelector((state) => state.auth.user);
 
-  let userId = userDetails.user.id;
-  let token = userDetails.token;
+  const userId = userDetails.user.id;
+  const token = userDetails.token;
 
   const [addresses, setAddresses] = useState([{}]);
   const [open, setOpen] = useState(false);
@@ -28,12 +28,12 @@ function Addresses() {
     country: "",
     postal_code: "",
     mobile_no: "",
-    user_id: userId,
+    user_id: userId
   });
 
   useEffect(() => {
     fetch(`${apiUrl}/user_addresses/`, {
-      headers: { authorization: `Bearer ${token}` },
+      headers: { authorization: `Bearer ${token}` }
     })
       .then((res) => res.json())
       .then((data) => {
@@ -44,7 +44,7 @@ function Addresses() {
   const handleChangeForm = (e) => {
     setNewAddress({
       ...newAddress,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -57,19 +57,19 @@ function Addresses() {
       country: "",
       postal_code: "",
       mobile_no: "",
-      user_id: userId,
+      user_id: userId
     });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    fetch(`${apiUrl}/user_addresses/${optionId ? optionId : ""}`, {
+    fetch(`${apiUrl}/user_addresses/${optionId || ""}`, {
       method: optionId ? "PUT" : "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(newAddress),
+      body: JSON.stringify(newAddress)
     })
       .then((res) => res.json())
       .then((data) => {
@@ -90,7 +90,7 @@ function Addresses() {
           country: "",
           postal_code: "",
           mobile_no: "",
-          user_id: userId,
+          user_id: userId
         });
         setOpen(false);
       });

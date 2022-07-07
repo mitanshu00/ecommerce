@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import NotFound from "../error-pages/NotFound";
 import ProductListLayout from "./ProductListLayout";
 
-let apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
-function Search() {
+function Search () {
   const [filterData, setFilterData] = useState([]);
   const [error, setError] = useState(false);
 
-  let { query } = useParams();
+  const { query } = useParams();
 
   useEffect(() => {
     fetch(`${apiUrl}/search?search=${query}`)

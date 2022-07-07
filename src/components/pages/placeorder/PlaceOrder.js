@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./PlaceOrder.module.css";
-import { useCallback, useState, useEffect } from "react";
+
 import { sendOrderData } from "../../../store/action/PlaceOrder-action";
 import Summery from "./Summery";
 
@@ -18,16 +18,14 @@ const PlaceOrder = () => {
     cardNum: 0,
     expire: 0,
     cvv: 0,
-    owner: "",
+    owner: ""
   });
 
   const fetchDataHandler = useCallback(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user_addresses`, {
-      headers: { authorization: `Bearer ${token}` },
+      headers: { authorization: `Bearer ${token}` }
     })
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         setState(data);
       });
@@ -42,7 +40,7 @@ const PlaceOrder = () => {
   };
 
   const DeliveryAddress = (id) => {
-    let arr = state.filter((item) => item.id === id);
+    const arr = state.filter((item) => item.id === id);
     setFinalAdd(arr);
     setPage((cur) => cur + 1);
   };
@@ -53,12 +51,12 @@ const PlaceOrder = () => {
       alert("Form Submitted");
       console.log({
         address_id: finalAdd[0].id,
-        totalAmount: MainTotal,
+        totalAmount: MainTotal
       });
       dispatch(
         sendOrderData({
           address_id: finalAdd[0].id,
-          totalAmount: MainTotal,
+          totalAmount: MainTotal
         })
       );
     } else {

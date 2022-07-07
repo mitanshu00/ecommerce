@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { sendFormData } from "../../../store/action/form-actions";
 import classes from "./login.module.css";
 
-function Login() {
+function Login () {
   const dispatch = useDispatch();
   const enteredEmail = useSelector((state) => state.login.email);
   const enteredPassword = useSelector((state) => state.login.password);
@@ -48,7 +48,7 @@ function Login() {
     dispatch(
       sendFormData({
         enteredEmail,
-        enteredPassword,
+        enteredPassword
       })
     );
   };

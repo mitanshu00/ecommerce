@@ -7,6 +7,7 @@ import FilterProduct from "./FilterProduct";
 import SortProduct from "./SortProduct";
 import ProductList from "./ProductList";
 import usePaginationc from "../../../hooks/usePaginationc";
+import PropTypes from "prop-types";
 
 function ProductListLayout({ filterData }) {
   const [products, setProducts] = useState(filterData);
@@ -50,5 +51,9 @@ function ProductListLayout({ filterData }) {
     </Box>
   );
 }
+
+ProductListLayout.propTypes = {
+  filterData: PropTypes.array,
+};
 
 export default ProductListLayout;

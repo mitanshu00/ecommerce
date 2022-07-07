@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const PublicRoute = ({ isAuth, redirectPath = "/", children }) => {
   if (isAuth) {
@@ -6,6 +7,12 @@ const PublicRoute = ({ isAuth, redirectPath = "/", children }) => {
   }
 
   return <Outlet />;
+};
+
+PublicRoute.propTypes = {
+  isAuth: PropTypes.bool,
+  redirectPath: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default PublicRoute;

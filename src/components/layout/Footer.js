@@ -1,13 +1,13 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
 
-function Footer() {
+function Footer () {
   return (
     <footer
       style={{
         backgroundColor: "lightgray",
         minHeight: "300px",
-        minWidth: "100%",
+        minWidth: "100%"
       }}
     >
       <Box sx={{ maxWidth: "1500px", margin: "0 auto" }}>

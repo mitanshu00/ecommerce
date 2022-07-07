@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 
-export default function ResponsiveGrid({ products, visited, rowsPerPage }) {
+export default function ResponsiveGrid ({ products, visited, rowsPerPage }) {
   const whishlistIds = useSelector((state) => state.whishlist.itemIds);
 
   return (

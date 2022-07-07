@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export default function Info() {
+export default function Info () {
   const user = useSelector((state) => state.auth.user.user);
   return (
     <Paper sx={{ width: "100%", minHeight: "400px", pt: 2, pl: 4, my: 2 }}>

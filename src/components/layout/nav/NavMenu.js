@@ -10,13 +10,13 @@ import BecomeSeller from "./BecomeSellerModal";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function NavMenu({ handleProfileMenuOpen }) {
+function NavMenu ({ handleProfileMenuOpen }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const userDetails = useSelector((state) => state.auth);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
-  let isAuth = userDetails.isAuthenticated;
-  let isSeller = userDetails.sellerId;
+  const isAuth = userDetails.isAuthenticated;
+  const isSeller = userDetails.sellerId;
 
   const handleOpen = () => setOpen(true);
 
@@ -81,7 +81,8 @@ function NavMenu({ handleProfileMenuOpen }) {
           </MenuItem>
         )}
 
-        {isAuth ? (
+        {isAuth
+          ? (
           <MenuItem onClick={handleProfileMenuOpen}>
             <IconButton
               size="large"
@@ -99,11 +100,12 @@ function NavMenu({ handleProfileMenuOpen }) {
               </p>
             )}
           </MenuItem>
-        ) : (
+            )
+          : (
           <MenuItem onClick={onLoginClick}>
             <p>Login</p>
           </MenuItem>
-        )}
+            )}
       </Stack>
     </>
   );
