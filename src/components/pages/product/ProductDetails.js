@@ -36,7 +36,7 @@ function ProductDetails({ product }) {
         totalPrice: product.price,
         name: product.name,
         img_url: product.poster_urls[0],
-        description: product.description,
+        description: product.description
       })
     );
     dispatch(sendCartData(token, product.id));
@@ -49,7 +49,7 @@ function ProductDetails({ product }) {
         price: product.price,
         name: product.name,
         img_url: product.poster_urls[0],
-        description: product.description,
+        description: product.description
       })
     );
   };
@@ -168,7 +168,7 @@ function ProductDetails({ product }) {
 }
 
 ProductDetails.propTypes = {
-  product: PropTypes.object,
+  product: PropTypes.object
 };
 
 export default ProductDetails;

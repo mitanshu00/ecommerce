@@ -12,7 +12,7 @@ function SortProduct({ setFilterData }) {
       setFilterData((prev) => [...prev.sort((a, b) => b.id - a.id)]);
     selectedOption === "name" &&
       setFilterData((prev) => [
-        ...prev.sort((a, b) => a.name.localeCompare(b.name)),
+        ...prev.sort((a, b) => a.name.localeCompare(b.name))
       ]);
   };
 
@@ -29,7 +29,7 @@ function SortProduct({ setFilterData }) {
 }
 
 SortProduct.propTypes = {
-  setFilterData: PropTypes.array,
+  setFilterData: PropTypes.array
 };
 
 export default SortProduct;

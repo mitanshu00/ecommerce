@@ -12,7 +12,7 @@ const PublicRoute = ({ isAuth, redirectPath = "/", children }) => {
 PublicRoute.propTypes = {
   isAuth: PropTypes.bool,
   redirectPath: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default PublicRoute;

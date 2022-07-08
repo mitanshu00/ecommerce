@@ -17,7 +17,7 @@ export default function ProductImg({ images }) {
         margin: "auto",
         px: 2,
         position: "sticky",
-        top: 0,
+        top: 0
       }}
     >
       <Grid container spacing={1}>
@@ -52,8 +52,8 @@ export default function ProductImg({ images }) {
                 backgroundColor: "#FFFFFF",
                 borderRadius: 50,
                 margin: 0,
-                width: 50,
-              },
+                width: 50
+              }
             }}
           >
             {images &&
@@ -63,7 +63,7 @@ export default function ProductImg({ images }) {
                   alt=""
                   style={{
                     height: "700px",
-                    maxWidth: "100%",
+                    maxWidth: "100%"
                   }}
                   key={index}
                 />
@@ -75,5 +75,5 @@ export default function ProductImg({ images }) {
   );
 }
 ProductImg.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string),
+  images: PropTypes.arrayOf(PropTypes.string)
 };

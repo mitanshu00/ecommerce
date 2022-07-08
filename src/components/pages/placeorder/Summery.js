@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import styles from "./PlaceOrder.module.css";
 import RButton from "../login-reg/ReusableComponents/Button";
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 
-const Summery = () => {
+const Summery = ({ setpage }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const MainTotal = useSelector((state) => state.cart.subTotal);
@@ -52,13 +53,19 @@ const Summery = () => {
               </div>
             </div>
             <Box sx={{ textAlign: "center" }}>
-              <RButton variant="text">Proceed To Pay</RButton>
+              <RButton variant="text" onClick={() => setpage((cur) => cur + 1)}>
+                Proceed To Pay
+              </RButton>
             </Box>
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+Summery.propTypes = {
+  setpage: PropTypes.func,
 };
 
 export default Summery;

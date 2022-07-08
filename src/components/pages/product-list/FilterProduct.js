@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import PropTypes from "prop-types";
 
 const starStye = { m: "-5px", p: "0px 5px" };
 
@@ -47,7 +48,7 @@ const countRating = (products) => {
   return rating;
 };
 
-function FilterProduct ({ products, setFilterData }) {
+function FilterProduct({ products, setFilterData }) {
   const [discount, setDiscount] = useState({
     "30above": 0,
     "40above": 0,
@@ -297,5 +298,10 @@ function FilterProduct ({ products, setFilterData }) {
     </Box>
   );
 }
+
+FilterProduct.propTypes = {
+  products: PropTypes.array,
+  setFilterData: PropTypes.array
+};
 
 export default FilterProduct;

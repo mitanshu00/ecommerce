@@ -1,15 +1,9 @@
 import Grid from "@mui/material/Grid";
 import { Stack, Typography, Divider, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function CategoryGrid ({
-  title,
-  list,
-  styles,
-  showTitle,
-  gridCol,
-  viewAllLink
-}) {
+export default function CategoryGrid({ title, list, styles, showTitle }) {
   const navigate = useNavigate();
 
   const handleClick = (name, id) => {
@@ -61,3 +55,10 @@ export default function CategoryGrid ({
     </>
   );
 }
+
+CategoryGrid.propTypes = {
+  title: PropTypes.string,
+  list: PropTypes.array,
+  styles: PropTypes.object,
+  showTitle: PropTypes.bool
+};

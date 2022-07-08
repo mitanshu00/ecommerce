@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import PropTypes from "prop-types";
 
-function BannerCarousel ({ discountedProducts }) {
+function BannerCarousel({ discountedProducts }) {
   return (
     <Carousel
       autoPlay={true}
@@ -17,15 +17,15 @@ function BannerCarousel ({ discountedProducts }) {
           backgroundColor: "#FFFFFF",
           borderRadius: 0,
           margin: 0,
-          width: 50
-        }
+          width: 50,
+        },
       }}
     >
       {discountedProducts.map((product) => (
         <img
           src={product.poster_url}
           alt=""
-          style={{ width: "100%", height: "300px" }}
+          style={{ width: "100%", height: "600px" }}
           key={product.id}
         />
       ))}
@@ -33,8 +33,8 @@ function BannerCarousel ({ discountedProducts }) {
   );
 }
 
-BannerCarousel.prototype = {
-  discountedProducts: PropTypes.arrayOf(PropTypes.object)
+BannerCarousel.propTypes = {
+  discountedProducts: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default BannerCarousel;

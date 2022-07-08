@@ -20,7 +20,7 @@ function ProductListLayout({ filterData }) {
   // custom hook for pagination
   const { page, visited, changePage } = usePaginationc({
     rowsPerPage,
-    pageCount,
+    pageCount
   });
 
   return (
@@ -53,7 +53,7 @@ function ProductListLayout({ filterData }) {
 }
 
 ProductListLayout.propTypes = {
-  filterData: PropTypes.array,
+  filterData: PropTypes.array
 };
 
 export default ProductListLayout;

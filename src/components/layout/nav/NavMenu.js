@@ -9,8 +9,9 @@ import Favorite from "@mui/icons-material/Favorite";
 import BecomeSeller from "./BecomeSellerModal";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-function NavMenu ({ handleProfileMenuOpen }) {
+function NavMenu({ handleProfileMenuOpen }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const userDetails = useSelector((state) => state.auth);
@@ -81,8 +82,7 @@ function NavMenu ({ handleProfileMenuOpen }) {
           </MenuItem>
         )}
 
-        {isAuth
-          ? (
+        {isAuth ? (
           <MenuItem onClick={handleProfileMenuOpen}>
             <IconButton
               size="large"
@@ -100,15 +100,17 @@ function NavMenu ({ handleProfileMenuOpen }) {
               </p>
             )}
           </MenuItem>
-            )
-          : (
+        ) : (
           <MenuItem onClick={onLoginClick}>
             <p>Login</p>
           </MenuItem>
-            )}
+        )}
       </Stack>
     </>
   );
 }
 
+NavMenu.propTypes = {
+  handleProfileMenuOpen: PropTypes.func.isRequired,
+};
 export default NavMenu;

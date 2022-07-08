@@ -2,8 +2,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-export default function ResponsiveGrid ({ products, visited, rowsPerPage }) {
+export default function ResponsiveGrid({ products, visited, rowsPerPage }) {
   const whishlistIds = useSelector((state) => state.whishlist.itemIds);
 
   return (
@@ -25,3 +26,9 @@ export default function ResponsiveGrid ({ products, visited, rowsPerPage }) {
     </Box>
   );
 }
+
+ResponsiveGrid.propTypes = {
+  products: PropTypes.object,
+  visited: PropTypes.number,
+  rowsPerPage: PropTypes.number
+};

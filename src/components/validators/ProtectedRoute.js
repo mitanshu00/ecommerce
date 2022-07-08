@@ -11,7 +11,7 @@ const ProtectedRoute = ({ isAuth, redirectPath = "login/", children }) => {
 ProtectedRoute.propTypes = {
   isAuth: PropTypes.bool,
   redirectPath: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default ProtectedRoute;

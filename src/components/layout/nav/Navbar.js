@@ -14,8 +14,9 @@ import SearchBar from "./search-bar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogout } from "../../../store/action/auth-action";
 import Otp from "../Otp";
+import PropTypes from "prop-types";
 
-export default function Navbar ({ isAuth }) {
+export default function Navbar({ isAuth }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [otpModel, setOtpModel] = React.useState(false);
@@ -70,13 +71,13 @@ export default function Navbar ({ isAuth }) {
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -94,13 +95,13 @@ export default function Navbar ({ isAuth }) {
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -158,3 +159,7 @@ export default function Navbar ({ isAuth }) {
     </>
   );
 }
+
+Navbar.propTypes = {
+  isAuth: PropTypes.bool.isRequired,
+};

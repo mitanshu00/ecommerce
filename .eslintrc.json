@@ -28,8 +28,9 @@
         "react/react-in-jsx-scope": "Off",
         "comma-dangle": "Off",
         // "react/prop-types": "Off",
-        "no-empty": "Off",
+        // "no-empty": "Off",
         "camelcase": "Off",
+        "multiline-ternary": "Off",
         "react/no-unescaped-entities": "Off",
         "space-before-function-paren": "Off",
         "arrow-body-style": ["error", "as-needed"]

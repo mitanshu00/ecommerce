@@ -29,7 +29,7 @@ export default function ActionAreaCard({ product, whishlisted }) {
         price: product.price,
         name: product.name,
         img_url: product.poster_urls[0],
-        description: product.description,
+        description: product.description
       })
     );
   };
@@ -46,7 +46,7 @@ export default function ActionAreaCard({ product, whishlisted }) {
           backgroundColor: "rgba(255, 255, 255, 0.921)",
           borderRadius: "50%",
           padding: "5px",
-          cursor: "pointer",
+          cursor: "pointer"
         }}
         onClick={addToWishlistHandler}
       >
@@ -66,8 +66,8 @@ export default function ActionAreaCard({ product, whishlisted }) {
               backgroundColor: "#FFFFFF",
               borderRadius: 50,
               margin: 0,
-              width: 50,
-            },
+              width: 50
+            }
           }}
         >
           {product.poster_urls.map((image, index) => (
@@ -100,5 +100,5 @@ export default function ActionAreaCard({ product, whishlisted }) {
 
 ActionAreaCard.propTypes = {
   product: PropTypes.object,
-  whishlisted: PropTypes.bool,
+  whishlisted: PropTypes.bool
 };

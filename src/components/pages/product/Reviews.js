@@ -11,7 +11,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button,
+  Button
 } from "@mui/material";
 
 const countRating = (products) => {
@@ -20,7 +20,7 @@ const countRating = (products) => {
     "2above": 0,
     "3above": 0,
     "4above": 0,
-    "5above": 0,
+    "5above": 0
   };
   products.forEach((product) => {
     if (product.rating >= 1 && product.rating < 2) {
@@ -56,7 +56,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
     "2above": 0,
     "3above": 0,
     "4above": 0,
-    "5above": 0,
+    "5above": 0
   });
 
   useEffect(() => {
@@ -193,7 +193,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
 Reviews.propTypes = {
   reviews: PropTypes.array,
   avgRating: PropTypes.number,
-  setAvgRating: PropTypes.number,
+  setAvgRating: PropTypes.number
 };
 
 export default Reviews;

@@ -1,17 +1,18 @@
+/* css file */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
 .cardbox {
   margin-bottom: 10px;
   box-sizing: border-box;
   width: 100%;
   background-color: #fff;
-  height: 200px;
+  min-height: 200px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 
   /* font-family: "Nunito", sans-serif; */
 }
 .cardbox li {
   list-style-type: none;
-  height: 200px;
+  min-height: 200px;
 }
 .list {
   display: flex;

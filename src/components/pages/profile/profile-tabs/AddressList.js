@@ -5,7 +5,7 @@ import {
   CardContent,
   Stack,
   Typography,
-  IconButton,
+  IconButton
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
@@ -48,7 +48,7 @@ function AddressList({ addresses, editAddress }) {
 
 AddressList.propTypes = {
   addresses: PropTypes.arrayOf(PropTypes.object),
-  editAddress: PropTypes.func,
+  editAddress: PropTypes.func
 };
 
 export default AddressList;

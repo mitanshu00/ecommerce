@@ -3,13 +3,14 @@ import OtpInput from "react-otp-input";
 import { Modal, Box, Paper, Stack, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/slice/auth-slice";
+import PropTypes from "prop-types";
 
 import { modelStyle as styles } from "../Styles/common";
 
 const modelStyle = {
   ...styles,
   width: 600,
-  height: 500
+  height: 500,
 };
 
 const Otp = ({ handleClose }) => {
@@ -23,7 +24,7 @@ const Otp = ({ handleClose }) => {
   const dispatch = useDispatch();
   const verifyOtpHandler = () => {
     fetch(`${process.env.REACT_APP_API_URL}/verify?otp=${otp}`, {
-      headers: { authorization: `Bearer ${token}` }
+      headers: { authorization: `Bearer ${token}` },
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -69,11 +70,11 @@ const Otp = ({ handleClose }) => {
                 color: "black",
                 margin: "30px 7px",
                 fontWeight: "400",
-                caretColor: "blue"
+                caretColor: "blue",
               }}
               focusStyle={{
                 border: "1px solid #CFD3DB",
-                outline: "none"
+                outline: "none",
               }}
             />
             <Button variant="contained" onClick={verifyOtpHandler}>
@@ -84,6 +85,10 @@ const Otp = ({ handleClose }) => {
       </Box>
     </Modal>
   );
+};
+
+Otp.propTypes = {
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default Otp;

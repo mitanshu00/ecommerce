@@ -9,9 +9,7 @@ import { catActions } from "./store/slice/categories-slice";
 import Home from "./components/pages/home/Home";
 import Cart from "./components/pages/cart/Cart";
 import Wishlist from "./components/pages/wishlist/Wishlist";
-// import Login from "./components/pages/login/Login";
 import Login2 from "./components/pages/login-reg/login2";
-// import Register from "./components/pages/login/Register";
 import Register2 from "./components/pages/login-reg/register2";
 import Profile from "./components/pages/profile/Profile";
 import { subCatActions } from "./store/slice/subcategories-slice";
@@ -34,7 +32,7 @@ const Products = React.lazy(() =>
   import("./components/pages/product-list/Products")
 );
 
-function App () {
+function App() {
   const apiUrl = process.env.REACT_APP_API_URL;
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth);

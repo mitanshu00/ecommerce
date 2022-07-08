@@ -19,7 +19,7 @@ const WishlistItems = (props) => {
         title,
         price,
         description,
-        image,
+        image
       })
     );
   };
@@ -65,7 +65,7 @@ const WishlistItems = (props) => {
 };
 
 WishlistItems.propTypes = {
-  item: PropTypes.object,
+  item: PropTypes.object
 };
 
 export default WishlistItems;

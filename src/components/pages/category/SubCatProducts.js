@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ProductGrid from "../home/ProductGrid";
+import PropTypes from "prop-types";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -8,7 +9,7 @@ const stylesTwo = {
   maxWidth: "350px"
 };
 
-function SubCatProducts ({ subCategory }) {
+function SubCatProducts({ subCategory }) {
   const [subCat, setSubCats] = useState([]);
   console.log(
     "🚀 ~ file: SubCatProducts.js ~ line 13 ~ SubCatProducts ~ subCat",
@@ -37,5 +38,9 @@ function SubCatProducts ({ subCategory }) {
     </>
   );
 }
+
+SubCatProducts.propTypes = {
+  subCategory: PropTypes.object
+};
 
 export default SubCatProducts;

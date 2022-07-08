@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { TextField } from "@mui/material";
+import PropTypes from "prop-types";
 
 const Input = ({ id, name, label, type }) => (
   <TextField

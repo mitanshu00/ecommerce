@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./PlaceOrder.module.css";
-
 import { sendOrderData } from "../../../store/action/PlaceOrder-action";
+import Payment from "./Payment";
 import Summery from "./Summery";
+import Address from "./Address";
 
 const PlaceOrder = () => {
   const dispatch = useDispatch();
@@ -14,16 +15,10 @@ const PlaceOrder = () => {
   const [page, setPage] = useState(0);
   const [finalAdd, setFinalAdd] = useState([]);
   const [state, setState] = useState([]);
-  const [cardData, setCardData] = useState({
-    cardNum: 0,
-    expire: 0,
-    cvv: 0,
-    owner: ""
-  });
 
   const fetchDataHandler = useCallback(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user_addresses`, {
-      headers: { authorization: `Bearer ${token}` }
+      headers: { authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -34,10 +29,6 @@ const PlaceOrder = () => {
   useEffect(() => {
     fetchDataHandler();
   }, [fetchDataHandler]);
-
-  const CardDataSetHandler = (e) => {
-    setCardData({ ...cardData, [e.target.name]: e.target.value });
-  };
 
   const DeliveryAddress = (id) => {
     const arr = state.filter((item) => item.id === id);
@@ -51,12 +42,12 @@ const PlaceOrder = () => {
       alert("Form Submitted");
       console.log({
         address_id: finalAdd[0].id,
-        totalAmount: MainTotal
+        totalAmount: MainTotal,
       });
       dispatch(
         sendOrderData({
           address_id: finalAdd[0].id,
-          totalAmount: MainTotal
+          totalAmount: MainTotal,
         })
       );
     } else {
@@ -64,176 +55,13 @@ const PlaceOrder = () => {
     }
   };
 
-  // const formStep = (e) => {
-  //   if (page === 2) {
-  //     e.preventDefault();
-  //     alert("Form Submitted");
-  //     console.log(cardData);
-  //     console.log(finalAdd);
-  //   } else {
-  //     setPage((cur) => cur + 1);
-  //   }
-  // };
-  // const PrevStep = () => {
-  //   setPage((cur) => cur - 1);
-  // };
-
   return (
     <div className={styles.container}>
       {page === 0 && (
-        <div className={styles.form}>
-          <div className={styles.con2}>
-            <h1>Select a delivery address</h1>
-            <div className={styles.rowcard}>
-              {state.length === 0 && <p>no address available.</p>}
-              {state.length > 0 &&
-                state.map((item) => (
-                  <div className={styles.card} key={item.id}>
-                    <div className={styles.name}>
-                      <h4>{item.mobile_no}</h4>
-                    </div>
-                    <p>{item.address_line1}</p>
-                    <p>{item.address_line2}</p>
-                    <p>
-                      {item.city}-{item.postal_code}
-                    </p>
-                    <p>
-                      {item.state}, {item.country}
-                    </p>
-
-                    <button onClick={() => DeliveryAddress(item.id)}>
-                      Deliver to this address
-                    </button>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
+        <Payment state={state} DeliveryAddress={DeliveryAddress} />
       )}
-      {page === 1 && <Summery />}
-      {page === 2 && (
-        <div className={styles.form}>
-          <div className={styles.con2}>
-            <h1>Payment Details</h1>
-
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-12 col-md-4 col-md-offset-4">
-                  <div className="panel panel-default">
-                    <div className="panel-heading mb-3">
-                      <div className="row">
-                        <img
-                          className="img-responsive cc-img"
-                          src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png"
-                          alt="debitcard"
-                        />
-                      </div>
-                    </div>
-                    <div className="panel-body">
-                      <form>
-                        <div className="row mb-3">
-                          <div className="col-xs-12">
-                            <div className="form-group">
-                              <label>CARD NUMBER</label>
-                              <div className="input-group">
-                                <input
-                                  value={cardData.cardNum}
-                                  name="cardNum"
-                                  type="number"
-                                  className="form-control"
-                                  placeholder="Valid Card Number"
-                                  onChange={CardDataSetHandler}
-                                />
-                                <span className="input-group-addon">
-                                  <span className="fa fa-credit-card"></span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row mb-3">
-                          <div className="col-xs-7 col-md-7">
-                            <div className="form-group">
-                              <label>
-                                <span className="hidden-xs">EXPIRATION</span>
-                                <span className="visible-xs-inline">
-                                  EXP
-                                </span>{" "}
-                                DATE
-                              </label>
-                              <input
-                                value={cardData.expire}
-                                name="expire"
-                                type="number"
-                                className="form-control"
-                                placeholder="MM / YY"
-                                onChange={CardDataSetHandler}
-                              />
-                            </div>
-                          </div>
-                          <div className="col-xs-5 col-md-5 pull-right">
-                            <div className="form-group">
-                              <label>CV CODE</label>
-                              <input
-                                value={cardData.cvv}
-                                name="cvv"
-                                type="number"
-                                className="form-control"
-                                placeholder="CVC"
-                                onChange={CardDataSetHandler}
-                                maxLength={3}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row mb-3">
-                          <div className="col-xs-12">
-                            <div className="form-group">
-                              <label>CARD OWNER</label>
-                              <input
-                                value={cardData.owner}
-                                name="owner"
-                                type="text"
-                                className="form-control"
-                                placeholder="Card Owner Names"
-                                onChange={CardDataSetHandler}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <div className="panel-footer">
-                      <div className="row">
-                        <div className="col-xs-12">
-                          <button
-                            className="btn btn-warning btn-lg btn-block"
-                            onClick={summeryHandler}
-                          >
-                            Process payment
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* <div className={styles.footer}>
-        <button
-          type="button"
-          onClick={PrevStep}
-          className={page === 1 || page === 2 ? "" : styles.prev}
-        >
-          {page === 0 ? "" : "Prev"}
-        </button>
-        <button type="button" onClick={formStep}>
-          {page === 0 || page === 1 ? "Next" : "Submit"}
-        </button>
-      </div> */}
+      {page === 1 && <Summery setpage={setPage} />}
+      {page === 2 && <Address summeryHandler={summeryHandler} />}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import SubCatProducts from "./SubCatProducts";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function Category () {
+function Category() {
   const [subCat, setSubCat] = useState([]);
   const [error, setError] = useState(false);
 
@@ -58,7 +58,7 @@ function Category () {
 
       {/* loop all category in categoryGrid */}
       {subCat.length > 0 &&
-        subCat.map((cat) => <SubCatProducts subCategory={cat} />)}
+        subCat.map((cat) => <SubCatProducts key={cat.id} subCategory={cat} />)}
     </>
   );
 }
