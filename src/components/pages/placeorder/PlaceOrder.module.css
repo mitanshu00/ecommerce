@@ -1,6 +1,4 @@
 .container {
-  background-color: rgb(229, 228, 228);
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,11 +9,7 @@
   width: 90%;
   min-height: 80vh;
 }
-.container .form .con2 {
-  /* border: 1px solid red; */
 
-  margin-top: 50px;
-}
 .container .form .con2 h1 {
   margin-bottom: 50px;
   border-bottom: 3px solid rgb(210, 210, 210);
@@ -45,8 +39,9 @@
   outline: none;
   background-color: rgb(216, 216, 0);
   border-radius: 5px;
-  width: 95%;
-  padding: 5px 5px;
+  width: 100%;
+  padding: 10px 5px;
+  cursor: pointer;
 }
 .container .form .con2 .bigcard {
   display: flex;
