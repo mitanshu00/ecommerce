@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 // import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 
 import { WhishlistActions } from "../../../store/slice/whishlist-slice";
 import classes from "../cart/cartItems.module.css";
-import { Button } from "@mui/material";
 import { cartActions } from "../../../store/slice/cart-slice";
+import RButton from "../../ReusableComponents/Button";
+import PropTypes from "prop-types";
 
 const WishlistItems = (props) => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const WishlistItems = (props) => {
         title,
         price,
         description,
-        image
+        image,
       })
     );
   };
@@ -38,21 +38,20 @@ const WishlistItems = (props) => {
             <p>{description}</p>
           </div>
           <div className={classes.quantityconn}>
-            <Button
+            <RButton
               variant="contained"
               sx={{ marginBottom: 2 }}
               onClick={addToCartHandler}
             >
               Add to Cart
-            </Button>
-            {/* <button onClick={removeWholeItemFromCart}>Remove</button> */}
-            <Button
+            </RButton>
+            <RButton
               variant="contained"
               sx={{ marginBottom: 2 }}
               onClick={removeItemFromWishlist}
             >
               Delete
-            </Button>
+            </RButton>
           </div>
         </div>
         <div className={classes.price}>
@@ -65,7 +64,7 @@ const WishlistItems = (props) => {
 };
 
 WishlistItems.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
 };
 
 export default WishlistItems;

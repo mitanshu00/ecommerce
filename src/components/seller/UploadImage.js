@@ -1,5 +1,6 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import RButton from "../ReusableComponents/Button";
 import PropTypes from "prop-types";
 
 const thumbsContainer = {
@@ -80,9 +81,7 @@ export default function UploadImage({ files, setFiles }) {
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps()} />
         <p>Drag 'n' drop some product images(upto 6).</p>
-        <button type="button" onClick={open}>
-          select images from files
-        </button>
+        <RButton onClick={open}>select images from files</RButton>
       </div>
       <aside style={thumbsContainer}>{thumbs}</aside>
     </section>

@@ -40,10 +40,10 @@ const PlaceOrder = () => {
     if (page === 2) {
       e.preventDefault();
       alert("Form Submitted");
-      console.log({
-        address_id: finalAdd[0].id,
-        totalAmount: MainTotal,
-      });
+      // console.log({
+      //   address_id: finalAdd[0].id,
+      //   totalAmount: MainTotal,
+      // });
       dispatch(
         sendOrderData({
           address_id: finalAdd[0].id,

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, Button } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import NotFound from "../error-pages/NotFound";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SubCatProducts from "./SubCatProducts";
+import RButton from "../../ReusableComponents/Button";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -48,9 +49,9 @@ function Category() {
               key={cat.id}
             >
               <Box onClick={() => handleClick(cat.id, cat.name)}>
-                <Button variant="contained" sx={{ px: 4, py: 2 }}>
+                <RButton variant="contained" sx={{ px: 4, py: 2 }}>
                   {cat.name}
-                </Button>
+                </RButton>
               </Box>
             </Grid>
           ))}

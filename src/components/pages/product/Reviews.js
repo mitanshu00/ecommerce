@@ -11,8 +11,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button
 } from "@mui/material";
+import RButton from "../../ReusableComponents/Button";
 
 const countRating = (products) => {
   const rating = {
@@ -20,7 +20,7 @@ const countRating = (products) => {
     "2above": 0,
     "3above": 0,
     "4above": 0,
-    "5above": 0
+    "5above": 0,
   };
   products.forEach((product) => {
     if (product.rating >= 1 && product.rating < 2) {
@@ -56,7 +56,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
     "2above": 0,
     "3above": 0,
     "4above": 0,
-    "5above": 0
+    "5above": 0,
   });
 
   useEffect(() => {
@@ -154,9 +154,8 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
             <Stack spacing={2}>
               <Stack spacing={2}>
                 <Stack direction="row" spacing={1}>
-                  <Button
+                  <RButton
                     variant="contained"
-                    size="small"
                     color={
                       review.rating >= 4
                         ? "success"
@@ -166,7 +165,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
                     }
                   >
                     {review.rating} ★
-                  </Button>
+                  </RButton>
                   <Typography>{review.review_header}</Typography>
                 </Stack>
                 <ListItemText secondary={review.review_content} />
@@ -193,7 +192,7 @@ function Reviews({ reviews, avgRating, setAvgRating }) {
 Reviews.propTypes = {
   reviews: PropTypes.array,
   avgRating: PropTypes.number,
-  setAvgRating: PropTypes.number
+  setAvgRating: PropTypes.number,
 };
 
 export default Reviews;

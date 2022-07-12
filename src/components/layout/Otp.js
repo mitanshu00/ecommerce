@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import OtpInput from "react-otp-input";
-import { Modal, Box, Paper, Stack, Button } from "@mui/material";
+import { Modal, Box, Paper, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/slice/auth-slice";
 import PropTypes from "prop-types";
 
 import { modelStyle as styles } from "../Styles/common";
+import RButton from "../ReusableComponents/Button";
 
 const modelStyle = {
   ...styles,
@@ -77,9 +78,9 @@ const Otp = ({ handleClose }) => {
                 outline: "none",
               }}
             />
-            <Button variant="contained" onClick={verifyOtpHandler}>
+            <RButton variant="contained" onClick={verifyOtpHandler}>
               Verify
-            </Button>
+            </RButton>
           </Stack>
         </Paper>
       </Box>

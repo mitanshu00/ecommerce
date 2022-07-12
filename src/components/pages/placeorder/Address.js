@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./PlaceOrder.module.css";
 import PropTypes from "prop-types";
+import RButton from "../../ReusableComponents/Button";
 
 const Address = ({ summeryHandler }) => {
   const [cardData, setCardData] = useState({
@@ -106,12 +107,9 @@ const Address = ({ summeryHandler }) => {
                 <div className="panel-footer">
                   <div className="row">
                     <div className="col-xs-12">
-                      <button
-                        className="btn btn-warning btn-lg btn-block"
-                        onClick={summeryHandler}
-                      >
+                      <RButton onClick={summeryHandler}>
                         Process payment
-                      </button>
+                      </RButton>
                     </div>
                   </div>
                 </div>

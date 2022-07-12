@@ -4,12 +4,12 @@ export const sendFormData = (data) => async (dispatch) => {
   fetch(`${process.env.REACT_APP_API_URL}login`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       email: data.enteredEmail,
-      password: data.enteredPassword
-    })
+      password: data.enteredPassword,
+    }),
   })
     .then((response) => {
       if (response.ok) {
@@ -19,7 +19,7 @@ export const sendFormData = (data) => async (dispatch) => {
     })
     .then((data) => {
       dispatch(authActions.login(data));
-      console.log(data);
+
       localStorage.setItem("auth", JSON.stringify(data));
     })
     .catch((error) => {

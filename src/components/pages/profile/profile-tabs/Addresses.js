@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
-import {
-  Grid,
-  Card,
-  CardContent,
-  TextField,
-  CardActions,
-  Button
-} from "@mui/material";
+import { Grid, Card, CardContent, CardActions } from "@mui/material";
 import AddressList from "./AddressList";
 import { useSelector } from "react-redux";
+import RButton from "../../../ReusableComponents/Button";
+import Input from "../../../ReusableComponents/Input";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function Addresses () {
+function Addresses() {
   const userDetails = useSelector((state) => state.auth.user);
 
   const userId = userDetails.user.id;
@@ -28,12 +23,12 @@ function Addresses () {
     country: "",
     postal_code: "",
     mobile_no: "",
-    user_id: userId
+    user_id: userId,
   });
 
   useEffect(() => {
     fetch(`${apiUrl}/user_addresses/`, {
-      headers: { authorization: `Bearer ${token}` }
+      headers: { authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -44,7 +39,7 @@ function Addresses () {
   const handleChangeForm = (e) => {
     setNewAddress({
       ...newAddress,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -57,7 +52,7 @@ function Addresses () {
       country: "",
       postal_code: "",
       mobile_no: "",
-      user_id: userId
+      user_id: userId,
     });
   };
 
@@ -67,9 +62,9 @@ function Addresses () {
       method: optionId ? "PUT" : "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(newAddress)
+      body: JSON.stringify(newAddress),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -90,7 +85,7 @@ function Addresses () {
           country: "",
           postal_code: "",
           mobile_no: "",
-          user_id: userId
+          user_id: userId,
         });
         setOpen(false);
       });
@@ -110,7 +105,7 @@ function Addresses () {
       )}
       <Grid item md={6}>
         {!open && (
-          <Button
+          <RButton
             variant="contained"
             onClick={() => {
               setOpen(true);
@@ -118,7 +113,7 @@ function Addresses () {
             }}
           >
             ADD NEW ADDRESS
-          </Button>
+          </RButton>
         )}
         {open && (
           <Card>
@@ -126,7 +121,7 @@ function Addresses () {
               <CardContent>
                 <Grid item container spacing={1} justify="center">
                   <Grid item xs={12} sm={6} md={12}>
-                    <TextField
+                    <Input
                       label="Full name"
                       variant="outlined"
                       fullWidth
@@ -135,7 +130,7 @@ function Addresses () {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <TextField
+                    <Input
                       label="Address line 1"
                       variant="outlined"
                       fullWidth
@@ -146,7 +141,7 @@ function Addresses () {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <TextField
+                    <Input
                       label="Address line 2"
                       variant="outlined"
                       fullWidth
@@ -158,7 +153,7 @@ function Addresses () {
                   </Grid>
 
                   <Grid item xs={12} sm={6} md={6}>
-                    <TextField
+                    <Input
                       label="City"
                       variant="outlined"
                       fullWidth
@@ -169,7 +164,7 @@ function Addresses () {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <TextField
+                    <Input
                       label="Country"
                       variant="outlined"
                       fullWidth
@@ -180,7 +175,7 @@ function Addresses () {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <TextField
+                    <Input
                       label="Pincode"
                       variant="outlined"
                       fullWidth
@@ -191,7 +186,7 @@ function Addresses () {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={6}>
-                    <TextField
+                    <Input
                       label="Mobile no"
                       variant="outlined"
                       fullWidth
@@ -204,17 +199,12 @@ function Addresses () {
                 </Grid>
               </CardContent>
               <CardActions>
-                <Button variant="contained" color="success" type="Submit">
+                <RButton variant="contained" color="success" type="Submit">
                   SAVE
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  type="button"
-                  onClick={closeForm}
-                >
+                </RButton>
+                <RButton variant="outlined" color="error" onClick={closeForm}>
                   CANCEL
-                </Button>
+                </RButton>
               </CardActions>
             </form>
           </Card>

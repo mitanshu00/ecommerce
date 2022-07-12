@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import CartItem from "./CartItems";
 import classes from "./cart.module.css";
 import { Link } from "react-router-dom";
+import RButton from "../../ReusableComponents/Button";
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -15,9 +16,7 @@ function Cart() {
 
       <div className={classes.container2}>
         {cartItems.length === 0 ? (
-          <div className={classes.emptywish}>
-            <h1>Your cart is empty ☹️</h1>
-          </div>
+          <h3>Your cart is empty ☹️</h3>
         ) : (
           <ul>
             {cartItems.length > 0 &&
@@ -48,7 +47,7 @@ function Cart() {
             </div>
             <div className={classes.proceed2}>
               <Link to="/placeorder">
-                <button className={classes.proceed3}>Proceed to Buy</button>
+                <RButton>Proceed to Buy</RButton>
               </Link>
             </div>
           </div>

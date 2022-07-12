@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Typography, Box, Stack, Divider } from "@mui/material";
+import { Typography, Box, Stack, Divider } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Reviews from "./Reviews";
@@ -10,6 +10,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import { sendCartData } from "../../../store/action/cart-action";
 import PropTypes from "prop-types";
+import RButton from "../../ReusableComponents/Button";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -36,7 +37,7 @@ function ProductDetails({ product }) {
         totalPrice: product.price,
         name: product.name,
         img_url: product.poster_urls[0],
-        description: product.description
+        description: product.description,
       })
     );
     dispatch(sendCartData(token, product.id));
@@ -49,7 +50,7 @@ function ProductDetails({ product }) {
         price: product.price,
         name: product.name,
         img_url: product.poster_urls[0],
-        description: product.description
+        description: product.description,
       })
     );
   };
@@ -65,9 +66,9 @@ function ProductDetails({ product }) {
       <Typography variant="h6" sx={{ my: 2 }}>
         {product.description}
       </Typography>
-      <Button variant="outlined">
+      <RButton variant="outlined">
         {avgRating} ⭐ | {reviews.length} Reviews
-      </Button>
+      </RButton>
       <Stack direction="row" sx={{ mt: 4 }}>
         <Typography variant="h5">
           <span>
@@ -96,9 +97,8 @@ function ProductDetails({ product }) {
         Inclusive all taxes
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mt: 4 }}>
-        {product.quantity > 0
-          ? (
-          <Button
+        {product.quantity > 0 ? (
+          <RButton
             variant="contained"
             color="success"
             sx={{ px: 4, py: 2 }}
@@ -106,17 +106,15 @@ function ProductDetails({ product }) {
           >
             <AddShoppingCartIcon sx={{ pr: 1 }} />
             ADD TO CARD
-          </Button>
-            )
-          : (
-          <Button variant="contained" color="warning" sx={{ px: 4, py: 2 }}>
+          </RButton>
+        ) : (
+          <RButton variant="contained" color="warning" sx={{ px: 4, py: 2 }}>
             <AddShoppingCartIcon sx={{ pr: 1 }} />
             OUT OF STOCK
-          </Button>
-            )}
-        {whishlistIds.includes(product.id)
-          ? (
-          <Button
+          </RButton>
+        )}
+        {whishlistIds.includes(product.id) ? (
+          <RButton
             variant="outlined"
             color="secondary"
             sx={{ px: 4, py: 2 }}
@@ -124,10 +122,9 @@ function ProductDetails({ product }) {
           >
             <FavoriteIcon sx={{ pr: 1 }} />
             WHISHLISTED
-          </Button>
-            )
-          : (
-          <Button
+          </RButton>
+        ) : (
+          <RButton
             variant="outlined"
             color="secondary"
             sx={{ px: 4, py: 2 }}
@@ -135,8 +132,8 @@ function ProductDetails({ product }) {
           >
             <FavoriteBorderIcon sx={{ pr: 1 }} />
             WHISHLIST
-          </Button>
-            )}
+          </RButton>
+        )}
       </Stack>
       <Divider sx={{ my: 4 }} />
       <Typography variant="h5">Product Details</Typography>
@@ -168,7 +165,7 @@ function ProductDetails({ product }) {
 }
 
 ProductDetails.propTypes = {
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 export default ProductDetails;

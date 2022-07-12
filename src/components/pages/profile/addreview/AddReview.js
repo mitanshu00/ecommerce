@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+import Input from "../../../ReusableComponents/Input";
+import RButton from "../../../ReusableComponents/Button";
 
-export default function AddReview ({ product_id, user_id }) {
+export default function AddReview({ product_id, user_id }) {
   const [value, setValue] = useState(0);
   const [review, setReview] = useState("");
   const [reviewHeader, setReviewHeader] = useState("");
@@ -28,24 +28,24 @@ export default function AddReview ({ product_id, user_id }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         product_id,
         user_id,
         rating: value,
         review_header: reviewHeader,
-        review_content: review
-      })
+        review_content: review,
+      }),
     });
-    const data = await response.json();
-    console.log(data);
+    // const data = await response.json();
+    // console.log(data);
   };
 
   return (
     <Box
       sx={{
-        "& > legend": { mt: 2 }
+        "& > legend": { mt: 2 },
       }}
     >
       <Rating
@@ -56,7 +56,7 @@ export default function AddReview ({ product_id, user_id }) {
         }}
       />
 
-      <TextField
+      <Input
         label="Outlined"
         variant="outlined"
         value={reviewHeader}
@@ -64,24 +64,23 @@ export default function AddReview ({ product_id, user_id }) {
         placeholder="Review header. (minimun 10 characters)"
       />
 
-      <TextField
+      <Input
         id="outlined-multiline-static"
         label="Review"
         multiline
-        rows={4}
         value={review}
         onChange={reviewChangeHandle}
         placeholder="Write your review here... (minimun 15 characters)"
       />
 
-      <Button variant="contained" onClick={handleSubmit}>
+      <RButton variant="contained" onClick={handleSubmit}>
         Submit Review
-      </Button>
+      </RButton>
     </Box>
   );
 }
 
 AddReview.propTypes = {
   product_id: PropTypes.number,
-  user_id: PropTypes.number
+  user_id: PropTypes.number,
 };

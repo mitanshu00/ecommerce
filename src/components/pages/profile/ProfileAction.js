@@ -142,5 +142,5 @@ export default function ProfileAction({ selecteTab }) {
 }
 
 ProfileAction.propTypes = {
-  selecteTab: PropTypes.string
+  selecteTab: PropTypes.func,
 };

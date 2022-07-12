@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import PropTypes from "prop-types";
+import RButton from "../../ReusableComponents/Button";
 
 const starStye = { m: "-5px", p: "0px 5px" };
 
@@ -11,7 +12,7 @@ const countDiscount = (products) => {
     "30above": 0,
     "40above": 0,
     "50above": 0,
-    "60above": 0
+    "60above": 0,
   };
   products.forEach((product) => {
     if (product.discount >= 30 && product.discount < 40) {
@@ -32,7 +33,7 @@ const countRating = (products) => {
   const rating = {
     "2above": 0,
     "3above": 0,
-    "4above": 0
+    "4above": 0,
   };
   products.forEach((product) => {
     if (product.average_rating >= 2 && product.average_rating < 3) {
@@ -53,14 +54,14 @@ function FilterProduct({ products, setFilterData }) {
     "30above": 0,
     "40above": 0,
     "50above": 0,
-    "60above": 0
+    "60above": 0,
   });
 
   const [rating, setRating] = useState({
     norating: 0,
     "2above": 0,
     "3above": 0,
-    "4above": 0
+    "4above": 0,
   });
 
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -68,7 +69,7 @@ function FilterProduct({ products, setFilterData }) {
   const [selectedDiscount, setSelectedDiscount] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState({
     min: null,
-    max: null
+    max: null,
   });
 
   useEffect(() => {
@@ -169,7 +170,7 @@ function FilterProduct({ products, setFilterData }) {
                 maxWidth: "50px",
                 padding: "5px",
                 borderRadius: "5px",
-                borderColor: "lightGray"
+                borderColor: "lightGray",
               }}
               max={selectedPrice.max && selectedPrice.max}
               onChange={(e) =>
@@ -184,7 +185,7 @@ function FilterProduct({ products, setFilterData }) {
                 maxWidth: "50px",
                 padding: "5px",
                 borderRadius: "5px",
-                borderColor: "lightGray"
+                borderColor: "lightGray",
               }}
               min={selectedPrice.min && selectedPrice.min}
               onChange={(e) =>
@@ -291,9 +292,9 @@ function FilterProduct({ products, setFilterData }) {
             </li>
           </ul>
         </Box>
-        <Button type="submit" variant="contained" color="primary">
+        <RButton type="submit" variant="contained" color="primary">
           Apply
-        </Button>
+        </RButton>
       </form>
     </Box>
   );
@@ -301,7 +302,7 @@ function FilterProduct({ products, setFilterData }) {
 
 FilterProduct.propTypes = {
   products: PropTypes.array,
-  setFilterData: PropTypes.array
+  setFilterData: PropTypes.func,
 };
 
 export default FilterProduct;

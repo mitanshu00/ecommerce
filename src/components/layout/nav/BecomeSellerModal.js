@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
+import RButton from "../../ReusableComponents/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../../store/slice/auth-slice";
 import { modelStyle } from "../../Styles/common";
 import PropTypes from "prop-types";
+import Input from "../../ReusableComponents/Input";
 
 // model style
 const style = {
@@ -81,47 +81,44 @@ export default function BasicModal({ open, setOpen }) {
 
           <form onSubmit={handleSubmit}>
             <Stack spacing={3} justifyContent="center">
-              <TextField
+              <Input
                 name="name"
                 label="Fullname"
                 variant="outlined"
                 value={userInfo?.name}
                 disabled
               />
-              <TextField
+              <Input
                 name="email"
                 label="Email"
                 variant="outlined"
                 value={userInfo?.email}
                 disabled
               />
-              <TextField
+              <Input
                 name="pan_id"
                 label="PAN no."
                 variant="outlined"
                 value={form.pan_id}
                 onChange={(e) => handleChange(e)}
-                required
               />
-              <TextField
+              <Input
                 name="gst_id"
                 label="GSTIN no."
                 variant="outlined"
                 value={form.gst_id}
                 onChange={(e) => handleChange(e)}
-                required
               />
-              <TextField
+              <Input
                 name="seller_location"
                 label="your city"
                 variant="outlined"
                 value={form.seller_location}
                 onChange={(e) => handleChange(e)}
-                required
               />
-              <Button variant="contained" color="primary" type="submit">
+              <RButton variant="contained" color="primary" type="submit">
                 Register
-              </Button>
+              </RButton>
             </Stack>
           </form>
         </Box>

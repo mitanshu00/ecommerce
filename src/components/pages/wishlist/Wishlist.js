@@ -11,9 +11,7 @@ function Wishlist() {
 
       <div className={classes.container2}>
         {WishlistItem.length === 0 ? (
-          <div className={classes.emptywish}>
-            <h1>Your Wishlist is Empty!</h1>
-          </div>
+          <h3>Your Wishlist is Empty!</h3>
         ) : (
           <ul>
             {WishlistItem.map((item) => (

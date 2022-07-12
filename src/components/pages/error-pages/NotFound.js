@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import RButton from "../../ReusableComponents/Button";
 
-function NotFound () {
+function NotFound() {
   return (
     <Box sx={{ width: "700px", m: "100px auto" }}>
       <h2>Something went wrong Error 404. go to home page</h2>
-      <Button variant="contained">
+      <RButton variant="contained">
         <Link to="/">Homepage</Link>
-      </Button>
+      </RButton>
     </Box>
   );
 }

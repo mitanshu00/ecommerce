@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./PlaceOrder.module.css";
-import RButton from "../login-reg/ReusableComponents/Button";
+import RButton from "../../ReusableComponents/Button";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 

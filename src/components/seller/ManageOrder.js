@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
+import RSelect from "../ReusableComponents/RSelect";
+
+const options = [
+  { value: "pending", label: "Created" },
+  { value: "delivered", label: "Delivered" },
+  { value: "cancelled", label: "Cancelled" },
+  { value: "returned", label: "Returned" },
+];
 
 export const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -8,19 +16,19 @@ export const columns = [
     field: "order_id",
     headerName: "Order id",
     width: 100,
-    sortable: false
+    sortable: false,
   },
   {
     field: "name",
     headerName: "Product name",
     width: 250,
-    renderCell: (params) => <p>{params.row.product.name}</p>
+    renderCell: (params) => <p>{params.row.product.name}</p>,
   },
   {
     field: "quantity",
     headerName: "quantity",
     width: 100,
-    sortable: false
+    sortable: false,
   },
 
   {
@@ -28,7 +36,7 @@ export const columns = [
     headerName: "price",
     type: "number",
     width: 120,
-    renderCell: (params) => <p>{params.row.product.price}</p>
+    renderCell: (params) => <p>{params.row.product.price}</p>,
   },
 
   {
@@ -36,17 +44,12 @@ export const columns = [
     headerName: "status",
     width: 120,
     renderCell: (params) => (
-        <select name="status" id="status">
-          <option value="pending">created</option>
-          <option value="delivered">delivered</option>
-          <option value="cancelled">cancelled</option>
-          <option value="returned">returned</option>
-        </select>
-    )
-  }
+      <RSelect options={options} name="status" id="status" />
+    ),
+  },
 ];
 
-export default function Stocks () {
+export default function Stocks() {
   const [rows, setRow] = useState([]);
 
   const sellerId = useSelector((state) => state.auth.sellerId);
@@ -56,7 +59,7 @@ export default function Stocks () {
     fetch(
       `${process.env.REACT_APP_API_URL}/order_items/?seller_id=${sellerId}`,
       {
-        headers: { authorization: `Bearer ${token}` }
+        headers: { authorization: `Bearer ${token}` },
       }
     )
       .then((res) => res.json())

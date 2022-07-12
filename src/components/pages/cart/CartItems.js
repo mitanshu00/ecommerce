@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/slice/cart-slice";
 
 import classes from "./cartItems.module.css";
-import { Button } from "@mui/material";
 import { sendCartData } from "../../../store/action/cart-action";
+import RButton from "../../ReusableComponents/Button";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -47,15 +47,18 @@ function CartItem({ item }) {
           </div>
           <div className={classes.quantitycon}>
             <div className={classes.quantity}>
-              <button onClick={removeItemHandler}>-</button>
+              <RButton onClick={removeItemHandler} variant="text">
+                -
+              </RButton>
               <p>{quantity}</p>
-              <button onClick={addItemHandler}>+</button>
+              <RButton onClick={addItemHandler} variant="text">
+                +
+              </RButton>
             </div>
             <div className={classes.removebtn}>
-              {/* <button onClick={removeWholeItemFromCart}>Remove</button> */}
-              <Button variant="contained" onClick={removeWholeItemFromCart}>
+              <RButton variant="contained" onClick={removeWholeItemFromCart}>
                 Remove
-              </Button>
+              </RButton>
             </div>
           </div>
         </div>

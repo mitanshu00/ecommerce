@@ -18,7 +18,7 @@ export default function CategoryGrid({ title, list, styles, showTitle }) {
             fontSize: 22,
             fontWeight: 600,
             lineHeight: "32px",
-            marginRight: 2
+            marginRight: 2,
           }}
         >
           {title}
@@ -38,6 +38,11 @@ export default function CategoryGrid({ title, list, styles, showTitle }) {
           >
             <Stack>
               <img src={category.img_url} alt="category img" style={styles} />
+              {/* <img
+                src="https://image.shutterstock.com/image-vector/grunge-green-category-word-round-260nw-1794170542.jpg"
+                alt="category img"
+                style={styles}
+              /> */}
               {showTitle && (
                 <p style={{ textAlign: "center" }}>{category.name}</p>
               )}
@@ -53,5 +58,5 @@ CategoryGrid.propTypes = {
   title: PropTypes.string,
   list: PropTypes.array,
   styles: PropTypes.object,
-  showTitle: PropTypes.bool
+  showTitle: PropTypes.bool,
 };

@@ -1,8 +1,8 @@
 import { useState, useEffect, Fragment } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import AddProdut from "./AddProduct";
-import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import RButton from "../ReusableComponents/Button";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -11,25 +11,25 @@ const columns = [
     field: "description",
     headerName: "description",
     width: 400,
-    sortable: false
+    sortable: false,
   },
   {
     field: "price",
     headerName: "price",
     type: "number",
-    width: 80
+    width: 80,
   },
   {
     field: "discount",
     headerName: "discount",
     type: "number",
-    width: 100
+    width: 100,
   },
   {
     field: "created_at",
     headerName: "created at",
     description: "This column has a value getter and is not sortable.",
-    width: 250
+    width: 250,
   },
   {
     field: "poster_urls",
@@ -46,17 +46,17 @@ const columns = [
           </Fragment>
         ))}
       </>
-    )
+    ),
   },
   {
     field: "Edit",
     headerName: "Edit",
     width: 150,
-    renderCell: (params) => <Button>edit</Button>
-  }
+    renderCell: (params) => <RButton>edit</RButton>,
+  },
 ];
 
-export default function Stocks () {
+export default function Stocks() {
   const [rows, setRow] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -69,7 +69,7 @@ export default function Stocks () {
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/sellers/${sellerId}`, {
-      headers: { authorization: `Bearer ${token}` }
+      headers: { authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -80,9 +80,9 @@ export default function Stocks () {
   return (
     <div style={{ width: "100%" }}>
       <AddProdut open={open} setOpen={setOpen} />
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+      <RButton variant="contained" color="primary" onClick={handleOpen}>
         Add Product
-      </Button>
+      </RButton>
       <DataGrid
         rows={rows}
         columns={columns}

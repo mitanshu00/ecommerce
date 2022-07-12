@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { Grid, Card, Box, Alert, Typography } from "@mui/material";
 import { sendRegisterData } from "../../../store/action/register-actions";
 import { Link } from "react-router-dom";
-import Input from "./ReusableComponents/Input";
-import RButton from "./ReusableComponents/Button";
+import Input from "../../ReusableComponents/Input";
+import RButton from "../../ReusableComponents/Button";
 import shopCart from "../../../assets/undraw_shopping_app_flsj.png";
 
 const Register2 = () => {
@@ -13,7 +13,7 @@ const Register2 = () => {
   const [error, setError] = useState({
     status: false,
     msg: "",
-    type: ""
+    type: "",
   });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,14 +22,14 @@ const Register2 = () => {
       name: data.get("name"),
       phone: data.get("phone"),
       email: data.get("email"),
-      password: data.get("password")
+      password: data.get("password"),
     };
     dispatch(
       sendRegisterData({
         enteredName: actualData.name,
         enteredPhone: actualData.phone,
         enteredRegEmail: actualData.email,
-        enteredRegPassword: actualData.password
+        enteredRegPassword: actualData.password,
       })
     );
     if (
@@ -43,18 +43,17 @@ const Register2 = () => {
         actualData.phone.length === 10 &&
         actualData.email.includes("@")
       ) {
-        console.log(actualData);
         document.getElementById("registration-form").reset();
         setError({
           status: true,
           msg: "Registration Successful",
-          type: "success"
+          type: "success",
         });
       } else {
         setError({
           status: true,
           msg: "Please enter valid information!",
-          type: "error"
+          type: "error",
         });
       }
     } else {
@@ -72,7 +71,7 @@ const Register2 = () => {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          display: { xs: "none", sm: "block" }
+          display: { xs: "none", sm: "block" },
         }}
       ></Grid>
       <Grid item lg={5} sm={7} xs={12}>
@@ -91,7 +90,7 @@ const Register2 = () => {
                   bgcolor: "#2e3b55",
                   py: 1,
                   textAlign: "center",
-                  color: "#fff"
+                  color: "#fff",
                 }}
               >
                 <Typography variant="h5">REGISTER USER</Typography>
@@ -119,8 +118,7 @@ const Register2 = () => {
                   Submit
                 </RButton>
               </Box>
-              {error.status
-                ? (
+              {error.status ? (
                 <Alert
                   severity={error.type}
                   onClose={() => {
@@ -129,10 +127,9 @@ const Register2 = () => {
                 >
                   {error.msg}
                 </Alert>
-                  )
-                : (
-                    ""
-                  )}
+              ) : (
+                ""
+              )}
             </Box>
           </Box>
           <Box textAlign="center">

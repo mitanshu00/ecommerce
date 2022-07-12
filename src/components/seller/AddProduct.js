@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
+import Input from "../ReusableComponents/Input";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
+import RButton from "../ReusableComponents/Button";
+import RSelect from "../ReusableComponents/RSelect";
 import { useSelector } from "react-redux";
-import Select from "react-select";
 import UploadImage from "./UploadImage";
 import PropTypes from "prop-types";
 
@@ -19,10 +19,10 @@ const style = {
   bgcolor: "background.paper",
   borderRadius: "5px",
   boxShadow: 4,
-  p: 4
+  p: 4,
 };
 
-export default function AddProdut ({ open, setOpen }) {
+export default function AddProdut({ open, setOpen }) {
   const [form, setForm] = useState({
     name: "",
     price: "",
@@ -31,7 +31,7 @@ export default function AddProdut ({ open, setOpen }) {
     category: "",
     brand: "",
     subcategory: "",
-    quantity: ""
+    quantity: "",
   });
 
   const [subCat, setSubCat] = useState([]);
@@ -71,7 +71,7 @@ export default function AddProdut ({ open, setOpen }) {
     fetch(`${process.env.REACT_APP_API_URL}/products`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: form.name,
@@ -80,8 +80,8 @@ export default function AddProdut ({ open, setOpen }) {
         sub_category_id: form.subcategory,
         brand_id: form.brand,
         seller_id: sellerId,
-        posters: [...form.images]
-      })
+        posters: [...form.images],
+      }),
     })
       .then((response) => response.json())
 
@@ -117,7 +117,7 @@ export default function AddProdut ({ open, setOpen }) {
 
           <form onSubmit={handleSubmit}>
             <Stack spacing={3} justifyContent="center">
-              <TextField
+              <Input
                 name="name"
                 label="product name"
                 variant="outlined"
@@ -125,74 +125,69 @@ export default function AddProdut ({ open, setOpen }) {
                 onChange={(e) => handleChange(e)}
                 required
               />
-              <TextField
+              <Input
                 name="description"
                 label="description"
                 variant="outlined"
                 value={form.description}
                 onChange={(e) => handleChange(e)}
-                required
               />
-              <TextField
+              <Input
                 name="price"
                 label="price"
                 variant="outlined"
                 value={form.price}
                 onChange={(e) => handleChange(e)}
-                required
               />
 
-              <TextField
+              <Input
                 name="quantity"
                 type="number"
                 label="quantity no."
                 variant="outlined"
                 value={form.quantity}
                 onChange={(e) => handleChange(e)}
-                required
               />
 
-              <Select
+              <RSelect
                 options={brands}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
                 onChange={handleBrandChange}
                 isSearchable={true}
-                placeholder={"select brand"}
+                placeholder="select brand"
                 name="brand"
-                required
               />
 
-              <Select
+              <RSelect
                 options={categories}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
                 onChange={handleCategoryChange}
                 isSearchable={true}
-                placeholder={"select category"}
+                placeholder="select category"
                 name="category"
                 // value={form.category}
-                required
               />
 
-              <Select
+              <RSelect
                 options={subCat}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
                 onChange={handleSubCatChange}
                 isSearchable={true}
-                placeholder={"select sub-category"}
+                placeholder="select sub-category"
                 name="subcategory"
                 // value={form.category}
-                required
+
                 isDisabled={Boolean(!form.category)}
               />
 
               <UploadImage files={form} setFiles={setForm} />
 
-              <Button variant="contained" color="primary" type="submit">
+              <RButton variant="contained" color="primary" type="submit">
                 Add product
-              </Button>
+              </RButton>
             </Stack>
           </form>
         </Box>
@@ -203,5 +198,5 @@ export default function AddProdut ({ open, setOpen }) {
 
 AddProdut.propTypes = {
   open: PropTypes.bool,
-  setOpen: PropTypes.bool
+  setOpen: PropTypes.func,
 };

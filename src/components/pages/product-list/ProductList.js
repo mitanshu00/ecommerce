@@ -28,7 +28,7 @@ export default function ResponsiveGrid({ products, visited, rowsPerPage }) {
 }
 
 ResponsiveGrid.propTypes = {
-  products: PropTypes.object,
+  products: PropTypes.array,
   visited: PropTypes.number,
-  rowsPerPage: PropTypes.number
+  rowsPerPage: PropTypes.number,
 };

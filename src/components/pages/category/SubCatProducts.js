@@ -6,15 +6,11 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const stylesTwo = {
   maxHeight: "200px",
-  maxWidth: "350px"
+  maxWidth: "350px",
 };
 
 function SubCatProducts({ subCategory }) {
   const [subCat, setSubCats] = useState([]);
-  console.log(
-    "🚀 ~ file: SubCatProducts.js ~ line 13 ~ SubCatProducts ~ subCat",
-    subCat
-  );
 
   useEffect(() => {
     fetch(`${apiUrl}/products?sub_category_id=${subCategory.id}`)
@@ -40,7 +36,7 @@ function SubCatProducts({ subCategory }) {
 }
 
 SubCatProducts.propTypes = {
-  subCategory: PropTypes.object
+  subCategory: PropTypes.object,
 };
 
 export default SubCatProducts;

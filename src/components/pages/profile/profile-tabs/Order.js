@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { List, ListItem, ListItemText, Grid, Button } from "@mui/material";
+import { List, ListItem, ListItemText, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import RButton from "../../../ReusableComponents/Button";
 import PropTypes from "prop-types";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -69,12 +70,12 @@ function Order({ status }) {
                 {order.order_items?.length > 0 &&
                   order.order_items.map((item, index) => (
                     <>
-                      <Button
+                      <RButton
                         variant="contained"
                         onClick={() => addReview(item.product_id)}
                       >
                         Add Review
-                      </Button>
+                      </RButton>
                       <Link to={`/product/${item.product_id}`} key={index}>
                         <ListItemText primary="view" />
                       </Link>

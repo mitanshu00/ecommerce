@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import PropTypes from "prop-types";
+import RButton from "../../ReusableComponents/Button";
 
 function SortProduct({ setFilterData }) {
   const handleSort = (selectedOption) => {
@@ -12,24 +13,24 @@ function SortProduct({ setFilterData }) {
       setFilterData((prev) => [...prev.sort((a, b) => b.id - a.id)]);
     selectedOption === "name" &&
       setFilterData((prev) => [
-        ...prev.sort((a, b) => a.name.localeCompare(b.name))
+        ...prev.sort((a, b) => a.name.localeCompare(b.name)),
       ]);
   };
 
   return (
     <Grid sx={{ mb: 4 }}>
-      <Button onClick={() => handleSort("popularity")}>Popularity</Button>
-      <Button onClick={() => handleSort("new")}>New Products</Button>
-      <Button onClick={() => handleSort("high")}>Price: High to Low</Button>
-      <Button onClick={() => handleSort("low")}>price: low to high</Button>
-      <Button onClick={() => handleSort("rating")}>Customer rating</Button>
-      <Button onClick={() => handleSort("discount")}>Highest discount</Button>
+      <RButton onClick={() => handleSort("popularity")}>Popularity</RButton>
+      <RButton onClick={() => handleSort("new")}>New Products</RButton>
+      <RButton onClick={() => handleSort("high")}>Price: High to Low</RButton>
+      <RButton onClick={() => handleSort("low")}>price: low to high</RButton>
+      <RButton onClick={() => handleSort("rating")}>Customer rating</RButton>
+      <RButton onClick={() => handleSort("discount")}>Highest discount</RButton>
     </Grid>
   );
 }
 
 SortProduct.propTypes = {
-  setFilterData: PropTypes.array
+  setFilterData: PropTypes.func,
 };
 
 export default SortProduct;
