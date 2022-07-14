@@ -18,7 +18,7 @@ export default function CategoryGrid({ title, list, styles, showTitle }) {
             fontSize: 22,
             fontWeight: 600,
             lineHeight: "32px",
-            marginRight: 2
+            marginRight: 2,
           }}
         >
           {title}
@@ -37,16 +37,20 @@ export default function CategoryGrid({ title, list, styles, showTitle }) {
             onClick={() => handleClick(category.name, category.id)}
           >
             <Stack>
-              {category?.poster_urls[0] && (
+              {category?.poster_urls[0] ? (
                 <img
                   src={category.poster_urls[0]}
                   alt="category img"
                   style={styles}
                 />
+              ) : (
+                <></>
               )}
 
-              {showTitle && (
+              {showTitle ? (
                 <p style={{ textAlign: "center" }}>{category.name}</p>
+              ) : (
+                <></>
               )}
             </Stack>
           </Grid>
@@ -60,5 +64,5 @@ CategoryGrid.propTypes = {
   title: PropTypes.string,
   list: PropTypes.array,
   styles: PropTypes.object,
-  showTitle: PropTypes.bool
+  showTitle: PropTypes.bool,
 };

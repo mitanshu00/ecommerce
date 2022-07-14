@@ -10,8 +10,8 @@ const SellerRoute = ({ isSeller, redirectPath = "/", children }) => {
 };
 
 SellerRoute.propTypes = {
-  isSeller: PropTypes.bool,
+  isSeller: PropTypes.number,
   redirectPath: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 export default SellerRoute;

@@ -17,13 +17,13 @@ export default function ProductImg({ images }) {
         margin: "auto",
         px: 2,
         position: "sticky",
-        top: 0
+        top: 0,
       }}
     >
       <Grid container spacing={1}>
         <Grid item xs={12} sm={2} columns={{ xs: 1 }}>
           <Stack spacing={2} direction="column">
-            {images &&
+            {images ? (
               images.map((image, index) => (
                 <img
                   src={image}
@@ -34,7 +34,10 @@ export default function ProductImg({ images }) {
                   key={index}
                   onClick={() => changeImg(index)}
                 />
-              ))}
+              ))
+            ) : (
+              <p>No Image Found</p>
+            )}
           </Stack>
         </Grid>
         <Grid item xs={12} sm={10} columns={{ xs: 1 }}>
@@ -52,22 +55,25 @@ export default function ProductImg({ images }) {
                 backgroundColor: "#FFFFFF",
                 borderRadius: 50,
                 margin: 0,
-                width: 50
-              }
+                width: 50,
+              },
             }}
           >
-            {images &&
+            {images ? (
               images.map((image, index) => (
                 <img
                   src={image}
                   alt=""
                   style={{
                     height: "700px",
-                    maxWidth: "100%"
+                    maxWidth: "100%",
                   }}
                   key={index}
                 />
-              ))}
+              ))
+            ) : (
+              <p>No Image Found</p>
+            )}
           </Carousel>
         </Grid>
       </Grid>
@@ -75,5 +81,5 @@ export default function ProductImg({ images }) {
   );
 }
 ProductImg.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string)
+  images: PropTypes.arrayOf(PropTypes.string),
 };

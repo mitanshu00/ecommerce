@@ -5,7 +5,7 @@ import ProductListLayout from "./ProductListLayout";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function Search () {
+function Search() {
   const [filterData, setFilterData] = useState([]);
   const [error, setError] = useState(false);
 
@@ -24,8 +24,11 @@ function Search () {
 
   return (
     <>
-      {/* {filterData.length === 0 && <p>Loading</p>} */}
-      {filterData.length > 0 && <ProductListLayout filterData={filterData} />}
+      {filterData.length === 0 ? (
+        <p>Loading</p>
+      ) : (
+        <ProductListLayout filterData={filterData} />
+      )}
     </>
   );
 }

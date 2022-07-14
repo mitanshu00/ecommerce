@@ -19,8 +19,11 @@ function Category() {
 
   // get category id
   const categoryId =
-    categories.length > 0 &&
-    categories.find((cat) => cat.name.toLowerCase() === category.toLowerCase());
+    categories.length > 0
+      ? categories.find(
+        (cat) => cat.name.toLowerCase() === category.toLowerCase()
+      )
+      : "";
 
   useEffect(() => {
     fetch(`${apiUrl}/sub_categories?main_category_id=${categoryId.id}`)
@@ -40,7 +43,7 @@ function Category() {
   return (
     <>
       <Grid container spacing={1} justifyContent="center">
-        {subCat.length > 0 &&
+        {subCat.length > 0 ? (
           subCat.map((cat) => (
             <Grid
               item
@@ -54,12 +57,18 @@ function Category() {
                 </RButton>
               </Box>
             </Grid>
-          ))}
+          ))
+        ) : (
+          <></>
+        )}
       </Grid>
 
       {/* loop all category in categoryGrid */}
-      {subCat.length > 0 &&
-        subCat.map((cat) => <SubCatProducts key={cat.id} subCategory={cat} />)}
+      {subCat.length > 0 ? (
+        subCat.map((cat) => <SubCatProducts key={cat.id} subCategory={cat} />)
+      ) : (
+        <></>
+      )}
     </>
   );
 }

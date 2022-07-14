@@ -6,19 +6,19 @@ import {
   ListItemAvatar,
   Avatar,
   Rating,
-  Stack
+  Stack,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function RatingReviews () {
+function RatingReviews() {
   const [ratings, setRatings] = useState([]);
   const token = useSelector((state) => state.auth.user.token);
 
   useEffect(() => {
     fetch(`${apiUrl}/reviews`, {
-      headers: { authorization: `Bearer ${token}` }
+      headers: { authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -29,11 +29,12 @@ function RatingReviews () {
   return (
     <List
       sx={{
-        width: "100%"
+        width: "100%",
       }}
     >
-      {ratings.length === 0 && <p>no reviews available.</p>}
-      {ratings.length > 0 &&
+      {ratings.length === 0 ? (
+        <p>no reviews available.</p>
+      ) : (
         ratings.map((rating, index) => (
           <ListItem sx={{ mb: 2, boxShadow: 2 }} key={index + rating.id}>
             <Stack spacing={2}>
@@ -57,7 +58,8 @@ function RatingReviews () {
               />
             </Stack>
           </ListItem>
-        ))}
+        ))
+      )}
     </List>
   );
 }

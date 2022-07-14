@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -16,24 +15,22 @@ const style = {
 };
 
 export default function BasicModal({ open, setOpen }) {
-  const [form, setForm] = useState({
-    pan_id: "",
-    gst_id: "",
-    seller_location: "",
-  });
-
   const userDetails = useSelector((state) => state.auth.user);
   const userInfo = userDetails.user;
   const token = userDetails.token;
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const actualData = {
+      pan_id: data.get("pan_id"),
+      gst_id: data.get("gst_id"),
+      seller_location: data.get("seller_location"),
+    };
+
     fetch(`${process.env.REACT_APP_API_URL}/sellers`, {
       method: "POST",
       headers: {
@@ -41,9 +38,9 @@ export default function BasicModal({ open, setOpen }) {
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        pan_id: form.pan_id,
-        gst_id: form.gst_id,
-        seller_location: form.seller_location,
+        pan_id: actualData.pan_id,
+        gst_id: actualData.gst_id,
+        seller_location: actualData.seller_location,
         user_id: userInfo.id,
       }),
     })
@@ -99,22 +96,19 @@ export default function BasicModal({ open, setOpen }) {
                 name="pan_id"
                 label="PAN no."
                 variant="outlined"
-                value={form.pan_id}
-                onChange={(e) => handleChange(e)}
+                isRequired
               />
               <Input
                 name="gst_id"
                 label="GSTIN no."
                 variant="outlined"
-                value={form.gst_id}
-                onChange={(e) => handleChange(e)}
+                isRequired
               />
               <Input
                 name="seller_location"
                 label="your city"
                 variant="outlined"
-                value={form.seller_location}
-                onChange={(e) => handleChange(e)}
+                isRequired
               />
               <RButton variant="contained" color="primary" type="submit">
                 Register

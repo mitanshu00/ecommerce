@@ -8,7 +8,7 @@ import NotFound from "../error-pages/NotFound";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function Product () {
+function Product() {
   const [product, setProduct] = useState({});
   const [error, setError] = useState(false);
   const { id } = useParams();
@@ -34,7 +34,11 @@ function Product () {
           columns={{ xs: 1 }}
           sx={{ position: "relative" }}
         >
-          {product.poster_urls && <ProductImgs images={product.poster_urls} />}
+          {product.poster_urls ? (
+            <ProductImgs images={product.poster_urls} />
+          ) : (
+            <></>
+          )}
         </Grid>
         <Grid item xs={12} sm={5} columns={{ xs: 1 }}>
           <ProductDetails product={product} />

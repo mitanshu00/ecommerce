@@ -90,5 +90,5 @@ export default function UploadImage({ files, setFiles }) {
 
 UploadImage.propTypes = {
   files: PropTypes.object,
-  setFiles: PropTypes.object,
+  setFiles: PropTypes.func,
 };

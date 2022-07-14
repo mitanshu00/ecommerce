@@ -19,7 +19,7 @@ function Cart() {
           <h3>Your cart is empty ☹️</h3>
         ) : (
           <ul>
-            {cartItems.length > 0 &&
+            {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <CartItem
                   key={item.id}
@@ -33,10 +33,13 @@ function Cart() {
                     image: item.img_url,
                   }}
                 />
-              ))}
+              ))
+            ) : (
+              <></>
+            )}
           </ul>
         )}
-        {cartItems.length > 0 && (
+        {cartItems.length > 0 ? (
           <div className={classes.proceed}>
             <div className={classes.proceed1}>
               <p>
@@ -51,6 +54,8 @@ function Cart() {
               </Link>
             </div>
           </div>
+        ) : (
+          <></>
         )}
       </div>
     </div>

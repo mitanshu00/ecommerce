@@ -8,8 +8,9 @@ const Payment = ({ state, DeliveryAddress }) => (
     <div className={styles.con2}>
       <h1>Select a delivery address</h1>
       <div className={styles.rowcard}>
-        {state.length === 0 && <p>no address available.</p>}
-        {state.length > 0 &&
+        {state.length === 0 ? (
+          <p>no address available.</p>
+        ) : (
           state.map((item) => (
             <div className={styles.card} key={item.id}>
               <div className={styles.name}>
@@ -28,7 +29,8 @@ const Payment = ({ state, DeliveryAddress }) => (
                 Deliver to this address
               </RButton>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   </div>

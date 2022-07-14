@@ -21,7 +21,7 @@ function SubCatProducts({ subCategory }) {
 
   return (
     <>
-      {subCat.length > 0 && (
+      {subCat.length > 0 ? (
         <ProductGrid
           title={subCategory.name}
           list={subCat.slice(0, 6)}
@@ -30,6 +30,8 @@ function SubCatProducts({ subCategory }) {
           gridCol={{ xs: 1, sm: 2, md: 4 }}
           viewAllLink={true}
         />
+      ) : (
+        <></>
       )}
     </>
   );

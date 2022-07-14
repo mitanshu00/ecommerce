@@ -20,27 +20,39 @@ function ProductListLayout({ filterData }) {
   // custom hook for pagination
   const { page, visited, changePage } = usePaginationc({
     rowsPerPage,
-    pageCount
+    pageCount,
   });
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={5} sm={3} columns={{ xs: 1 }}>
-          {products.length === 0 && <div>No data available for filter</div>}
-          {products.length > 0 && (
+          {products.length === 0 ? (
+            <div>No data available for filter</div>
+          ) : (
+            <></>
+          )}
+          {products.length > 0 ? (
             <FilterProduct products={filterData} setFilterData={setProducts} />
+          ) : (
+            <></>
           )}
         </Grid>
         <Grid item xs={7} sm={9} columns={{ xs: 1 }}>
-          {products.length === 0 && <div>No products found.</div>}
-          {products.length > 0 && <SortProduct setFilterData={setProducts} />}
-          {products.length > 0 && (
+          {products.length === 0 ? <div>No products found.</div> : <></>}
+          {products.length > 0 ? (
+            <SortProduct setFilterData={setProducts} />
+          ) : (
+            <></>
+          )}
+          {products.length > 0 ? (
             <ProductList
               products={products}
               visited={visited}
               rowsPerPage={rowsPerPage}
             />
+          ) : (
+            <></>
           )}
 
           <Stack justifyContent="center" direction="row" sx={{ my: 4 }}>
@@ -53,7 +65,7 @@ function ProductListLayout({ filterData }) {
 }
 
 ProductListLayout.propTypes = {
-  filterData: PropTypes.array
+  filterData: PropTypes.array,
 };
 
 export default ProductListLayout;

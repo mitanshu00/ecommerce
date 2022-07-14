@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 const styles = {
   borderRadius: "50%",
   maxHeight: "200px",
-  maxWidth: "200px"
+  maxWidth: "200px",
 };
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -50,19 +50,25 @@ const Home = () => {
   return (
     <>
       <Box>
-        {discountedProducts.length > 0 && (
+        {discountedProducts.length > 0 ? (
           <BannerCarousel discountedProducts={discountedProducts} />
+        ) : (
+          <></>
         )}
-        {highestDiscProd.length > 0 && (
+        {highestDiscProd.length > 0 ? (
           <ProductCarousel title="Discounted products" data={highestDiscProd} />
+        ) : (
+          <></>
         )}
-        {categories.length > 0 && (
+        {categories.length > 0 ? (
           <CategoryGrid
             title="Categories"
             list={categories}
             styles={styles}
             showTitle={true}
           />
+        ) : (
+          <></>
         )}
 
         {/* <ProductCarousel

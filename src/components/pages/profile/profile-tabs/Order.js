@@ -40,8 +40,9 @@ function Order({ status }) {
 
   return (
     <>
-      {filteredOrders.length === 0 && <p>no {status} orders exists.</p>}
-      {filteredOrders.length > 0 &&
+      {filteredOrders.length === 0 ? (
+        <p>no {status} orders exists.</p>
+      ) : (
         filteredOrders.map((order) => (
           <List
             sx={{
@@ -61,13 +62,16 @@ function Order({ status }) {
 
             <Grid container spacing={2} columns={16} sx={{ pl: 4 }}>
               <Grid item xs={8}>
-                {order.orders?.length > 0 &&
+                {order.orders?.length > 0 ? (
                   order.orders.map((item, index) => (
                     <ListItemText primary={item} secondary="" key={index} />
-                  ))}
+                  ))
+                ) : (
+                  <></>
+                )}
               </Grid>
               <Grid item xs={8}>
-                {order.order_items?.length > 0 &&
+                {order.order_items?.length > 0 ? (
                   order.order_items.map((item, index) => (
                     <>
                       <RButton
@@ -80,11 +84,15 @@ function Order({ status }) {
                         <ListItemText primary="view" />
                       </Link>
                     </>
-                  ))}
+                  ))
+                ) : (
+                  <></>
+                )}
               </Grid>
             </Grid>
           </List>
-        ))}
+        ))
+      )}
     </>
   );
 }

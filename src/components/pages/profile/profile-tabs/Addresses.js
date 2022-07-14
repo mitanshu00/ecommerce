@@ -68,9 +68,9 @@ function Addresses() {
     })
       .then((res) => res.json())
       .then((data) => {
-        !optionId && setAddresses([...addresses, data]);
-        optionId &&
-          setAddresses(
+        !optionId
+          ? setAddresses([...addresses, data])
+          : setAddresses(
             addresses.map((address) => {
               if (address.id === optionId) {
                 return data;
@@ -99,23 +99,13 @@ function Addresses() {
 
   return (
     <Grid container justify="center" spacing={1}>
-      {addresses.length === 0 && <p>No address available.</p>}
-      {addresses.length > 0 && (
+      {addresses.length === 0 ? (
+        <p>No address available.</p>
+      ) : (
         <AddressList addresses={addresses} editAddress={editAddress} />
       )}
       <Grid item md={6}>
-        {!open && (
-          <RButton
-            variant="contained"
-            onClick={() => {
-              setOpen(true);
-              setOptionId(0);
-            }}
-          >
-            ADD NEW ADDRESS
-          </RButton>
-        )}
-        {open && (
+        {open ? (
           <Card>
             <form onSubmit={handleFormSubmit}>
               <CardContent>
@@ -208,6 +198,16 @@ function Addresses() {
               </CardActions>
             </form>
           </Card>
+        ) : (
+          <RButton
+            variant="contained"
+            onClick={() => {
+              setOpen(true);
+              setOptionId(0);
+            }}
+          >
+            ADD NEW ADDRESS
+          </RButton>
         )}
       </Grid>
     </Grid>

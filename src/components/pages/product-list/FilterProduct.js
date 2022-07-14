@@ -172,7 +172,7 @@ function FilterProduct({ products, setFilterData }) {
                 borderRadius: "5px",
                 borderColor: "lightGray",
               }}
-              max={selectedPrice.max && selectedPrice.max}
+              max={selectedPrice.max}
               onChange={(e) =>
                 setSelectedPrice({ ...selectedPrice, min: e.target.value })
               }
@@ -187,7 +187,7 @@ function FilterProduct({ products, setFilterData }) {
                 borderRadius: "5px",
                 borderColor: "lightGray",
               }}
-              min={selectedPrice.min && selectedPrice.min}
+              min={selectedPrice.min}
               onChange={(e) =>
                 setSelectedPrice({ ...selectedPrice, max: e.target.value })
               }

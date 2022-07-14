@@ -38,8 +38,8 @@ export default function AddReview({ product_id, user_id }) {
         review_content: review,
       }),
     });
-    // const data = await response.json();
-    // console.log(data);
+    const data = await response.json();
+    console.log(data);
   };
 
   return (

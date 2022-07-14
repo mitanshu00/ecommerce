@@ -38,7 +38,7 @@ function CartItem({ item }) {
     <div className={classes.cardbox}>
       <li className={classes.list}>
         <div className={classes.image}>
-          {image[0] && <img src={image[0]} alt="" />}
+          {image[0] ? <img src={image[0]} alt="" /> : <></>}
         </div>
         <div className={classes.dtlscon}>
           <div className={classes.txt}>

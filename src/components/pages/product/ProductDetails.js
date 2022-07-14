@@ -152,8 +152,9 @@ function ProductDetails({ product }) {
       </Typography>
       <Divider sx={{ my: 4 }} />
       <Typography variant="h5">Ratings & Reviews</Typography>
-      {reviews.length === 0 && <p>no reviews available</p>}
-      {reviews.length > 0 && (
+      {reviews.length === 0 ? (
+        <p>no reviews available</p>
+      ) : (
         <Reviews
           reviews={reviews}
           avgRating={avgRating}

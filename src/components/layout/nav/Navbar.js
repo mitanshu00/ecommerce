@@ -83,7 +83,11 @@ export default function Navbar({ isAuth }) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={onMyAccountClick}>My account</MenuItem>
-      {!isVerified && <MenuItem onClick={onVerifyClick}>Verify email</MenuItem>}
+      {!isVerified ? (
+        <MenuItem onClick={onVerifyClick}>Verify email</MenuItem>
+      ) : (
+        ""
+      )}
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -113,7 +117,7 @@ export default function Navbar({ isAuth }) {
   return (
     <>
       <Box>
-        {otpModel && <Otp handleClose={handleOtpModelClose} />}
+        {otpModel ? <Otp handleClose={handleOtpModelClose} /> : null}
         <AppBar position="static" style={{ background: "#2E3B55" }}>
           <Toolbar sx={{ maxWidth: "1500px", margin: "0 auto" }}>
             <Typography
