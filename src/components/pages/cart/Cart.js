@@ -39,7 +39,7 @@ function Cart() {
             )}
           </ul>
         )}
-        {cartItems.length > 0 ? (
+        {cartItems.length > 0 && (
           <div className={classes.proceed}>
             <div className={classes.proceed1}>
               <p>
@@ -54,8 +54,6 @@ function Cart() {
               </Link>
             </div>
           </div>
-        ) : (
-          <></>
         )}
       </div>
     </div>

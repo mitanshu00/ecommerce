@@ -25,7 +25,7 @@ function BannerCarousel({ discountedProducts }) {
         <img
           src={product.poster_url}
           alt=""
-          style={{ width: "100%", height: "600px" }}
+          style={{ width: "100%", height: "480px" }}
           key={product.id}
         />
       ))}

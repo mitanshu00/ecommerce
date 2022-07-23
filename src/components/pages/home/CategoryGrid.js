@@ -43,10 +43,8 @@ export default function CategoryGrid({ title, list, styles, showTitle }) {
                 alt="category img"
                 style={styles}
               /> */}
-              {showTitle ? (
+              {showTitle && (
                 <p style={{ textAlign: "center" }}>{category.name}</p>
-              ) : (
-                <></>
               )}
             </Stack>
           </Grid>

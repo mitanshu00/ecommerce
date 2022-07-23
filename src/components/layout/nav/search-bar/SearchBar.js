@@ -127,9 +127,9 @@ function SearchBar() {
         />
       </form>
 
-      {inFocus ? (
+      {inFocus && (
         <ul className="dropdown">
-          {history.length > 0 ? (
+          {history.length > 0 &&
             history.slice(0, 8).map((item) => (
               <li className={"dropdown__item"} key={item.id}>
                 <Link
@@ -157,13 +157,8 @@ function SearchBar() {
                   />
                 </Link>
               </li>
-            ))
-          ) : (
-            <></>
-          )}
+            ))}
         </ul>
-      ) : (
-        <></>
       )}
     </Search>
   );

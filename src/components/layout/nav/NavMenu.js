@@ -94,12 +94,10 @@ function NavMenu({ handleProfileMenuOpen }) {
               <AccountCircle />
             </IconButton>
             <p>{userDetails?.user?.user?.name} </p>
-            {!userDetails.isVerified ? (
+            {!userDetails.isVerified && (
               <p style={{ fontSize: "x-small", color: "yellow" }}>
                 (Not Verified)
               </p>
-            ) : (
-              <></>
             )}
           </MenuItem>
         ) : (
